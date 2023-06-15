@@ -330,15 +330,16 @@ Acuerdo intersubjetivo\\[0.1cm]
 \vspace{1cm}
 
 
-\begin{textblock}{160}(20,24)
-\onslide<2->{Modelo gráfico} \\ \vspace{0.3cm}
+\begin{textblock}{160}(8,22)
+%\onslide<2->{Modelo gráfico} \\ \vspace{0.3cm}
  \tikz{
     \node[latent,] (r) {\includegraphics[width=0.06\textwidth]{../../auxiliar/static/regalo.png}} ;
-    \node[const,left=of r] (nr) {\Large $r$} ;
+    \node[const,above=of r, xshift=-0.2cm, yshift=0.3cm] (titulo) {\Large Modelo gráfico} ;
+    \node[const,left=of r] (nr) {Regalo: \Large $r$\,} ;
 
     \onslide<2->{
     \node[latent, below=of r] (d) {\includegraphics[width=0.05\textwidth]{../../auxiliar/static/dedo.png}} ;
-    \node[const, left=of d] (nd) {\Large $s$} ;
+    \node[const, left=of d] (nd) {Pista: \Large $s$\,} ;
     \node[const, below=of d, yshift=-0.2cm] (c) {$(s \neq r)$};
 
     \edge {r} {d};
@@ -408,17 +409,19 @@ Acuerdo intersubjetivo\\[0.1cm]
 
 
 \only<1-3>{
-\begin{textblock}{160}(20,24)
-Modelo gráfico \\ \vspace{0.3cm}
+\begin{textblock}{160}(8,22)
+%\onslide<2->{Modelo gráfico} \\ \vspace{0.3cm}
  \tikz{
     \node[latent,] (r) {\includegraphics[width=0.06\textwidth]{../../auxiliar/static/regalo.png}} ;
-    \node[const,left=of r] (nr) {\Large $r$} ;
+    \node[const,above=of r, xshift=-0.2cm, yshift=0.3cm] (titulo) {\Large {Modelo gráfico}} ;
+    \node[const,left=of r] (nr) {Regalo: \Large $r$\,} ;
 
     \node[latent, below=of r] (d) {\includegraphics[width=0.05\textwidth]{../../auxiliar/static/dedo.png}} ;
-    \node[const, left=of d] (nd) {\Large $s$} ;
+    \node[const, left=of d] (nd) {Pista: \Large $s$\,} ;
     \node[const, below=of d, yshift=-0.2cm] (c) {$(s \neq r)$};
 
     \edge {r} {d};
+
 }
 \end{textblock}
 }
@@ -617,12 +620,13 @@ intersubjetiva inicial
 
 \end{frame}
 
-
+{
+\setbeamercolor{background canvas}{bg=orange!20}
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
 \centering \LARGE Las reglas de la probabilidad
 \end{textblock}
-\onslide<2>{
+\onslide<1>{
 \vspace{1.5cm}
 
 
@@ -644,7 +648,7 @@ intersubjetiva inicial
 
 
 
- \footnotesize
+ \small
  No perdemos ni creamos creencia cuando \\
 la distribuimos. Si sumamos, la recuperamos.
 
@@ -664,7 +668,7 @@ la distribuimos. Si sumamos, la recuperamos.
 
 \vspace{0.1cm}
 
-\footnotesize
+\small
 Preservamos la creencia previa que \\
 sigue siendo compatible con el dato
 
@@ -672,36 +676,104 @@ sigue siendo compatible con el dato
 \end{columns}
 }
 \end{frame}
+}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Regla del producto
+\end{textblock}
+
+\begin{textblock}{180}(-10,28)
+ \begin{align*}
+ \phantom{\frac{P(\text{R})}{P\text{R})}P(\text{Regalo} = i)}P(\,\overbrace{\,\text{Regalo} = i\,}^{\text{\small Hipótesis}_i}\,|\,\overbrace{\,\text{Pista} = 2\,}^{\text{\small Dato}}\,) & = \frac{P(\text{Regalo} = i, \text{Pista} = 2)}{P(\text{Pista} = 2)} \phantom{-----------} \\[0.4cm]
+ \only<2-3>{\phantom{\frac{P(\text{R})}{P\text{R})}}P(\,\,\text{Pista} = 2\,\,|\,\,\text{Regalo} = i\,\,) & = }  \only<3>{\frac{P(\text{Regalo} = i, \text{Pista} = 2)}{P(\text{Regalo} = i)}\phantom{\frac{P(\text{R})}{P\text{R})}}}
+ \only<4>{\phantom{\frac{P(\text{R})}{P\text{R})}}P(\text{Regalo} = i)P(\,\,\text{Pista} = 2\,\,|\,\,\text{Regalo} = i\,\,) & =   {P(\text{Regalo} = i, \text{Pista} = 2)}\phantom{\frac{P(\text{R})}{P\text{R})}} }
+ \only<5>{\phantom{\frac{P(\text{R})}{P\text{R})}}P(\text{Regalo} = i)P(\,\,\text{Pista} = 2\,\,|\,\,\text{Regalo} = i\,\,) & =   \bm{P(\text{Regalo} = i, \text{Pista} = 2)}\phantom{\frac{P(\text{R})}{P\text{R})}} }
+ \end{align*}
+\end{textblock}
+
+\end{frame}
 
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE Enfoque bayesiano \\
-\Large Aplicación estricta de las reglas de la probabilidad
+\centering \LARGE Regla del producto \\
+\Large Teorema de Bayes \\
 \end{textblock}
 
-
-\only<2->{
-\begin{textblock}{160}(0,28) \centering
-\Large El problema histórico: \\[0.1cm]
-
-\large
-La complejidad computacional de \\
-\textbf{evaluar todo el espacio de hipótesis}.
-
+\only<1>{
+\begin{textblock}{180}(-10,28)
+ \begin{align*}
+ \phantom{\frac{P(\text{R})}{P\text{R})}-\ \ \ }P(\,\overbrace{\,\text{Regalo} = i\,}^{\text{\small Hipótesis}_i}\,|\,\overbrace{\,\text{Pista} = 2\,}^{\text{\small Dato}}\,) & = \frac{P(\text{Pista} = 2)P(\,\,\text{Pista} = 2\,\,|\,\,\text{Regalo} = i\,\,)}{P(\text{Pista} = 2)} \\[0.4cm]
+ \end{align*}
 \end{textblock}
 }
 
-\begin{textblock}{120}(20,54)
-\only<3->{$\bullet$ Siglo 18: Nace la probabilidad}
-
-\only<4->{$\bullet$ Siglo 19: Física estadística}
-
-\only<5->{$\bullet$ Siglo 20: Enfoque frecuentista}
-
-\only<6->{$\bullet$ Siglo 21: Comienza a ser posible aplicar las reglas de la probabilidad de forma estricta en todos los campos de la ciencia}
+\only<2>{
+\begin{textblock}{160}(0,33)
+\begin{equation*}
+P(\text{Hip\'otesis}_i |\,\text{Dato}) = \frac{P(\text{Dato}\,|\,\text{Hip\'otesis}_i) \, P(\text{Hip\'otesis}_i)}{P(\text{Dato})}
+\end{equation*}
 \end{textblock}
+}
 
+
+\only<3>{
+\begin{textblock}{160}(0,26.62)
+\begin{equation*}
+\underbrace{P(\text{Hip\'otesis}_i|\,\text{Dato})}_{\text{\small Posterior}} = \frac{\overbrace{P(\text{Dato}\,|\,\text{Hip\'otesis}_i)}^{\text{\small Verosimilitud}} \overbrace{P(\text{Hip\'otesis}_i)}^{\text{\small Prior}} }{\underbrace{P(\text{Dato})}_{\text{\small Evidencia}}}
+\end{equation*}
+\end{textblock}
+}
+
+\vspace{0.2cm}
+
+\only<4->{
+%\vspace{0.3cm}
+\Wider[2cm]{
+\begin{textblock}{160}(0,23)
+\begin{equation*}
+\underbrace{P(\text{Hip\'otesis}_i|\,\text{Dato, Modelo})}_{\text{\small Posterior}} = \frac{\overbrace{P(\text{Dato}\,|\,\text{Hip\'otesis$_i$, Modelo})}^{\text{\small Verosimilitud}} \overbrace{P(\text{Hip\'otesis}_i|\text{ Modelo})}^{\text{\small Prior}} }{\underbrace{P(\text{Dato }|\text{ Modelo})}_{\text{\small Evidencia}}}
+\end{equation*}
+\end{textblock}
+}
+}
+
+\only<4>{
+\begin{textblock}{100}(30,65)
+\centering \vspace{0.05cm}
+\Large Y el \textbf{modelo}!
+
+\large que relaciona el \textbf{dato} con la \textbf{hipótesis}!
+\vspace{0.1cm}
+\end{textblock}
+}
+
+
+\only<5-9>{
+\begin{textblock}{140}(10,62)
+\begin{flalign*}
+\only<5>{P(\underbrace{\text{Dato}\,|\,\text{Modelo}}_{\text{\small Evidencia}}) = \ ? }
+\only<6>{P(\underbrace{\text{Dato}\,|\,\text{Modelo}}_{\text{\small Evidencia}}) = \ \text{\Large \ Regla de la suma} }
+\only<7-8>{P(\text{Dato}\,|\,\text{Modelo}) = }
+\only<9->{P(\underbrace{\text{Dato}\,|\,\text{Modelo}}_{\hfrac{\text{\small Con \textbf{todas}}}{\text{\small las hipótesis}} } ) = }
+\only<7>{\sum_{\text{Hipótesis}_i} P(\underbrace{\text{Dato},\,\text{Hip\'otesis$_i$}}_{\hfrac{\text{\small Creencia}}
+{\text{\small conjunta}}} \, | \, \text{Modelo})}
+\only<8>{\sum_{\text{Hipótesis}_i} P(\underbrace{\text{Dato}\,|\,\text{Hip\'otesis$_i$, Modelo}}_{\text{\small Verosimilitud}}) P(\underbrace{\text{Hip\'otesis}_i|\text{ Modelo}}_{\text{\small prior}}) }
+\only<9>{\sum_{\text{Hipótesis}_i} P(\underbrace{\text{Dato}\,|\,\text{Hip\'otesis$_i$, Modelo}}_{\hfrac{\text{\small Predicción con \textbf{una}}}{\text{\small única hipótesis}}}) P(\text{Hip\'otesis}_i|\text{ Modelo}) }
+&&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\only<10->{
+\begin{textblock}{160}(0,60)
+\begin{equation*}
+ P(\text{Modelo}_j|\text{Datos}) = \onslide<11>{\frac{\overbrace{P(\text{Datos}|\text{Modelo}_j)}^{\text{\small Evidencia}} P(\text{Modelo}_j)}{ P(\text{Datos})}}
+\end{equation*}
+\end{textblock}
+}
 
 
 \end{frame}
@@ -717,7 +789,7 @@ La complejidad computacional de \\
  \begin{textblock}{80}(0,24)
  \centering
 
- \normalsize Modelo gráfico:
+ \large Modelo gráfico:
 
  \vspace{0.3cm}
 
@@ -727,7 +799,7 @@ La complejidad computacional de \\
     \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
     \node[const,below=of r] (nr) {\Large $r$} ;
     \only<-1>{\phantom}{\node[latent, fill=black!30, above=of d, xshift=1.5cm] (c) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/cerradura.png}} ;}
-    \only<-1>{\phantom}{\node[const,below=of c] (nc) {\Large $c_1$} ;}
+    \only<-1>{\phantom}{\node[const,below=of c] (nc) {\, \Large $c = 1$} ;}
     \only<-2>{\phantom}{\edge {r,c} {d};}
 
     \only<-2>{\phantom}{\node[const,below=of d] (modelo) {\large $s \neq r$ \, $s \neq c$} ;}
@@ -805,7 +877,7 @@ La complejidad computacional de \\
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
  \centering \LARGE Modelo causal alternativo \\
- \Large Incertidumbre óptima dado el modelo
+ \Large \phantom{y el dato} Incertidumbre óptima dado el modelo \only<1-12>{\phantom}{y el dato}
  \end{textblock}
  \vspace{-1cm}
 
@@ -813,7 +885,7 @@ La complejidad computacional de \\
  \begin{textblock}{80}(0,24)
  \centering
 
- \normalsize Modelo gráfico:
+ \large Modelo gráfico:
 
  \vspace{0.3cm}
 
@@ -823,7 +895,7 @@ La complejidad computacional de \\
     \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
     \node[const,below=of r] (nr) {\Large $r$} ;
     {\node[latent, fill=black!30, above=of d, xshift=1.5cm] (c) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/cerradura.png}} ;}
-    {\node[const,below=of c] (nc) {\Large $c_1$} ;}
+    {\node[const,below=of c] (nc) {\, \Large $c = 1$} ;}
     {\edge {r,c} {d};}
 
     {\node[const,below=of d] (modelo) {\large $s \neq r$ \, $s \neq c$} ;}
@@ -1115,39 +1187,39 @@ $P(\text{Modelo}_i|\text{Datos})$
 \only<-5>{
 \begin{textblock}{160}(0,18)
 \begin{equation*}
- P(\text{Modelo}_i|\text{Datos}) = \frac{\overbrace{P(\text{Datos}|\text{Modelo}_i)}^{\hfrac{\text{\footnotesize Predicción a priori}}{\text{\footnotesize o evidencia}} } P(\text{Modelo}_i)}{ P(\text{Datos})}
+ P(\text{Modelo}_i|\text{Datos}) = \frac{\overbrace{P(\text{Datos}|\text{Modelo}_i)}^{\text{\small Evidencia} } P(\text{Modelo}_i)}{ P(\text{Datos})}
 \end{equation*}
 \end{textblock}
 }
+%
+% \only<2>{
+% \begin{textblock}{160}(0,44)
+% \begin{equation*}
+% P(\text{Hip\'otesis}_i|\,\text{Datos, Modelo}) = \frac{P(\text{Datos}\,|\,\text{Hip\'otesis$_i$, Modelo}) P(\text{Hip\'otesis}_i|\text{ Modelo})} {\underbrace{P(\text{Datos }|\text{ Modelo})}_{\hfrac{\text{\footnotesize Predicción a priori}}{\text{\footnotesize o evidencia}}} }
+% \end{equation*}
+% \end{textblock}
+% }
+%
 
-\only<2>{
-\begin{textblock}{160}(0,44)
-\begin{equation*}
-P(\text{Hip\'otesis}_i|\,\text{Datos, Modelo}) = \frac{P(\text{Datos}\,|\,\text{Hip\'otesis$_i$, Modelo}) P(\text{Hip\'otesis}_i|\text{ Modelo})} {\underbrace{P(\text{Datos }|\text{ Modelo})}_{\hfrac{\text{\footnotesize Predicción a priori}}{\text{\footnotesize o evidencia}}} }
-\end{equation*}
-\end{textblock}
-}
+%
+% \only<3-4>{
+% \begin{textblock}{160}(0,42)
+%  \begin{equation*}
+% \begin{split}
+%  \frac{P(\text{Modelo}_A|\text{Datos})}{P(\text{Modelo}_B|\text{Datos})} = \frac{P(\text{Datos}|\text{Modelo}_A)} {P(\text{Datos}|\text{Modelo}_B)} \only<4>{\phantom}{\frac{P(\text{Modelo}_A)}{P(\text{Modelo}_B)}}
+% \end{split}
+% \end{equation*}
+% \end{textblock}
+% }
 
-
-
-\only<3-4>{
-\begin{textblock}{160}(0,42)
- \begin{equation*}
-\begin{split}
- \frac{P(\text{Modelo}_A|\text{Datos})}{P(\text{Modelo}_B|\text{Datos})} = \frac{P(\text{Datos}|\text{Modelo}_A)} {P(\text{Datos}|\text{Modelo}_B)} \only<4>{\phantom}{\frac{P(\text{Modelo}_A)}{P(\text{Modelo}_B)}}
-\end{split}
-\end{equation*}
-\end{textblock}
-}
-
-\only<5->{
-\begin{textblock}{160}(0,38)
- \begin{equation*}
-\begin{split}
-P(\text{Dat\en{a}\es{os}}|\text{Model\es{o}}) & = P(d_1|\text{Model\es{o}})P(d_2|d_1,\text{Model\es{o}}) \dots
-%\\ \onslide<6->{& = \left( \sum^{\text{Hipótesis}}_h P(d_1|h,\text{M}) P(h|\text{M}) \right) \left( \sum^{\text{Hipótesis}}_h P(d_2|d_1,h,\text{M}) P(h|d_1,\text{M}) \right)  \dots \\}%\onslide<3->{& =  \prod_i^{|\text{Datos}|} \sum_h P(d_i|d_1, \dots, d_{i-1}, h, \text{M}) P(h|d_1, \dots, d_{i-1},\text{M}) }
-\end{split}
-\end{equation*}
+\only<2->{
+\begin{textblock}{130}(18,38)
+ \begin{flalign*}
+ P(\text{Dat\en{a}\es{os}} = \{d_1, \, d_2, \, \dots \} | \, \text{Model\es{o}}) & =
+\only<3>{ \text{\Large \,Regla de la suma}}
+\only<4>{ \text{\Large \,Regla del producto}}
+ \only<5->{P(d_1|\text{Model\es{o}})P(d_2|d_1,\text{Model\es{o}}) \dots} &&
+\end{flalign*}
 \end{textblock}
 }
 
@@ -1445,6 +1517,40 @@ P(\text{Dat\en{a}\es{os}}|\text{Model\es{o}}) & = P(d_1|\text{Model\es{o}})P(d_2
 }
 \end{textblock}
 }
+
+\end{frame}
+
+
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Enfoque bayesiano \\
+\Large Razonamiento común a toda ciencia con incertidumbre
+\end{textblock}
+
+\only<2->{
+\begin{textblock}{160}(0,28) \centering
+\Large El problema histórico: \\[0.1cm]
+
+\large
+\textbf{obliga a evaluar todo el espacio de hipótesis}.
+
+\end{textblock}
+}
+
+\begin{textblock}{120}(20,54)
+\only<3->{$\bullet$ Siglo 18: Nace la probabilidad}
+
+\only<4->{$\bullet$ Siglo 19: Física estadística}
+
+\only<5->{$\bullet$ Siglo 20: Enfoque frecuentista}
+
+\only<6->{$\bullet$ Siglo 21: Comienza a ser posible aplicar las reglas de la probabilidad de forma estricta en todos los campos de la ciencia}
+\end{textblock}
+
+
 
 \end{frame}
 
