@@ -1520,7 +1520,16 @@ $P(\text{Modelo}_i|\text{Datos})$
 
 \end{frame}
 
+\begin{frame}[plain]
 
+\Large Ejercicio 1.1 \\[0.4cm]
+
+\large En realidad la persona que dá la pista a veces se confunde y señala la caja donde está el regalo o la caja que fue elegida previamente por la persona. \\[0.2cm]
+
+\large En la guía tienen un conjunto de datos sobre el cual pueden evaluar modelos causales alternativos para descubrir el verdadero efecto causal que el regalo y la elección tienen sobre la pista. \\[0.1cm]
+
+
+\end{frame}
 
 
 
@@ -1550,10 +1559,111 @@ $P(\text{Modelo}_i|\text{Datos})$
 \only<6->{$\bullet$ Siglo 21: Comienza a ser posible aplicar las reglas de la probabilidad de forma estricta en todos los campos de la ciencia}
 \end{textblock}
 
+\end{frame}
 
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Siglo 18 \\
+\Large El primer problema resuelto
+\end{textblock}
+
+
+\only<1>{
+\begin{textblock}{140}(20,26)
+¿A quién le compro? \\[0.3cm]
+
+\ \ \ $\bullet$ 100\% Me gusta de 10 Ratings \\[0.1cm]
+
+\ \ \ $\bullet$ 96\% Me gusta de 50 Ratings \\[0.1cm]
+
+\ \ \ $\bullet$ 93\% Me gusta de 200 Ratings \\[0.1cm]
+\end{textblock}
+}
+
+
+\only<2->{
+\begin{textblock}{150}(5,21)
+\centering
+\scalebox{1.2}{
+\tikz{
+    \normalsize
+    \node[latent] (p) {$p$} ;
+    \node[const,left=of p] (np) {\small Probabilidad} ;
+
+    \onslide<2>{
+      \node[latent, fill=black!20,below=of p, xshift=-1cm] (m1) {$m_1$} ;
+      \node[const, below=of p, yshift=-1.3cm] (m2) {$\dots$} ;
+      \node[latent, below=of p,fill=black!20, xshift=1cm] (m3) {$m_n$} ;
+      \edge {p} {m1,m3};
+      \node[const,left=of m1] (nm) {\small Me gusta} ;
+    }
+    \onslide<3-5>{
+      \node[latent, fill=black!20,below=of p] (mi) {$m_i$} ;
+      \node[const,left=of mi] (nmi) {\small Me gusta} ;
+      \edge {p} {mi};
+      \plate {monedas} {(mi)(nmi)} {$i \in \{1, \dots, n\}$};
+    }
+    \onslide<4>{
+      \node[const,right=of mi, xshift=0.15cm] (pm) {\small $P(m_i \, | \, p) = p^{m_i} \, (1-p)^{1-m_i}$} ;
+    }
+    \onslide<6->{
+      \node[latent, fill=black!20,below=of p] (k) {$k$} ;
+      \node[latent, fill=black!100, above=of k, xshift=-0.8cm, yshift=-0.8cm, minimum size=2pt] (n) {};
+      \node[const,left=of k] (nk) {\small Cantidad de Me gusta} ;
+      \edge {p,n} {k};
+      \node[const,above=of n] (nn) {\small $n$} ;
+      \edge {p,n} {k};
+      }
+    \onslide<7->{
+      \node[const,right=of mi, xshift=0.15cm] (pm) {\small $P(k \, | \, p, \, n) = \frac{n!}{k!(n-k)!} \,  p^{k} \, (1-p)^{n-k}$} ;
+    }
+    \onslide<8->{
+      \node[const,right=of p, xshift=0.15cm] (pp) {\small $P(p) = 1$} ;
+    }
+}
+}
+\end{textblock}
+}
+
+
+\only<5-6>{
+\begin{textblock}{80}(70,20)
+\centering
+\includegraphics[width=0.8\linewidth]{../../auxiliar/static/galton-board.jpg}
+\end{textblock}
+}
+
+
+\only<9->{
+\begin{textblock}{150}(12,62)
+\begin{flalign*}
+\phantom{\bigg|}P(p\, | \, k, n) = \frac{P(k\,|\,p, n) P(p)}{P(k\,|\,n)}
+\only<10>{= \underbrace{\phantom{\bigg|}(n+1)\phantom{\bigg|}}_{P(k\,|\,n)} \underbrace{\frac{n!}{k!(n-k)!} \,  p^{k} \, (1-p)^{n-k}}_{P(k\,|\,p, n)} \underbrace{\phantom{\bigg|}1\phantom{\bigg|}}_{P(p)} }
+\only<11>{=\frac{(n+1)!}{k!(n-k)!} \,  p^{k} \, (1-p)^{n-k} }
+&&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<12>{
+\begin{textblock}{90}(65,50)
+\centering
+\includegraphics[width=0.85\linewidth]{figuras/betas.pdf}
+\end{textblock}
+}
 
 \end{frame}
 
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Siglo 19\\
+\Large Física estadística
+\end{textblock}
+
+
+
+\end{frame}
 
 
 \begin{frame}[plain]
