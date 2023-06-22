@@ -180,11 +180,24 @@ def fit(alpha):
         w_maxAprior = posterior(alpha, beta, t_priori, Phi_priori )[0]
         maxApriori.append(likelihood(w_maxAprior , t, Phi, beta)[0])
 
+
+
 fit(alpha)
 plt.close()
 #plt.plot(prior_predictive_joint)
 plt.plot(np.exp(log_evidence_joint))
 plt.plot(np.exp(prior_predictive_online))
+plt.close()
+indices = np.arange(10)
+total = sum(np.exp(log_evidence_joint))
+cmap = plt.get_cmap("tab10")
+for i in range(10):
+    plt.bar(indices[i], np.exp(log_evidence_joint)[i]/total, align='center', color=cmap(i))
+
+
+plt.xticks(ticks=indices)
+ax = plt.gca()
+ax.tick_params(axis='both', labelsize=20)
 plt.savefig("pdf/model_selection_evidence.pdf",bbox_inches='tight')
 plt.savefig('png/model_selection_evidence.png', bbox_inches='tight',transparent=False)
 plt.close()    
