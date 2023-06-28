@@ -7,6 +7,7 @@
 \estrue
 \documentclass[shownotes,aspectratio=169]{beamer}
 
+\usepackage{siunitx}
 \input{../../auxiliar/tex/diapo_encabezado.tex}
 \input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
  \mode<presentation>
@@ -23,6 +24,7 @@
 
 \newcommand{\gray}{\color{black!55}}
 
+\usepackage{mdframed}
 \usepackage{listings}
 \lstset{
   aboveskip=3mm,
@@ -1520,17 +1522,148 @@ $P(\text{Modelo}_i|\text{Datos})$
 
 \end{frame}
 
+
+
+
 \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Tasa de filtrado \\
+\large (o de información)
+\end{textblock}
 
-\Large Ejercicio 1.1 \\[0.4cm]
+\only<15>{
+\begin{textblock}{80}(21,18)
+ \tikz{
+    \node[latent,] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
+    \node[const,left=of r] (nr) {\Large $r$} ;
 
-\large En realidad la persona que dá la pista a veces se confunde y señala la caja donde está el regalo o la caja que fue elegida previamente por la persona. \\[0.2cm]
 
-\large En la guía tienen un conjunto de datos sobre el cual pueden evaluar modelos causales alternativos para descubrir el verdadero efecto causal que el regalo y la elección tienen sobre la pista. \\[0.1cm]
+    \node[latent, below=of r] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;
+    \node[const, left=of d] (nd) {\Large $s$} ;
 
+    \edge {r} {d};
+
+}
+\end{textblock}
+}
+
+\only<-14>{
+\begin{textblock}{80}(6,18)
+\tikz{
+
+    \node[latent] (d) {\includegraphics[width=0.10\textwidth]{../../auxiliar/static/dedo.png}} ;
+    \node[const,left=of d] (nd) {\Large $s$} ;
+
+    \node[latent, above=of d, xshift=-1.5cm] (r) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/regalo.png}} ;
+    \node[const,left=of r] (nr) {\Large $r$} ;
+
+
+    \node[latent, fill=black!30, above=of d, xshift=1.5cm] (c) {\includegraphics[width=0.12\textwidth]{../../auxiliar/static/cerradura.png}} ;
+    \node[const,left=of c] (nc) {\Large $c$} ;
+
+    \edge {r,c} {d};
+}
+\end{textblock}
+}
+
+\only<1>{
+\begin{textblock}{110}(50,18) \normalsize
+\begin{equation*}
+ P(\text{Modelo}_i|\text{Datos}) = \frac{\overbrace{P(\text{Datos}|\text{Modelo}_i)}^{\text{\small Filtro} } \overbrace{P(\text{Modelo}_i)}^{\text{\small Creencia}}}{\underbrace{P(\text{Datos})}_{\text{\small Normalizador}} }
+\end{equation*}
+\end{textblock}
+}
+
+\only<2-15>{
+\begin{textblock}{110}(60,18)
+\normalsize
+\begin{flalign*}
+& \overbrace{P(\text{Datos} \, | \, \text{Modelo})}^{\text{\small Filtro}} =
+\only<2>{P(d_1|\text{Model\es{o}})P(d_2|d_1,\text{Model\es{o}}) \dots}
+\only<3-15>{\ ?}
+&&
+\end{flalign*}
+
+\onslide<3-15>{
+\vspace{0.1cm}
+
+\small
+
+Datos:
+
+\hspace{0.5cm}\large $n_{s2}$ \ \small Pista en caja 2
+
+\hspace{0.5cm}\large $n_{s3}$ \ \small Pista en caja 3
+
+\hspace{0.5cm}\large $n_{r1}$ \ \small Regalo en caja elegida (1)
+
+\hspace{0.5cm}\large $n_{r0}$ \ \small Regalo en otra caja (no 1)
+}
+
+\end{textblock}
+}
+
+\only<4-15>{
+\begin{textblock}{150}(2,60)
+\normalsize
+\begin{flalign*}P(\text{D} = \{\overbrace{n_{s2}, n_{s3}}^{T}, \overbrace{n_{r1}, n_{r0}}^{T} \} \, | \, \text{M})\only<-5>{\phantom}{^{1/T}} &= \ \
+\only<5>{P(s2|M)^{n_{s2}\phantom{/T}}  P(s3|M)^{n_{s3}\phantom{/T}} \, P(r1|M)^{n_{r1}\phantom{/T}} \, P(r0|M)^{n_{r0}\phantom{/T}} }
+\only<6->{P(s2|M)^{n_{s2}/T}  P(s3|M)^{n_{s3}/T} \, P(r1|M)^{n_{r1}/T} \, P(r0|M)^{n_{r0}/T} } \\
+\only<10->{\log \ \ }
+\only<7->{\underbrace{\lim_{T \rightarrow \infty} P(\text{D}|\text{M})^{1/T}}_{\text{Tasa de filtrado}} & = }
+\only<7>{\ \ P(s2|M)^{p_{s2}} \ \ \  P(s3|M)^{p_{s3}} \ \ \ P(r1|M)^{p_{r1}} \ \ \ P(r0|M)^{p_{r0}}}
+\only<8>{\ \ P(s2|M)^{p_{s2}} \ \ \  P(s3|M)^{p_{s3}} \ \ \ P(r1|M)^{p_{r1}} \hspace{0.9cm} p_{_{r0}}^{ \ \ p_{r0}}}
+\only<9>{ \hspace{0.8cm} p_{_{s2}}^{ \ \ p_{s2}} \hspace{1.4cm}  p_{_{s3}}^{ \ \ p_{s3}} \hspace{1.4cm}  p_{_{r1}}^{ \ \ p_{r1}} \hspace{1.4cm}  p_{_{r0}}^{ \ \ p_{r0}}}
+\only<10>{\ \ \ ?}
+\only<11>{\ \ \underbrace{p_{_{s2}} \log p_{_{s2}} \ + \ p_{_{s3}} \log   p_{_{s3}} \ + \ p_{_{r1}} \log p_{_{r1}} \ + \ p_{_{r0}} \log p_{_{r0}}}_{\text{Orden de magnitud de la tasa de filtrado}}  }
+\only<12-14>{\ \  \sum_x \, p_{_{x}} \, \log p_{_{x}}  }
+\only<13>{ = - \ \ \text{Entopía} \ }
+\only<14>{= -\underbrace{\textbf{Entropía}}_{\hfrac{\text{\scriptsize Magnitud de}}{\text{\scriptsize la información}}} \ !!!!!!!!!!!!!!!}
+\only<15>{\ \  \sum_x \, p_{_{x}} \, \log p_{_{x|M}}  }
+\only<15>{= - \underbrace{ \textbf{Entopía cruzada}}_{\hfrac{\text{\scriptsize Entropía}}{\text{\scriptsize + divergencia}} } \ !}
+\phantom{\sum_x P(r0|M)^{p_{r0}}}
+&&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\only<16-17>{
+\begin{textblock}{160}(0,28)
+\normalsize
+\begin{equation*}
+\underset{\text{M}}{\text{arg max}}
+\hspace{0.3cm}  P(\text{D} \, | \, \text{M}) = \ \underset{\text{M}}{\text{arg min}} \hspace{0.3cm} \text{Entropía Cruzada} (M)
+\end{equation*}
+\end{textblock}
+}
+
+\only<17>{
+\begin{textblock}{100}(30,48)
+\centering
+No me da información ver que lo que ya conozco \\
+
+\begin{mdframed}
+\centering
+\textbf{El mejor modelo es el que lo sabe todo} \\
+\textbf{al que nada le produce sorpresa (o información)}
+\end{mdframed}
+\end{textblock}
+}
 
 \end{frame}
-
+%
+% \begin{frame}[plain]
+%
+% \Large Ejercicio 1.1 \\[0.4cm]
+%
+% \large En realidad la persona que dá la pista a veces se confunde y señala la caja donde está el regalo o la caja que fue elegida previamente por la persona. \\[0.2cm]
+%
+% \large En la guía tienen un conjunto de datos sobre el cual pueden evaluar modelos causales alternativos para descubrir el verdadero efecto causal que el regalo y la elección tienen sobre la pista. \\[0.1cm]
+%
+%
+% \end{frame}
+%
 
 
 \begin{frame}[plain]
@@ -1564,8 +1697,7 @@ $P(\text{Modelo}_i|\text{Datos})$
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE Siglo 18 \\
-\Large El primer problema resuelto
+\centering \LARGE Siglo 18: la primera solución.
 \end{textblock}
 
 
@@ -1657,10 +1789,231 @@ $P(\text{Modelo}_i|\text{Datos})$
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE Siglo 19\\
-\Large Física estadística
+\centering \LARGE Siglo 19: Física estadística \\
+\Large Gases
 \end{textblock}
 
+
+\only<1->{
+\begin{textblock}{140}(10,18)
+\phantom{Gas} \\[0.2cm]
+
+\small Micro Estados
+\end{textblock}
+
+
+\begin{textblock}{140}(10,28)
+\begin{tikzpicture}[scale=0.50]
+  % Grid lines
+  \draw[step=1cm, black!60!white] (0,0) grid (5,4);
+  % Points
+  % \foreach \x/\y in {0.5/0.5, 1.5/1.5, 2.5/2.5, 3.5/3.5, 4.5/1.5, 1.5/3.5, 3.5/1.5, 4.5/2.5, 2.5/0.5, 0.5/3.5} {
+  % \fill[red] (\x, \y) circle (0.1);
+  \foreach \x/\y/\radius in {0.5/0.5/0.15, 1.5/1.5/0.15, 2.5/2.5/0.15, 3.5/3.5/0.15, 4.5/1.5/0.15, 1.5/3.5/0.15, 3.5/1.5/0.15, 4.5/2.5/0.15, 2.5/0.5/0.15, 0.5/3.5/0.15} {
+    \fill[black!65] (\x, \y) circle (\radius);
+  }
+\end{tikzpicture}
+\end{textblock}
+
+\begin{textblock}{140}(10,54)
+$\left.
+\begin{array}{l}
+N = 10 \\
+V = 20
+\end{array}
+\right\}$ \small Macro estados
+
+
+\only<4->{
+\begin{flalign*}
+& \ \ W = \binom{20}{10} = \num{184756} &&
+\end{flalign*}
+}
+
+\end{textblock}
+}
+
+
+
+\only<2->{
+\begin{textblock}{140}(70,18)
+\phantom{Gas} \\[0.2cm]
+
+\small Expansión de volumen
+\end{textblock}
+
+\begin{textblock}{140}(70,28)
+\begin{tikzpicture}[scale=0.50]
+  % Grid lines
+  \draw[step=1cm, black!60!white] (0,0) grid (10,4);
+  % Points
+  \foreach \x/\y/\radius in {4.5/0.5/0.15, 0.5/3.5/0.15, 0.5/0.5/0.15, 8.5/3.5/0.15, 4.5/2.5/0.15, 9.5/0.5/0.15, 3.5/3.5/0.15, 1.5/1.5/0.15, 6.5/2.5/0.15,  7.5/1.5/0.15 } {
+    \fill[black!65] (\x, \y) circle (\radius);
+  }
+  % Bold horizontal line
+  \draw[line width=1pt] (5,0) -- (5,4);
+\end{tikzpicture}
+\end{textblock}
+
+\begin{textblock}{140}(70,54)
+$\begin{array}{l}
+N = 10 \\
+V = 40
+\end{array}$
+\end{textblock}
+}
+
+
+\only<5->{
+\begin{textblock}{140}(94,51)
+\small
+\begin{flalign*}
+& W = \binom{40}{10} = \num{847660528} &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{160}(0,74)
+\centering
+
+¿Cuál es la probabilidad de que se contraiga nuevamente?
+\end{textblock}
+}
+
+\only<6>{
+\begin{textblock}{160}(66,66)
+\begin{flalign*}
+& P(\text{contraiga}|N=10,V=40) = \frac{\binom{20}{10}}{\binom{40}{10}} = 0.0002 &&
+\end{flalign*}
+\end{textblock}
+}
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Siglo 19: Física estadística \\
+\Large \only<1-4>{Gases}\only<5->{Entropía}
+\end{textblock}
+
+
+\only<3-5>{
+\begin{textblock}{140}(8,26)
+\begin{tikzpicture}[scale=0.50]
+% Draw the surrounding box
+  \draw[red!60, thick] (-0.2, -0.4) rectangle (10.9, 4.4);
+\end{tikzpicture}
+\end{textblock}
+}
+
+\only<-5>{
+\begin{textblock}{140}(10,28)
+\begin{tikzpicture}[scale=0.50]
+  % Grid lines
+  \draw[step=1cm, black!60!white] (0,0) grid (5,4);
+  % Points
+  % \foreach \x/\y in {0.5/0.5, 1.5/1.5, 2.5/2.5, 3.5/3.5, 4.5/1.5, 1.5/3.5, 3.5/1.5, 4.5/2.5, 2.5/0.5, 0.5/3.5} {
+  % \fill[red] (\x, \y) circle (0.1);
+  \foreach \x/\y/\radius in {0.5/0.5/0.15, 1.5/1.5/0.15, 2.5/2.5/0.15, 3.5/3.5/0.15, 4.5/1.5/0.15, 1.5/3.5/0.15, 3.5/1.5/0.15, 4.5/2.5/0.15, 2.5/0.5/0.15, 0.5/3.5/0.15} {
+    \fill[black!65] (\x, \y) circle (\radius);
+  }
+\end{tikzpicture}
+\only<2->{\begin{tikzpicture}[scale=0.50]
+  % Grid lines
+  \draw[step=1cm, black!60!white] (0,0) grid (5,4);
+  % Points
+  % \foreach \x/\y in {0.5/0.5, 1.5/1.5, 2.5/2.5, 3.5/3.5, 4.5/1.5, 1.5/3.5, 3.5/1.5, 4.5/2.5, 2.5/0.5, 0.5/3.5} {
+  % \fill[red] (\x, \y) circle (0.1);
+  \foreach \x/\y/\radius in {1.5/0.5/0.15, 0.5/1.5/0.15, 3.5/2.5/0.15, 3.5/3.5/0.15, 4.5/1.5/0.15, 1.5/3.5/0.15, 3.5/1.5/0.15, 4.5/0.5/0.15, 2.5/1.5/0.15, 0.5/2.5/0.15} {
+    \fill[black!65] (\x, \y) circle (\radius);
+  }
+
+\end{tikzpicture}}
+\end{textblock}
+
+\begin{textblock}{140}(10,54)
+$\begin{array}{l}
+N_A = 10 \\
+V_A = 20
+\end{array}
+$ \small
+
+\begin{flalign*}
+& \ \ W_A = \binom{20}{10} &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<2-5>{
+\begin{textblock}{140}(40,54)
+$\begin{array}{l}
+N_B = 10 \\
+V_B = 20
+\end{array}
+$ \small
+
+\begin{flalign*}
+& \ \ W_B = \binom{20}{10} &&
+\end{flalign*}
+
+\end{textblock}
+}
+
+\only<4-5>{
+\begin{textblock}{140}(70,24)
+\begin{flalign*}
+N_{AB} &= N_A + N_B \\
+V_{AB} &= V_A + V_B \\
+\only<4>{\phantom}{\log} \, \bm{W_{AB}} &= \bm{W_A} \only<4>{\phantom}{+}  \bm{W_B} \\ &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<6->{
+\begin{textblock}{140}(16,20)
+\begin{flalign*}
+S = \log W = &
+\only<7>{\log \frac{N!}{\prod_i n_i!}}
+\only<8->{\log N! - \sum_i \log n_i!}
+\phantom{\frac{N!}{\prod_i n_i}} \\
+& \only<13-14>{= N \log N - N - \big(\sum_i n_i \log n_i - n_i\big)}
+\only<15>{= N \log N - N - \sum_i n_i \log n_i - \sum_i n_i}
+\only<16->{= N \log N - \cancel{N} - \sum_i n_i \log n_i + \cancel{\sum_i n_i} } \phantom{\cancel{\sum_i n_i} } \\
+& \only<17->{= (\sum_i n_i) \log N - \sum_i n_i \log n_i  } \\
+& \only<18>{= \sum_i n_i ( \log N - \log n_i )  }
+\only<19>{= \sum_i n_i  \log \frac{N}{n_i}   }
+\only<20->{= - \sum_i n_i  \log \frac{n_i}{N}   } \phantom{\frac{N}{n_i} } \\
+\only<21>{\frac{S}{N} & = - \sum_i \frac{n_i}{N}  \log \frac{n_i}{N}   }
+\only<22->{\frac{S}{N} & = - \sum_i p_i  \log p_i   } \only<23>{= \text{Entropía}}
+\phantom{\frac{N}{n_i} }
+\\&&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\only<9-13>{
+\begin{textblock}{140}(10,52)
+\begin{flalign*}
+\log N! = \sum_{k=1}^N \log k & \only<11->{\approx \int_1^N \log k \ dk} \\ \only<12->{&= N \log N - N \cancel{+ 1}} &&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<10>{
+\begin{textblock}{70}(80,48)
+\includegraphics[width=\textwidth, page=1]{figuras/stirling.pdf}
+\end{textblock}
+}
+
+\only<11-13>{
+\begin{textblock}{70}(80,48)
+\includegraphics[width=\textwidth, page=2]{figuras/stirling.pdf}
+\end{textblock}
+}
 
 
 \end{frame}
