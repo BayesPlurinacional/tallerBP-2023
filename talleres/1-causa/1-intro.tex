@@ -21,9 +21,9 @@
 \estrue
 \usepackage{todonotes}
 \setbeameroption{show notes}
-
+%
 \newcommand{\gray}{\color{black!55}}
-
+\usepackage{ulem} % sout
 \usepackage{mdframed}
 \usepackage{listings}
 \lstset{
@@ -1527,8 +1527,8 @@ $P(\text{Modelo}_i|\text{Datos})$
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE Tasa de filtrado \\
-\large (o de información)
+\centering \LARGE Tasa de información \\
+\large (o de sorpresa)
 \end{textblock}
 
 \only<15>{
@@ -1569,7 +1569,7 @@ $P(\text{Modelo}_i|\text{Datos})$
 \only<1>{
 \begin{textblock}{110}(50,18) \normalsize
 \begin{equation*}
- P(\text{Modelo}_i|\text{Datos}) = \frac{\overbrace{P(\text{Datos}|\text{Modelo}_i)}^{\text{\small Filtro} } \overbrace{P(\text{Modelo}_i)}^{\text{\small Creencia}}}{\underbrace{P(\text{Datos})}_{\text{\small Normalizador}} }
+ P(\text{Modelo}_i|\text{Datos}) = \frac{\overbrace{P(\text{Datos}|\text{Modelo}_i)}^{\text{\small Predicción} } \overbrace{P(\text{Modelo}_i)}^{\text{\small Creencia}}}{\underbrace{P(\text{Datos})}_{\text{\small Normalizador}} }
 \end{equation*}
 \end{textblock}
 }
@@ -1578,7 +1578,7 @@ $P(\text{Modelo}_i|\text{Datos})$
 \begin{textblock}{110}(60,18)
 \normalsize
 \begin{flalign*}
-& \overbrace{P(\text{Datos} \, | \, \text{Modelo})}^{\text{\small Filtro}} =
+& \overbrace{P(\text{Datos} \, | \, \text{Modelo})}^{\text{\small Predicción}} =
 \only<2>{P(d_1|\text{Model\es{o}})P(d_2|d_1,\text{Model\es{o}}) \dots}
 \only<3-15>{\ ?}
 &&
@@ -1604,23 +1604,24 @@ Datos:
 }
 
 \only<4-15>{
-\begin{textblock}{150}(2,60)
+\begin{textblock}{150}(0.5,58)
 \normalsize
-\begin{flalign*}P(\text{D} = \{\overbrace{n_{s2}, n_{s3}}^{T}, \overbrace{n_{r1}, n_{r0}}^{T} \} \, | \, \text{M})\only<-5>{\phantom}{^{1/T}} &= \ \
+\begin{flalign*}
+\onslide<4-13>{P(\text{D}_{_T} = \{\overbrace{n_{s2}, n_{s3}}^{T}, \overbrace{n_{r1}, n_{r0}}^{T} \} \, | \, \text{M})\only<-5>{\phantom}{^{1/T}} &= \ }
 \only<5>{P(s2|M)^{n_{s2}\phantom{/T}}  P(s3|M)^{n_{s3}\phantom{/T}} \, P(r1|M)^{n_{r1}\phantom{/T}} \, P(r0|M)^{n_{r0}\phantom{/T}} }
-\only<6->{P(s2|M)^{n_{s2}/T}  P(s3|M)^{n_{s3}/T} \, P(r1|M)^{n_{r1}/T} \, P(r0|M)^{n_{r0}/T} } \\
-\only<10->{\log \ \ }
-\only<7->{\underbrace{\lim_{T \rightarrow \infty} P(\text{D}|\text{M})^{1/T}}_{\text{Tasa de filtrado}} & = }
+\onslide<6-13>{P(s2|M)^{n_{s2}/T}  P(s3|M)^{n_{s3}/T} \, P(r1|M)^{n_{r1}/T} \, P(r0|M)^{n_{r0}/T} } \\
+\only<10->{\underbrace{\log \ \ \lim_{T \rightarrow \infty} P(\text{D}|\text{M})^{1/T}}_{\hfrac{\text{\footnotesize Tasa de predicción}}{\text{\footnotesize en orden de magnitud}}} & = }
+\only<7-9>{\underbrace{\lim_{T \rightarrow \infty} P(\text{D}|\text{M})^{1/T}}_{\text{\footnotesize Tasa de predicción}} & = }
 \only<7>{\ \ P(s2|M)^{p_{s2}} \ \ \  P(s3|M)^{p_{s3}} \ \ \ P(r1|M)^{p_{r1}} \ \ \ P(r0|M)^{p_{r0}}}
 \only<8>{\ \ P(s2|M)^{p_{s2}} \ \ \  P(s3|M)^{p_{s3}} \ \ \ P(r1|M)^{p_{r1}} \hspace{0.9cm} p_{_{r0}}^{ \ \ p_{r0}}}
 \only<9>{ \hspace{0.8cm} p_{_{s2}}^{ \ \ p_{s2}} \hspace{1.4cm}  p_{_{s3}}^{ \ \ p_{s3}} \hspace{1.4cm}  p_{_{r1}}^{ \ \ p_{r1}} \hspace{1.4cm}  p_{_{r0}}^{ \ \ p_{r0}}}
 \only<10>{\ \ \ ?}
-\only<11>{\ \ \underbrace{p_{_{s2}} \log p_{_{s2}} \ + \ p_{_{s3}} \log   p_{_{s3}} \ + \ p_{_{r1}} \log p_{_{r1}} \ + \ p_{_{r0}} \log p_{_{r0}}}_{\text{Orden de magnitud de la tasa de filtrado}}  }
+\only<11>{\ \ p_{_{s2}} \log p_{_{s2}} \ + \ p_{_{s3}} \log   p_{_{s3}} \ + \ p_{_{r1}} \log p_{_{r1}} \ + \ p_{_{r0}} \log p_{_{r0}}  }
 \only<12-14>{\ \  \sum_x \, p_{_{x}} \, \log p_{_{x}}  }
-\only<13>{ = - \ \ \text{Entopía} \ }
-\only<14>{= -\underbrace{\textbf{Entropía}}_{\hfrac{\text{\scriptsize Magnitud de}}{\text{\scriptsize la información}}} \ !!!!!!!!!!!!!!!}
+\only<13>{ = - \hspace{0.85cm} \text{Entopía} \ }
+\only<14>{= -\underbrace{\textbf{Entropía}}_{\hfrac{\text{\footnotesize \phantom{p}Tasa de información}\phantom{p}}{\text{\footnotesize orden de magnitud}}} \ !!!!!!!!!!!!!!!}
 \only<15>{\ \  \sum_x \, p_{_{x}} \, \log p_{_{x|M}}  }
-\only<15>{= - \underbrace{ \textbf{Entopía cruzada}}_{\hfrac{\text{\scriptsize Entropía}}{\text{\scriptsize + divergencia}} } \ !}
+\only<15>{= - \hspace{0.3cm} \underbrace{ \textbf{Entopía cruzada}}_{\hfrac{\text{\footnotesize Entropía}}{\text{\footnotesize + divergencia}} } \ !}
 \phantom{\sum_x P(r0|M)^{p_{r0}}}
 &&
 \end{flalign*}
@@ -1628,66 +1629,106 @@ Datos:
 }
 
 
-\only<16-17>{
+\only<16->{
 \begin{textblock}{160}(0,28)
 \normalsize
 \begin{equation*}
-\underset{\text{M}}{\text{arg max}}
-\hspace{0.3cm}  P(\text{D} \, | \, \text{M}) = \ \underset{\text{M}}{\text{arg min}} \hspace{0.3cm} \text{Entropía Cruzada} (M)
+\underset{\text{M}}{\text{arg \textbf{max}}}
+\hspace{0.3cm}  \text{Predicción}(\text{D}_{_T} \, | \, \text{M}) = \ \underset{\text{M}}{\text{arg \textbf{min}}} \hspace{0.3cm} \text{Información} (\text{D}_{_T}\,|\,\text{M})
 \end{equation*}
 \end{textblock}
 }
 
-\only<17>{
-\begin{textblock}{100}(30,48)
-\centering
-No me da información ver que lo que ya conozco \\
 
-\begin{mdframed}
-\centering
-\textbf{El mejor modelo es el que lo sabe todo} \\
-\textbf{al que nada le produce sorpresa (o información)}
-\end{mdframed}
+\only<17>{
+\begin{textblock}{160}(0,48)
+\centering \Large
+¿Cuánto más sé, menos información recibo?
 \end{textblock}
 }
 
+\only<18>{
+\begin{textblock}{160}(0,48)
+\centering \Large
+¿Puedo dar más información a una niña o a una experta?
+\end{textblock}
+}
+
+
+\only<19>{
+\begin{textblock}{160}(0,48)
+\centering  \Large
+¿Cuál era la estrategia falsacionista?
+\end{textblock}
+}
+
+\only<20>{
+\begin{textblock}{160}(0,48)
+\centering  \Large
+¿Al inicio maximizamos incertidumbre y ahora queremos reducirla?
+\end{textblock}
+}
+
+
 \end{frame}
-%
-% \begin{frame}[plain]
-%
-% \Large Ejercicio 1.1 \\[0.4cm]
-%
-% \large En realidad la persona que dá la pista a veces se confunde y señala la caja donde está el regalo o la caja que fue elegida previamente por la persona. \\[0.2cm]
-%
-% \large En la guía tienen un conjunto de datos sobre el cual pueden evaluar modelos causales alternativos para descubrir el verdadero efecto causal que el regalo y la elección tienen sobre la pista. \\[0.1cm]
-%
-%
-% \end{frame}
-%
+
+
 
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE Enfoque bayesiano \\
-\Large Razonamiento común a toda ciencia con incertidumbre
+\centering \LARGE La función de costo epistémica \\
+\end{textblock}
+
+
+\begin{textblock}{160}(0,20)
+\begin{equation*}
+\underbrace{P(\text{Modelo},\text{\En{Data}\Es{Datos}})}_{\hfrac{\text{\footnotesize\En{Initial belief compatible}\Es{Creencia compatible }}}{\text{\footnotesize \En{with the data}\Es{con los datos}}}} = \underbrace{P(\text{Modelo})}_{\hfrac{\text{\footnotesize\En{Initial intersubjective}\Es{Acuerdo intersubjetivo}}}{\text{\footnotesize\En{agreement}\Es{inicial}}}} \underbrace{P(\text{data}_1 |\text{Modelo})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 1}} \, \underbrace{P(\text{data}_2 | \text{data}_1 , \text{Modelo})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 2}} \dots
+\end{equation*}
+\end{textblock}
+
+\only<2->{
+\begin{textblock}{140}(10,50)\centering
+Un 0 (cero) en la secuencia hace falsa la hipótesis para siempre \\
+
+\only<3->{\textbf{Ventaja a favor de las variantes que reducen fluctuaciones}}
+\end{textblock}
+}
+
+
+\only<4->{
+\begin{textblock}{140}(10,66)\centering
+\begin{equation*}
+P(\text{data}_1|\text{Modelo}) = \only<5->{\phantom}{\sum_{\text{hipótesis}}}  P(\text{data}_1| \text{hipótesis}, \text{Modelo}) \only<5->{\phantom}{P(\text{hipótesis} | \text{Modelo})}
+\end{equation*}
+\end{textblock}
+}
+
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE El problema histórico \\
+\large Costo computacional
 \end{textblock}
 
 \only<2->{
 \begin{textblock}{160}(0,28) \centering
-\Large El problema histórico: \\[0.1cm]
+\Large La aplicación estricta de las reglas de la probabilidad \\[0.1cm]
 
 \large
-\textbf{obliga a evaluar todo el espacio de hipótesis}.
+\textbf{obligan a evaluar todo el espacio de hipótesis}.
 
 \end{textblock}
 }
 
-\begin{textblock}{120}(20,54)
+\begin{textblock}{120}(20,50)
 \only<3->{$\bullet$ Siglo 18: Nace la probabilidad}
 
 \only<4->{$\bullet$ Siglo 19: Física estadística}
 
-\only<5->{$\bullet$ Siglo 20: Enfoque frecuentista}
+\only<5->{$\bullet$ Siglo 20: Frecuentismo}
 
 \only<6->{$\bullet$ Siglo 21: Comienza a ser posible aplicar las reglas de la probabilidad de forma estricta en todos los campos de la ciencia}
 \end{textblock}
@@ -1790,7 +1831,7 @@ No me da información ver que lo que ya conozco \\
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
 \centering \LARGE Siglo 19: Física estadística \\
-\Large Gases
+\large Gases
 \end{textblock}
 
 
@@ -1896,7 +1937,7 @@ V = 40
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
 \centering \LARGE Siglo 19: Física estadística \\
-\Large \only<1-4>{Gases}\only<5->{Entropía}
+\large \only<1-4>{Gases}\only<5->{Entropía}
 \end{textblock}
 
 
@@ -2019,336 +2060,156 @@ S = \log W = &
 \end{frame}
 
 
-\begin{frame}[plain]
-
-\centering
-\LARGE
-
-¿La aplicación estricta de la probabilidad  \\
-
-produce sobreajuste (\emph{overfitting})?
-
-
-
-
-
-\end{frame}
-
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering  \LARGE Modelo lineal (bayesiano)
+\centering \LARGE Siglo 20: Frecuentismo\\
+\large \sout{Evaluación} Selección de hipótesis
 \end{textblock}
 
-\vspace{1.5cm}
+ \only<1>{
+\tikz{
+    \node[det, fill=black!10] (r) {$r$} ;
+    \node[const, left=of r, xshift=-1.35cm] (r_name) {\small Result:};
+    \node[const, right=of r] (dr) {\normalsize $ r = (d > 0)$};
 
+    \node[latent, above=of r, yshift=-0.45cm] (d) {$d$} ; %
+    \node[const, right=of d] (dd) {\normalsize $ d = p_i-p_j$};
+    \node[const, left=of d, xshift=-1.35cm] (d_name) {\small Difference:};
+
+    \node[latent, above=of d, xshift=-0.8cm, yshift=-0.45cm] (p1) {$p_i$} ; %
+    \node[latent, above=of d, xshift=0.8cm, yshift=-0.45cm] (p2) {$p_j$} ; %
+    \node[const, left=of p1, xshift=-0.55cm] (p_name) {\small Performance:};
+
+    \node[accion, above=of p1,yshift=0.3cm] (s1) {} ; %
+    \node[const, right=of s1] (ds1) {$s_i$};
+    \node[accion, above=of p2,yshift=0.3cm] (s2) {} ; %
+    \node[const, right=of s2] (ds2) {$s_j$};
+
+    \node[const, right=of p2] (dp2) {\normalsize $p \sim \N(s,\beta^2)$};
+
+    \node[const, left=of s1, xshift=-.85cm] (s_name) {\small Skill:};
+
+    \edge {d} {r};
+    \edge {p1,p2} {d};
+    \edge {s1} {p1};
+    \edge {s2} {p2};
+
+}
+}
+
+
+ \only<2>{
 \begin{equation*}
 \begin{split}
-y & = w_0 + w_1 x \\[0.2cm]
-p(t | x, \bm{w}, \beta ) &= \N(t \,|\, y, \beta^2) \\[0.6cm]
-\onslide<2->{
-p(w_0) &= \N(w_0 \,|\, 0, \sigma_{0}^2) \\[0cm]
-p(w_1) &= \N(w_1 \,|\, 0, \sigma_{1}^2) \\}
+  d_{ij} & \sim \iint \mathbb{I}(d_{ij}=p_i-p_j) N(p_i|s_i,\beta^2)N(p_j|s_j,\beta^2) \, dp_i \, dp_j \\
+  \onslide<2->{&\overset{1}{=} \int N(d_{ij}+p_j|s_i,\beta^2) N(p_j|s_j,\beta^2) dp_j}\\
+  \onslide<3->{&\overset{2}{=} \int N(p_j|s_i-d_{ij},\beta^2) N(p_j|s_j,\beta^2) dp_j} \\
+  \onslide<4->{&\overset{*}{=} \int \underbrace{N(d_{ij}|s_i-s_j,2\beta^2)}_{\text{const.}} \underbrace{N(p_j|\mu_{-},\sigma^2_{-})dp_j}_{1}}
 \end{split}
 \end{equation*}
 
-
-
-\end{frame}
-
-
-\begin{frame}[plain]
-
-\Wider[-3cm]{
- \begin{figure}
-\begin{subfigure}[t]{0.32\textwidth}
-\onslide<3->{\caption*{Verosimilitud}}
-\end{subfigure}
-\begin{subfigure}[t]{0.32\textwidth}
-\caption*{Priori\onslide<3->{/Posteriori}}
-\includegraphics[width=\textwidth]{figuras/pdf/linearRegression_posterior_0.pdf}
-\end{subfigure}
-\begin{subfigure}[t]{0.32\textwidth}
-\onslide<2->{
-\caption*{Espacio de datos}
-\includegraphics[width=\textwidth]{figuras/pdf/linearRegression_dataSpace_0.pdf}}
-\end{subfigure}
-
-
-\begin{subfigure}[c]{0.32\textwidth}
-\onslide<3->{\includegraphics[width=\textwidth]{figuras/pdf/linearRegression_likelihood_1.pdf}}
-\end{subfigure}
-\begin{subfigure}[c]{0.32\textwidth}
-\onslide<3->{\includegraphics[width=\textwidth]{figuras/pdf/linearRegression_posterior_1.pdf}}
-\end{subfigure}
-\begin{subfigure}[c]{0.32\textwidth}
-\onslide<3->{\includegraphics[width=\textwidth]{figuras/pdf/linearRegression_dataSpace_1.pdf}}
-\end{subfigure}
-
-\begin{subfigure}[c]{0.32\textwidth}
-\onslide<4->{\includegraphics[width=\textwidth]{figuras/pdf/linearRegression_likelihood_2.pdf}}
-\end{subfigure}
-\begin{subfigure}[c]{0.32\textwidth}
-\onslide<4->{\includegraphics[width=\textwidth]{figuras/pdf/linearRegression_posterior_2.pdf}}
-\end{subfigure}
-\begin{subfigure}[c]{0.32\textwidth}
-\onslide<4->{\includegraphics[width=\textwidth]{figuras/pdf/linearRegression_dataSpace_2.pdf}}
-\end{subfigure}
-
-\end{figure}
+\begin{equation}
+d_{ij} \sim N(d_{ij}|s_i-s_j,2\beta^2)
+\end{equation}
 }
-\end{frame}
 
 
 
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering \Large Modelos lineales
-\end{textblock}
- \vspace{1.25cm}
-
-\begin{equation*}
-y(\bm{x},\bm{w}) = \sum_{i=0}^{M-1} w_i \phi_i(\bm{x}) = \bm{w}^T \bm{\phi}(\bm{x})
-\end{equation*}
-
-\vspace{0.5cm}
-\pause
-%
-% \begin{equation*}
-%  t = y(\vm{x},\vm{w}) + \epsilon  \ \ \ \ \  \text{con} \ \ \  \epsilon \sim \N(0,\beta^{-1})
-% \end{equation*}
-
- \begin{equation*}
-p(t \, | \, \bm{x}, \bm{w}, \beta) = \N(t \, | \, y(\bm{x},\bm{w}) , \beta^{-1})
-\end{equation*}
-\vspace{0.025cm}
-\pause
-
-\begin{equation*}
-P(\bm{t} | \bm{x}, \bm{w}, \beta) = \prod_{i=1}^n \N(t_i | \bm{w}^T \bm{\phi}(\bm{x}_i) , \beta^{-1}) = \N(\bm{t}|\bm{w}^T \bm{\Phi}, \beta^{-1} \vm{I})
-\end{equation*}
-\vspace{0.05cm}
-\pause
-
-\begin{equation*}
- \bm{\Phi} =
-  \begin{pmatrix}
-    \phi_0(\bm{x}_1) & \phi_1(\bm{x}_1) & \dots & \phi_{M-1}(\bm{x}_1)\\
-    \vdots & \vdots & \ddots & \vdots \\
-    \phi_0(\bm{x}_N) & \phi_1(\bm{x}_N) & \dots & \phi_{M-1}(\bm{x}_N)
-  \end{pmatrix}
-  =
-  \begin{pmatrix}
-   \bm{\phi}(\vm{x}_1)^T \\
-   \vdots \\
-   \bm{\phi}(\vm{x}_N)^T \\
-  \end{pmatrix}
-\end{equation*}
+\only<3>{
+\includegraphics[page=1,width=\textwidth]{figuras/probaOfWin_2D}
+}
 
 
-\end{frame}
-
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large Solución fecuentista
-\end{textblock}
-\vspace{1.25cm}
-
-
-\begin{equation*}
- \underset{\bm{w}}{\text{ max }} P(\bm{t} | \bm{x}, \bm{w}, \beta) = \underset{\bm{w}}{\text{ min }} \sum_{i=1}^{n}  (t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2
-\end{equation*}
-
-\end{frame}
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \Large \centering Soluci\'on completa
-\end{textblock}
- \vspace{1cm}
-
-\begin{equation*}
- p(\vm{w}) = N(\vm{w}| \vm{0}, \alpha^{-1} \vm{I})
-\end{equation*}
-
+\only<4>{
+\begin{equation}
+P(p_i>p_j|s_i,s_j) = 1 - \Phi\left( \frac{0-(s_i - s_j)}{\sqrt{2}\beta} \right) =  \Phi\left( \frac{s_i - s_j}{\sqrt{2}\beta} \right)
+\end{equation}
+\vspace{-0.1cm}
 \begin{figure}[H]
-    \centering
-    \tikz{
-
-    \node[latent, fill=black!100, minimum size=2pt] (x) {} ; %
-    \node[const, right=of x] (c_x) {$\vm{X}$};
-    \node[latent, fill=black!20, yshift=-1.5cm] (t) {$\bm{t}$} ; %
-    \node[latent, fill=black!100, yshift=-1.5cm , xshift=-2cm,minimum size=2pt] (beta)
-    {} ; %
-    \node[const, above=of beta] (c_beta) {$\beta$};
-    \node[latent, fill=black!0, yshift=-1.5cm, xshift=2cm] (w) {$\vm{w}$};
-    \node[latent, fill=black!100, xshift=2cm, minimum size=2pt] (alpha) {} ; %
-    \node[const, right=of alpha] (c_alpha) {$\alpha$};
-
-    \edge {x,beta,w} {t};
-    \edge {alpha} {w};
-
-    \node[invisible, fill=black!0, minimum size=0pt, xshift=-0.52cm] (data_inv) {} ; %
-
-    }
+     \centering
+     \begin{subfigure}[b]{0.65\textwidth}
+       \includegraphics[page=1,width=\textwidth]{figuras/probaOfWin}
+     \end{subfigure}
 \end{figure}
-\end{frame}
+}
 
 
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \Large \centering Soluci\'on completa
-\end{textblock}
- \vspace{0.75cm}
+\only<5>{
+\begin{equation*}
+\Delta = \underbrace{(2r_{ij}-1)}_{\hfrac{\text{\textbf{Direcci\'on} }}{\text{(Signo del resultado)}}} \, \underbrace{(1 - P(r_{ij}|s_i,s_j))}_{\hfrac{\text{\textbf{Magnitud}}}{\text{(Sorpresa del resultado)}}}
+\end{equation*}
 
-La distribuci\'on \textbf{posteriori} sobre $\vm{w}$ tiene como media
-
-\begin{equation}
- \vm{m}_N = \beta  \vm{S}_N\vm{\Phi}^T \vm{t}
-\end{equation}
-
-y como covarianzas
+\vspace{0.25cm}
 
 \begin{equation}
- \vm{S}_N^{-1} = \alpha \vm{I} + \beta \vm{\Phi}^T\vm{\Phi}
+s_i^{\text{new}} = s_i^{\text{old}} + K \Delta
 \end{equation}
 
-\pause
+\vspace{0.25cm}
 
-Y la \textbf{evidencia} del modelo es
-
-\begin{equation}
- P(t) = \N(\bm{t}| \vm{0}, \beta^{-1} \vm{I} + \alpha^{-1}\bm{\Phi}\bm{\Phi}^T  )
-\end{equation}
-
-\vspace{0.75cm}
-
-\small
-\Wider[-8cm]{
-\begin{mdframed}[backgroundcolor=black!15]\centering
- Cap\'itulo 2 de Bishop
+\begin{center}
+\large Modelo de soluci\'on
+\end{center}
+\vspace{-0.1cm}
+\begin{mdframed}[backgroundcolor=black!20]
+\begin{center}
+ Estimador $\hfrac{\longrightarrow}{\longleftarrow}$ Predicci\'on
+\end{center}
 \end{mdframed}
+
+
+\begin{itemize}
+ \item[$\bullet$] El estimador hace a la predicci\'on
+ \item[$\bullet$] La predicci\'on hace al estimador
+\end{itemize}
 }
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Siglo 20: Teoría de la información\\
+\large La sorpresa como fuente de información
+\end{textblock}
+
 
 \end{frame}
 
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering  \Large Regresi\'on lineal (bayesiana)
+\centering \LARGE Siglo 21: El retorno del enfoque bayesiano\\
+\large Aplicación estricta de las reglas de la probabilidad
 \end{textblock}
 
-\only<2->{
-\begin{textblock}{160}(0,18)
-\begin{equation*}
-y = \beta_0 + \beta_1 x + \beta_2 x^2 + \dots
-\end{equation*}
-\end{textblock}
-}
-
-
-\begin{textblock}{80}(0,28)
- \centering
- \onslide<1->{Funci\'on objetivo}
-\end{textblock}
-
-\begin{textblock}{80}(80,28)
- \centering
- \onslide<2>{Modelos polinomiales}
-\end{textblock}
-
-\begin{textblock}{160}(0,32)
-     \centering
-       \onslide<1->{\includegraphics[width=0.45\textwidth]{figuras/pdf/model_selection_true_and_sample} }
-       \onslide<2>{\includegraphics[width=0.45\textwidth]{figuras/pdf/model_selection_MAP_non-informative} }
-\end{textblock}
 
 \end{frame}
 
 \begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering  \Large Regresi\'on lineal (bayesiana) \\
-\large Evaluación de modelo
+
+
+\begin{textblock}{140}(10,28)
+\Large Ejercicio 1.1 \\[0.4cm]
+
+\large La persona que da la pista a veces se confunde y señala la caja donde está el regalo o la caja que fue elegida previamente por la persona. \\[0.2cm]
+
+\only<2>{
+\large Descubrir el verdadero efecto causal que el regalo y la elección tienen sobre la pista en base a los datos ofrecidos en la práctica. \\[0.1cm]}
+
 \end{textblock}
-
-
-
-\begin{textblock}{160}(0,18)
-\begin{equation*}
-y = \beta_0 + \beta_1 x + \beta_2 x^2 + \dots
-\end{equation*}
-\end{textblock}
-
-\begin{textblock}{80}(0,28)
- \centering
- M\'axima verosimilitud
-\end{textblock}
-
-\only<2->{
-\begin{textblock}{80}(80,28)
-\centering
-Aplicación estricta de la probabilidad
-\end{textblock}
-}
-
-\begin{textblock}{160}(0,29)
-     \centering
-  \begin{figure}[H]
-     \centering
-      \begin{subfigure}[b]{0.45\textwidth}
-       \includegraphics[width=1\textwidth]{figuras/pdf/model_selection_maxLikelihood}
-     \end{subfigure}
-     \onslide<2->{
-    \begin{subfigure}[b]{0.45\textwidth}
-       \includegraphics[width=1\textwidth]{figuras/pdf/model_selection_evidence}
-     \end{subfigure}
-    }
-\end{figure}
-\end{textblock}
-
-\end{frame}
-
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering \LARGE La función de costo epistémica \\
-\end{textblock}
-
-
-\begin{textblock}{160}(0,20)
-\begin{equation*}
-\underbrace{P(\text{Modelo},\text{\En{Data}\Es{Datos}})}_{\hfrac{\text{\footnotesize\En{Initial belief compatible}\Es{Creencia compatible }}}{\text{\footnotesize \En{with the data}\Es{con los datos}}}} = \underbrace{P(\text{Modelo})}_{\hfrac{\text{\footnotesize\En{Initial intersubjective}\Es{Acuerdo intersubjetivo}}}{\text{\footnotesize\En{agreement}\Es{inicial}}}} \underbrace{P(\text{data}_1 |\text{Modelo})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 1}} \, \underbrace{P(\text{data}_2 | \text{data}_1 , \text{Modelo})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 2}} \dots
-\end{equation*}
-\end{textblock}
-
-\only<2->{
-\begin{textblock}{140}(10,50)\centering
-Un 0 (cero) en la secuencia hace falsa la hipótesis para siempre \\
-
-\only<3->{\textbf{Ventaja a favor de las variantes que reducen fluctuaciones}}
-\end{textblock}
-}
-
-
-\only<4->{
-\begin{textblock}{140}(10,66)\centering
-\begin{equation*}
-P(\text{data}_1|\text{Modelo}) = \only<5->{\phantom}{\sum_{\text{hipótesis}}}  P(\text{data}_1| \text{hipótesis}, \text{Modelo}) \only<5->{\phantom}{P(\text{hipótesis} | \text{Modelo})}
-\end{equation*}
-\end{textblock}
-}
 
 
 \end{frame}
-
 
 \begin{frame}[plain,noframenumbering]
 \centering \vspace{0.5cm}
 \includegraphics[width=1\textwidth]{../../auxiliar/static/BP.png}
 \end{frame}
+
+
+
+
 
 %
 % \begin{frame}[plain]
