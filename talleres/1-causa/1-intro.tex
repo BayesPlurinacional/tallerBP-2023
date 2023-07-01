@@ -1828,107 +1828,320 @@ P(\text{data}_1|\text{Modelo}) = \only<5->{\phantom}{\sum_{\text{hipótesis}}}  
 
 \end{frame}
 
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+% \centering \LARGE Siglo 19: Física estadística \\
+% \large Gases
+% \end{textblock}
+%
+%
+% \only<1->{
+% \begin{textblock}{140}(10,18)
+% \phantom{Gas} \\[0.2cm]
+%
+% \small Micro Estados
+% \end{textblock}
+%
+%
+% \begin{textblock}{140}(10,28)
+% \begin{tikzpicture}[scale=0.50]
+%   % Grid lines
+%   \draw[step=1cm, black!60!white] (0,0) grid (5,4);
+%   % Points
+%   % \foreach \x/\y in {0.5/0.5, 1.5/1.5, 2.5/2.5, 3.5/3.5, 4.5/1.5, 1.5/3.5, 3.5/1.5, 4.5/2.5, 2.5/0.5, 0.5/3.5} {
+%   % \fill[red] (\x, \y) circle (0.1);
+%   \foreach \x/\y/\radius in {0.5/0.5/0.15, 1.5/1.5/0.15, 2.5/2.5/0.15, 3.5/3.5/0.15, 4.5/1.5/0.15, 1.5/3.5/0.15, 3.5/1.5/0.15, 4.5/2.5/0.15, 2.5/0.5/0.15, 0.5/3.5/0.15} {
+%     \fill[black!65] (\x, \y) circle (\radius);
+%   }
+% \end{tikzpicture}
+% \end{textblock}
+%
+% \begin{textblock}{140}(10,54)
+% $\left.
+% \begin{array}{l}
+% N = 10 \\
+% V = 20
+% \end{array}
+% \right\}$ \small Macro estados
+%
+%
+% \only<4->{
+% \begin{flalign*}
+% & \ \ W = \binom{20}{10} = \num{184756} &&
+% \end{flalign*}
+% }
+%
+% \end{textblock}
+% }
+%
+%
+%
+% \only<2->{
+% \begin{textblock}{140}(70,18)
+% \phantom{Gas} \\[0.2cm]
+%
+% \small Expansión de volumen
+% \end{textblock}
+%
+% \begin{textblock}{140}(70,28)
+% \begin{tikzpicture}[scale=0.50]
+%   % Grid lines
+%   \draw[step=1cm, black!60!white] (0,0) grid (10,4);
+%   % Points
+%   \foreach \x/\y/\radius in {4.5/0.5/0.15, 0.5/3.5/0.15, 0.5/0.5/0.15, 8.5/3.5/0.15, 4.5/2.5/0.15, 9.5/0.5/0.15, 3.5/3.5/0.15, 1.5/1.5/0.15, 6.5/2.5/0.15,  7.5/1.5/0.15 } {
+%     \fill[black!65] (\x, \y) circle (\radius);
+%   }
+%   % Bold horizontal line
+%   \draw[line width=1pt] (5,0) -- (5,4);
+% \end{tikzpicture}
+% \end{textblock}
+%
+% \begin{textblock}{140}(70,54)
+% $\begin{array}{l}
+% N = 10 \\
+% V = 40
+% \end{array}$
+% \end{textblock}
+% }
+%
+%
+% \only<5->{
+% \begin{textblock}{140}(94,51)
+% \small
+% \begin{flalign*}
+% & W = \binom{40}{10} = \num{847660528} &&
+% \end{flalign*}
+% \end{textblock}
+% }
+%
+% \only<3>{
+% \begin{textblock}{160}(0,74)
+% \centering
+%
+% ¿Cuál es la probabilidad de que se contraiga nuevamente?
+% \end{textblock}
+% }
+%
+% \only<6>{
+% \begin{textblock}{160}(66,66)
+% \begin{flalign*}
+% & P(\text{contraiga}|N=10,V=40) = \frac{\binom{20}{10}}{\binom{40}{10}} = 0.0002 &&
+% \end{flalign*}
+% \end{textblock}
+% }
+%
+% \end{frame}
+%
+%
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Siglo 18: lógica de Boole
+\end{textblock}
+
+Valor de verdad continuo, no discreto.
+
+\end{frame}
+
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
 \centering \LARGE Siglo 19: Física estadística \\
-\large Gases
+\large Máxima incertidumbre dadas restricciones
 \end{textblock}
-
-
-\only<1->{
-\begin{textblock}{140}(10,18)
-\phantom{Gas} \\[0.2cm]
-
-\small Micro Estados
-\end{textblock}
-
-
-\begin{textblock}{140}(10,28)
-\begin{tikzpicture}[scale=0.50]
-  % Grid lines
-  \draw[step=1cm, black!60!white] (0,0) grid (5,4);
-  % Points
-  % \foreach \x/\y in {0.5/0.5, 1.5/1.5, 2.5/2.5, 3.5/3.5, 4.5/1.5, 1.5/3.5, 3.5/1.5, 4.5/2.5, 2.5/0.5, 0.5/3.5} {
-  % \fill[red] (\x, \y) circle (0.1);
-  \foreach \x/\y/\radius in {0.5/0.5/0.15, 1.5/1.5/0.15, 2.5/2.5/0.15, 3.5/3.5/0.15, 4.5/1.5/0.15, 1.5/3.5/0.15, 3.5/1.5/0.15, 4.5/2.5/0.15, 2.5/0.5/0.15, 0.5/3.5/0.15} {
-    \fill[black!65] (\x, \y) circle (\radius);
-  }
-\end{tikzpicture}
-\end{textblock}
-
-\begin{textblock}{140}(10,54)
-$\left.
-\begin{array}{l}
-N = 10 \\
-V = 20
-\end{array}
-\right\}$ \small Macro estados
-
-
-\only<4->{
-\begin{flalign*}
-& \ \ W = \binom{20}{10} = \num{184756} &&
-\end{flalign*}
-}
-
-\end{textblock}
-}
-
-
 
 \only<2->{
-\begin{textblock}{140}(70,18)
-\phantom{Gas} \\[0.2cm]
+\begin{textblock}{130}(10,22)
+Restricciones: \normalsize
 
-\small Expansión de volumen
-\end{textblock}
+\hspace{0.3cm} $\bullet$ Partículas totales $N = 6$
 
-\begin{textblock}{140}(70,28)
-\begin{tikzpicture}[scale=0.50]
+\hspace{0.3cm} $\bullet$ Energía total $E = \sum_i e_i \cdot n_i =  6 $
+
+
+\vspace{0.4cm}
+
+\hspace{-0.7cm}\begin{tikzpicture}[scale=0.45]
   % Grid lines
-  \draw[step=1cm, black!60!white] (0,0) grid (10,4);
-  % Points
-  \foreach \x/\y/\radius in {4.5/0.5/0.15, 0.5/3.5/0.15, 0.5/0.5/0.15, 8.5/3.5/0.15, 4.5/2.5/0.15, 9.5/0.5/0.15, 3.5/3.5/0.15, 1.5/1.5/0.15, 6.5/2.5/0.15,  7.5/1.5/0.15 } {
-    \fill[black!65] (\x, \y) circle (\radius);
+  \draw[step=1cm, black!60!white] (0,0) grid (1,7);
+  % Add character "6" at specified coordinates
+  \foreach \x/\y in {-0.75/0.5} {\node at (\x, \y) {0};}
+  \foreach \x/\y in {-0.75/1.5} {\node at (\x, \y) {1};}
+  \foreach \x/\y in {-0.75/2.5} {\node at (\x, \y) {2};}
+  \foreach \x/\y in {-0.75/3.5} {\node at (\x, \y) {3};}
+  \foreach \x/\y in {-0.75/4.5} {\node at (\x, \y) {4};}
+  \foreach \x/\y in {-0.75/5.5} {\node at (\x, \y) {5};}
+  \foreach \x/\y in {-0.75/6.5} {\node at (\x, \y) {6};}
+  \foreach \x/\y in {-0.75/7.5} {\node at (\x, \y) {$e_i$};}
+  \foreach \x/\y in {0.5/7.5} {\node at (\x, \y) {$n_i$};}
+  \onslide<3->{\foreach \x/\y in {0.5/0.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/1.5} {\node at (\x, \y) {$6$};}
+  \foreach \x/\y in {0.5/2.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/3.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/4.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/5.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/6.5} {\node at (\x, \y) {};}
   }
-  % Bold horizontal line
-  \draw[line width=1pt] (5,0) -- (5,4);
-\end{tikzpicture}
-\end{textblock}
+  \onslide<8->{\foreach \x/\y in {-1.3/-0.5} {\node at (\x, \y) {\scriptsize Gini:};}
+  \foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize $0$};}}
+\end{tikzpicture}\hspace{-0.035cm}\onslide<4->{\begin{tikzpicture}[scale=0.45]
+  % Grid lines
+  \draw[step=1cm, black!60!white] (0,0) grid (1,7);
+  % Add character "6" at specified coordinates
+  \foreach \x/\y in {0.5/0.5} {\node at (\x, \y) {$1$};}
+  \foreach \x/\y in {0.5/1.5} {\node at (\x, \y) {$4$};}
+  \foreach \x/\y in {0.5/2.5} {\node at (\x, \y) {$1$};}
+  \foreach \x/\y in {0.5/3.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/4.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/5.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/6.5} {\node at (\x, \y) {};}
+  \onslide<8->{\phantom{\foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize G};}}
+  \foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize $33$};}}
+\end{tikzpicture}}\onslide<5->{\begin{tikzpicture}[scale=0.45]
+  % Grid lines
+  \draw[step=1cm, black!60!white] (0,0) grid (1,7);
+  % Add character "6" at specified coordinates
+  \foreach \x/\y in {0.5/0.5} {\node at (\x, \y) {$2$};}
+  \foreach \x/\y in {0.5/1.5} {\node at (\x, \y) {$2$};}
+  \foreach \x/\y in {0.5/2.5} {\node at (\x, \y) {$2$};}
+  \foreach \x/\y in {0.5/3.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/4.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/5.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/6.5} {\node at (\x, \y) {};}
+  \onslide<8->{\phantom{\foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize G};}}
+  \foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize $53$};}}
+\end{tikzpicture}}\onslide<6->{\begin{tikzpicture}[scale=0.45]
 
-\begin{textblock}{140}(70,54)
-$\begin{array}{l}
-N = 10 \\
-V = 40
-\end{array}$
+  \draw[step=1cm, black!60!white] (0,0) grid (1,7);
+
+  \foreach \x/\y in {0.5/0.5} {\node at (\x, \y) {$2$};}
+  \foreach \x/\y in {0.5/1.5} {\node at (\x, \y) {$3$};}
+  \foreach \x/\y in {0.5/2.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/3.5} {\node at (\x, \y) {$1$};}
+  \foreach \x/\y in {0.5/4.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/5.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/6.5} {\node at (\x, \y) {};}
+  \onslide<8->{\phantom{\foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize G};}}
+  \foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize $60$};}}
+\end{tikzpicture}}\onslide<7->{\begin{tikzpicture}[scale=0.45]
+
+  \draw[step=1cm, black!60!white] (0,0) grid (1,7);
+
+  \foreach \x/\y in {0.5/0.5} {\node at (\x, \y) {$3$};}
+  \foreach \x/\y in {0.5/1.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/2.5} {\node at (\x, \y) {$3$};}
+  \foreach \x/\y in {0.5/3.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/4.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/5.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/6.5} {\node at (\x, \y) {};}
+  \onslide<8->{\phantom{\foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize G};}}
+  \foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize $60$};}}
+\end{tikzpicture}}\onslide<7->{\begin{tikzpicture}[scale=0.45]
+
+  \draw[step=1cm, black!60!white] (0,0) grid (1,7);
+
+  \foreach \x/\y in {0.5/0.5} {\node at (\x, \y) {$3$};}
+  \foreach \x/\y in {0.5/1.5} {\node at (\x, \y) {$1$};}
+  \foreach \x/\y in {0.5/2.5} {\node at (\x, \y) {$1$};}
+  \foreach \x/\y in {0.5/3.5} {\node at (\x, \y) {$1$};}
+  \foreach \x/\y in {0.5/4.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/5.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/6.5} {\node at (\x, \y) {};}
+  \onslide<8->{\phantom{\foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize G};}}
+  \foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize $73$};}}
+\end{tikzpicture}}\onslide<7->{\begin{tikzpicture}[scale=0.45]
+
+  \draw[step=1cm, black!60!white] (0,0) grid (1,7);
+
+  \foreach \x/\y in {0.5/0.5} {\node at (\x, \y) {$3$};}
+  \foreach \x/\y in {0.5/1.5} {\node at (\x, \y) {$2$};}
+  \foreach \x/\y in {0.5/2.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/3.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/4.5} {\node at (\x, \y) {$1$};}
+  \foreach \x/\y in {0.5/5.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/6.5} {\node at (\x, \y) {};}
+  \onslide<8->{\phantom{\foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize G};}}
+  \foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize $80$};}}
+\end{tikzpicture}}\onslide<7->{\begin{tikzpicture}[scale=0.45]
+
+  \draw[step=1cm, black!60!white] (0,0) grid (1,7);
+
+  \foreach \x/\y in {0.5/0.5} {\node at (\x, \y) {$4$};}
+  \foreach \x/\y in {0.5/1.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/2.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/3.5} {\node at (\x, \y) {$2$};}
+  \foreach \x/\y in {0.5/4.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/5.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/6.5} {\node at (\x, \y) {};}
+  \onslide<8->{\phantom{\foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize G};}}
+  \foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize $80$};}}
+\end{tikzpicture}}\onslide<7->{\begin{tikzpicture}[scale=0.45]
+
+  \draw[step=1cm, black!60!white] (0,0) grid (1,7);
+
+  \foreach \x/\y in {0.5/0.5} {\node at (\x, \y) {$4$};}
+  \foreach \x/\y in {0.5/1.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/2.5} {\node at (\x, \y) {$1$};}
+  \foreach \x/\y in {0.5/3.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/4.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/5.5} {\node at (\x, \y) {$1$};}
+  \foreach \x/\y in {0.5/6.5} {\node at (\x, \y) {};}
+  \onslide<8->{\phantom{\foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize G};}}
+  \foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize $86$};}}
+\end{tikzpicture}}\onslide<7->{\begin{tikzpicture}[scale=0.45]
+
+  \draw[step=1cm, black!60!white] (0,0) grid (1,7);
+
+
+  \foreach \x/\y in {0.5/0.5} {\node at (\x, \y) {$4$};}
+  \foreach \x/\y in {0.5/1.5} {\node at (\x, \y) {$1$};}
+  \foreach \x/\y in {0.5/2.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/3.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/4.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/5.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/6.5} {\node at (\x, \y) {$1$};}
+  \onslide<8->{\phantom{\foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize G};}}
+  \foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize $93$};}}
+\end{tikzpicture}}\hspace{-0.08cm}\onslide<7->{\begin{tikzpicture}[scale=0.45]
+
+  \draw[step=1cm, black!60!white] (0,0) grid (1,7);
+
+  \foreach \x/\y in {0.5/0.5} {\node at (\x, \y) {$5$};}
+  \foreach \x/\y in {0.5/1.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/2.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/3.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/4.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/5.5} {\node at (\x, \y) {};}
+  \foreach \x/\y in {0.5/6.5} {\node at (\x, \y) {$1$};}
+  \onslide<8->{\phantom{\foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize G};}}
+  \foreach \x/\y in {0.5/-0.5} {\node at (\x, \y) {\scriptsize $100$};}}
+\end{tikzpicture}}
 \end{textblock}
 }
 
-
-\only<5->{
-\begin{textblock}{140}(94,51)
-\small
+\only<9->{
+\begin{textblock}{80}(80,22)
+\centering \normalsize
 \begin{flalign*}
-& W = \binom{40}{10} = \num{847660528} &&
+& W(n_0, n_1, n_2, n_3, n_4, n_5, n_6)  = \frac{N!}{\prod_i n_i !} \\
+\only<10-13>{& \ \ W(0, 6, 0, 0, 0, 0, 0)  = 1 \\}
+\only<11-13>{& \ \ W(1, 4, 1, 0, 0, 0, 0)  = 30 \\}
+\only<12-13>{& \ \ W(2, 2, 2, 0, 0, 0, 0)  = 90 \\}
+\only<13>{& \ \ \dots \\}
+\only<13>{& \ \ W(5, 0, 0, 0, 0, 0, 1)  = 6 \\}
+&&
 \end{flalign*}
 \end{textblock}
 }
 
-\only<3>{
-\begin{textblock}{160}(0,74)
+\only<14>{
+\begin{textblock}{78}(79,42)
 \centering
-
-¿Cuál es la probabilidad de que se contraiga nuevamente?
+\includegraphics[width=\textwidth, page=1]{figuras/energia.pdf}
 \end{textblock}
 }
 
-\only<6>{
-\begin{textblock}{160}(66,66)
-\begin{flalign*}
-& P(\text{contraiga}|N=10,V=40) = \frac{\binom{20}{10}}{\binom{40}{10}} = 0.0002 &&
-\end{flalign*}
-\end{textblock}
-}
 
 \end{frame}
 
@@ -1937,98 +2150,98 @@ V = 40
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
 \centering \LARGE Siglo 19: Física estadística \\
-\large \only<1-4>{Gases}\only<5->{Entropía}
+\large Entropía
 \end{textblock}
 
+%
+% \only<3-5>{
+% \begin{textblock}{140}(8,26)
+% \begin{tikzpicture}[scale=0.50]
+% % Draw the surrounding box
+%   \draw[red!60, thick] (-0.2, -0.4) rectangle (10.9, 4.4);
+% \end{tikzpicture}
+% \end{textblock}
+% }
+%
+% \only<-5>{
+% \begin{textblock}{140}(10,28)
+% \begin{tikzpicture}[scale=0.50]
+%   % Grid lines
+%   \draw[step=1cm, black!60!white] (0,0) grid (5,4);
+%   % Points
+%   % \foreach \x/\y in {0.5/0.5, 1.5/1.5, 2.5/2.5, 3.5/3.5, 4.5/1.5, 1.5/3.5, 3.5/1.5, 4.5/2.5, 2.5/0.5, 0.5/3.5} {
+%   % \fill[red] (\x, \y) circle (0.1);
+%   \foreach \x/\y/\radius in {0.5/0.5/0.15, 1.5/1.5/0.15, 2.5/2.5/0.15, 3.5/3.5/0.15, 4.5/1.5/0.15, 1.5/3.5/0.15, 3.5/1.5/0.15, 4.5/2.5/0.15, 2.5/0.5/0.15, 0.5/3.5/0.15} {
+%     \fill[black!65] (\x, \y) circle (\radius);
+%   }
+% \end{tikzpicture}
+% \only<2->{\begin{tikzpicture}[scale=0.50]
+%   % Grid lines
+%   \draw[step=1cm, black!60!white] (0,0) grid (5,4);
+%   % Points
+%   % \foreach \x/\y in {0.5/0.5, 1.5/1.5, 2.5/2.5, 3.5/3.5, 4.5/1.5, 1.5/3.5, 3.5/1.5, 4.5/2.5, 2.5/0.5, 0.5/3.5} {
+%   % \fill[red] (\x, \y) circle (0.1);
+%   \foreach \x/\y/\radius in {1.5/0.5/0.15, 0.5/1.5/0.15, 3.5/2.5/0.15, 3.5/3.5/0.15, 4.5/1.5/0.15, 1.5/3.5/0.15, 3.5/1.5/0.15, 4.5/0.5/0.15, 2.5/1.5/0.15, 0.5/2.5/0.15} {
+%     \fill[black!65] (\x, \y) circle (\radius);
+%   }
+%
+% \end{tikzpicture}}
+% \end{textblock}
+%
+% \begin{textblock}{140}(10,54)
+% $\begin{array}{l}
+% N_A = 10 \\
+% V_A = 20
+% \end{array}
+% $ \small
+%
+% \begin{flalign*}
+% & \ \ W_A = \binom{20}{10} &&
+% \end{flalign*}
+% \end{textblock}
+% }
+%
+% \only<2-5>{
+% \begin{textblock}{140}(40,54)
+% $\begin{array}{l}
+% N_B = 10 \\
+% V_B = 20
+% \end{array}
+% $ \small
+%
+% \begin{flalign*}
+% & \ \ W_B = \binom{20}{10} &&
+% \end{flalign*}
+%
+% \end{textblock}
+% }
+%
+% \only<4-5>{
+% \begin{textblock}{140}(70,24)
+% \begin{flalign*}
+% N_{AB} &= N_A + N_B \\
+% V_{AB} &= V_A + V_B \\
+% \only<4>{\phantom}{\log} \, \bm{W_{AB}} &= \bm{W_A} \only<4>{\phantom}{+}  \bm{W_B} \\ &&
+% \end{flalign*}
+% \end{textblock}
+% }
 
-\only<3-5>{
-\begin{textblock}{140}(8,26)
-\begin{tikzpicture}[scale=0.50]
-% Draw the surrounding box
-  \draw[red!60, thick] (-0.2, -0.4) rectangle (10.9, 4.4);
-\end{tikzpicture}
-\end{textblock}
-}
-
-\only<-5>{
-\begin{textblock}{140}(10,28)
-\begin{tikzpicture}[scale=0.50]
-  % Grid lines
-  \draw[step=1cm, black!60!white] (0,0) grid (5,4);
-  % Points
-  % \foreach \x/\y in {0.5/0.5, 1.5/1.5, 2.5/2.5, 3.5/3.5, 4.5/1.5, 1.5/3.5, 3.5/1.5, 4.5/2.5, 2.5/0.5, 0.5/3.5} {
-  % \fill[red] (\x, \y) circle (0.1);
-  \foreach \x/\y/\radius in {0.5/0.5/0.15, 1.5/1.5/0.15, 2.5/2.5/0.15, 3.5/3.5/0.15, 4.5/1.5/0.15, 1.5/3.5/0.15, 3.5/1.5/0.15, 4.5/2.5/0.15, 2.5/0.5/0.15, 0.5/3.5/0.15} {
-    \fill[black!65] (\x, \y) circle (\radius);
-  }
-\end{tikzpicture}
-\only<2->{\begin{tikzpicture}[scale=0.50]
-  % Grid lines
-  \draw[step=1cm, black!60!white] (0,0) grid (5,4);
-  % Points
-  % \foreach \x/\y in {0.5/0.5, 1.5/1.5, 2.5/2.5, 3.5/3.5, 4.5/1.5, 1.5/3.5, 3.5/1.5, 4.5/2.5, 2.5/0.5, 0.5/3.5} {
-  % \fill[red] (\x, \y) circle (0.1);
-  \foreach \x/\y/\radius in {1.5/0.5/0.15, 0.5/1.5/0.15, 3.5/2.5/0.15, 3.5/3.5/0.15, 4.5/1.5/0.15, 1.5/3.5/0.15, 3.5/1.5/0.15, 4.5/0.5/0.15, 2.5/1.5/0.15, 0.5/2.5/0.15} {
-    \fill[black!65] (\x, \y) circle (\radius);
-  }
-
-\end{tikzpicture}}
-\end{textblock}
-
-\begin{textblock}{140}(10,54)
-$\begin{array}{l}
-N_A = 10 \\
-V_A = 20
-\end{array}
-$ \small
-
-\begin{flalign*}
-& \ \ W_A = \binom{20}{10} &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<2-5>{
-\begin{textblock}{140}(40,54)
-$\begin{array}{l}
-N_B = 10 \\
-V_B = 20
-\end{array}
-$ \small
-
-\begin{flalign*}
-& \ \ W_B = \binom{20}{10} &&
-\end{flalign*}
-
-\end{textblock}
-}
-
-\only<4-5>{
-\begin{textblock}{140}(70,24)
-\begin{flalign*}
-N_{AB} &= N_A + N_B \\
-V_{AB} &= V_A + V_B \\
-\only<4>{\phantom}{\log} \, \bm{W_{AB}} &= \bm{W_A} \only<4>{\phantom}{+}  \bm{W_B} \\ &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<6->{
+\only<1->{
 \begin{textblock}{140}(16,20)
 \begin{flalign*}
 S = \log W = &
-\only<7>{\log \frac{N!}{\prod_i n_i!}}
-\only<8->{\log N! - \sum_i \log n_i!}
+\only<1>{\log \frac{N!}{\prod_i n_i!}}
+\only<2->{\log N! - \sum_i \log n_i!}
 \phantom{\frac{N!}{\prod_i n_i}} \\
-& \only<13-14>{= N \log N - N - \big(\sum_i n_i \log n_i - n_i\big)}
-\only<15>{= N \log N - N - \sum_i n_i \log n_i - \sum_i n_i}
-\only<16->{= N \log N - \cancel{N} - \sum_i n_i \log n_i + \cancel{\sum_i n_i} } \phantom{\cancel{\sum_i n_i} } \\
-& \only<17->{= (\sum_i n_i) \log N - \sum_i n_i \log n_i  } \\
-& \only<18>{= \sum_i n_i ( \log N - \log n_i )  }
-\only<19>{= \sum_i n_i  \log \frac{N}{n_i}   }
-\only<20->{= - \sum_i n_i  \log \frac{n_i}{N}   } \phantom{\frac{N}{n_i} } \\
-\only<21>{\frac{S}{N} & = - \sum_i \frac{n_i}{N}  \log \frac{n_i}{N}   }
-\only<22->{\frac{S}{N} & = - \sum_i p_i  \log p_i   } \only<23>{= \text{Entropía}}
+& \only<6-7>{= N \log N - N - \big(\sum_i n_i \log n_i - n_i\big)}
+\only<8>{= N \log N - N - \sum_i n_i \log n_i - \sum_i n_i}
+\only<9->{= N \log N - \cancel{N} - \sum_i n_i \log n_i + \cancel{\sum_i n_i} } \phantom{\cancel{\sum_i n_i} } \\
+& \only<10->{= (\sum_i n_i) \log N - \sum_i n_i \log n_i  } \\
+& \only<11>{= \sum_i n_i ( \log N - \log n_i )  }
+\only<12>{= \sum_i n_i  \log \frac{N}{n_i}   }
+\only<13->{= - \sum_i n_i  \log \frac{n_i}{N}   } \phantom{\frac{N}{n_i} } \\
+\only<14>{\frac{S}{N} & = - \sum_i \frac{n_i}{N}  \log \frac{n_i}{N}   }
+\only<15->{\frac{S}{N} & = - \sum_i p_i  \log p_i   } \only<16>{= \text{Entropía}}
 \phantom{\frac{N}{n_i} }
 \\&&
 \end{flalign*}
@@ -2036,21 +2249,21 @@ S = \log W = &
 }
 
 
-\only<9-13>{
+\only<3-6>{
 \begin{textblock}{140}(10,52)
 \begin{flalign*}
-\log N! = \sum_{k=1}^N \log k & \only<11->{\approx \int_1^N \log k \ dk} \\ \only<12->{&= N \log N - N \cancel{+ 1}} &&
+\log N! = \sum_{k=1}^N \log k & \only<4->{\approx \int_1^N \log k \ dk} \\ \only<5->{&= N \log N - N \cancel{+ 1}} &&
 \end{flalign*}
 \end{textblock}
 }
 
-\only<10>{
+\only<4>{
 \begin{textblock}{70}(80,48)
 \includegraphics[width=\textwidth, page=1]{figuras/stirling.pdf}
 \end{textblock}
 }
 
-\only<11-13>{
+\only<5-6>{
 \begin{textblock}{70}(80,48)
 \includegraphics[width=\textwidth, page=2]{figuras/stirling.pdf}
 \end{textblock}
@@ -2060,35 +2273,45 @@ S = \log W = &
 \end{frame}
 
 
-
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
 \centering \LARGE Siglo 20: Frecuentismo\\
 \large \sout{Evaluación} Selección de hipótesis
 \end{textblock}
 
- \only<1>{
+\only<1>{
+\begin{textblock}{140}(10,18)
+\centering
+\includegraphics[width=0.6\textwidth]{../../auxiliar/static/Elo1980.jpg}
+\end{textblock}
+}
+
+ \only<2->{
+ \begin{textblock}{140}(3,24)
+ \normalsize
 \tikz{
     \node[det, fill=black!10] (r) {$r$} ;
-    \node[const, left=of r, xshift=-1.35cm] (r_name) {\small Result:};
-    \node[const, right=of r] (dr) {\normalsize $ r = (d > 0)$};
+    \node[const, right=of r] (dr) {\normalsize $ P(r|d) = \mathbb{I}(r = d > 0)$};
 
     \node[latent, above=of r, yshift=-0.45cm] (d) {$d$} ; %
-    \node[const, right=of d] (dd) {\normalsize $ d = p_i-p_j$};
-    \node[const, left=of d, xshift=-1.35cm] (d_name) {\small Difference:};
+    \node[const, right=of d] (dd) {\normalsize $ P(d|p_a,p_b) = \delta(d = p_i-p_j)$};
 
-    \node[latent, above=of d, xshift=-0.8cm, yshift=-0.45cm] (p1) {$p_i$} ; %
-    \node[latent, above=of d, xshift=0.8cm, yshift=-0.45cm] (p2) {$p_j$} ; %
-    \node[const, left=of p1, xshift=-0.55cm] (p_name) {\small Performance:};
+    \node[latent, above=of d, xshift=-0.8cm, yshift=-0.45cm] (p1) {$p_a$} ; %
+    \node[latent, above=of d, xshift=0.8cm, yshift=-0.45cm] (p2) {$p_b$} ; %
+
 
     \node[accion, above=of p1,yshift=0.3cm] (s1) {} ; %
-    \node[const, right=of s1] (ds1) {$s_i$};
+    \node[const, right=of s1] (ds1) {$s_a$};
     \node[accion, above=of p2,yshift=0.3cm] (s2) {} ; %
-    \node[const, right=of s2] (ds2) {$s_j$};
+    \node[const, right=of s2] (ds2) {$s_b$};
 
-    \node[const, right=of p2] (dp2) {\normalsize $p \sim \N(s,\beta^2)$};
+    \node[const, right=of p2] (dp2) {\normalsize $P(p_i|s_i) = \N(s_i,\beta^2)$};
 
-    \node[const, left=of s1, xshift=-.85cm] (s_name) {\small Skill:};
+    \node[const, above=of dr] (r_name) {\small Resultado};
+    \node[const, above=of dd] (d_name) {\small Diferencia};
+    \node[const, above=of dp2] (p_name) {\small Desempeño};
+
+    \node[const, above=of ds2, yshift=0.1cm] (s_name) {\small Habilidad};
 
     \edge {d} {r};
     \edge {p1,p2} {d};
@@ -2096,84 +2319,90 @@ S = \log W = &
     \edge {s2} {p2};
 
 }
-}
-
-
- \only<2>{
-\begin{equation*}
-\begin{split}
-  d_{ij} & \sim \iint \mathbb{I}(d_{ij}=p_i-p_j) N(p_i|s_i,\beta^2)N(p_j|s_j,\beta^2) \, dp_i \, dp_j \\
-  \onslide<2->{&\overset{1}{=} \int N(d_{ij}+p_j|s_i,\beta^2) N(p_j|s_j,\beta^2) dp_j}\\
-  \onslide<3->{&\overset{2}{=} \int N(p_j|s_i-d_{ij},\beta^2) N(p_j|s_j,\beta^2) dp_j} \\
-  \onslide<4->{&\overset{*}{=} \int \underbrace{N(d_{ij}|s_i-s_j,2\beta^2)}_{\text{const.}} \underbrace{N(p_j|\mu_{-},\sigma^2_{-})dp_j}_{1}}
-\end{split}
-\end{equation*}
-
-\begin{equation}
-d_{ij} \sim N(d_{ij}|s_i-s_j,2\beta^2)
-\end{equation}
+\end{textblock}
 }
 
 
 
 \only<3>{
-\includegraphics[page=1,width=\textwidth]{figuras/probaOfWin_2D}
+\begin{textblock}{90}(75,24)
+\includegraphics[width=0.75\textwidth]{figuras/probaOfWin_2D}
+\end{textblock}
 }
-
 
 \only<4>{
-\begin{equation}
-P(p_i>p_j|s_i,s_j) = 1 - \Phi\left( \frac{0-(s_i - s_j)}{\sqrt{2}\beta} \right) =  \Phi\left( \frac{s_i - s_j}{\sqrt{2}\beta} \right)
-\end{equation}
-\vspace{-0.1cm}
-\begin{figure}[H]
-     \centering
-     \begin{subfigure}[b]{0.65\textwidth}
-       \includegraphics[page=1,width=\textwidth]{figuras/probaOfWin}
-     \end{subfigure}
-\end{figure}
+\begin{textblock}{90}(80,38)
+\includegraphics[width=0.8\textwidth]{figuras/probaOfWin}
+\end{textblock}
+}
+
+\only<3->{
+\begin{textblock}{90}(65,12)
+\normalsize
+\begin{flalign*}
+ \hspace{-2cm}  P(d\,|\,p_a,p_b) = \iint &\delta(d=p_a-p_b)  \N(p_a|s_a,\beta^2)\N(p_b|s_b,\beta^2) \, dp_a \, dp_b \\
+ \only<4->{&  = \N(\,d\,|\, s_a-s_b, \, 2\beta^2\,)}
+ &&
+ \end{flalign*}
+
+\end{textblock}
+}
+
+\only<5->{
+\begin{textblock}{90}(80,32)
+\normalsize
+\begin{flalign*}
+& P(d>0 \,|\,s_a,s_b, \text{M}) =   1 - \Phi\left( \frac{s_a - s_b}{\sqrt{2}\beta} \right) &&
+\end{flalign*}
+\end{textblock}
 }
 
 
-\only<5>{
+\only<6->{
+\begin{textblock}{60}(80,54)
+\normalsize
+
 \begin{equation*}
-\Delta = \underbrace{(2r_{ij}-1)}_{\hfrac{\text{\textbf{Direcci\'on} }}{\text{(Signo del resultado)}}} \, \underbrace{(1 - P(r_{ij}|s_i,s_j))}_{\hfrac{\text{\textbf{Magnitud}}}{\text{(Sorpresa del resultado)}}}
+s_a^{\text{new}} = s_b^{\text{old}} + \Delta
 \end{equation*}
 
-\vspace{0.25cm}
-
-\begin{equation}
-s_i^{\text{new}} = s_i^{\text{old}} + K \Delta
-\end{equation}
-
-\vspace{0.25cm}
-
-\begin{center}
-\large Modelo de soluci\'on
-\end{center}
-\vspace{-0.1cm}
-\begin{mdframed}[backgroundcolor=black!20]
-\begin{center}
- Estimador $\hfrac{\longrightarrow}{\longleftarrow}$ Predicci\'on
-\end{center}
-\end{mdframed}
-
-
-\begin{itemize}
- \item[$\bullet$] El estimador hace a la predicci\'on
- \item[$\bullet$] La predicci\'on hace al estimador
-\end{itemize}
+\begin{equation*}
+\onslide<7->{\Delta = \underbrace{(1 - P(d > 0 \,|\,s_a,\, s_b))}_{\text{\footnotesize Sorpresa}}}
+\onslide<8>{
+\underbrace{(-1)^{(1-r)} }_{\text{\footnotesize Signo}}
+}
+\end{equation*}
+\end{textblock}
 }
 
 \end{frame}
+
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
 \centering \LARGE Siglo 20: Teoría de la información\\
 \large La sorpresa como fuente de información
 \end{textblock}
+\centering
+\vspace{1.2cm}
 
+\only<1>{
+\Large El problema fundamental de la comunicación es el de
 
+\vspace{0.3cm}
+
+\textbf{reconstruir el mensaje enviando por la realidad}
+}
+
+\only<2>{
+Estructura invariante del dato empírico. Canal emisor - receptor
+}
+
+\only<3>{
+Teorema de Bayes.
+
+\includegraphics[width=0.65\textwidth]{figuras/posterior_win.pdf}
+}
 \end{frame}
 
 
