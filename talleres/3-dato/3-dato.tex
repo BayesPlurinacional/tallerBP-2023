@@ -1,0 +1,520 @@
+\newif\ifen
+\newif\ifes
+\newif\iffr
+\newcommand{\fr}[1]{\iffr#1 \fi}
+\newcommand{\En}[1]{\ifen#1\fi}
+\newcommand{\Es}[1]{\ifes#1\fi}
+\estrue
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\usepackage{siunitx}
+\input{../../auxiliar/tex/diapo_encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+\estrue
+\usepackage{todonotes}
+\setbeameroption{show notes}
+%
+\newcommand{\gray}{\color{black!55}}
+\usepackage{ulem} % sout
+\usepackage{mdframed}
+\usepackage{listings}
+\lstset{
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=true,
+  columns=flexible,
+  basicstyle={\ttfamily},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showlines=true
+}
+
+
+\begin{document}
+
+\color{black!85}
+\large
+%
+% \begin{frame}[plain,noframenumbering]
+%
+%
+% \begin{textblock}{160}(0,0)
+% \includegraphics[width=1\textwidth]{../../auxiliar/static/deforestacion}
+% \end{textblock}
+%
+% \begin{textblock}{80}(18,9)
+% \textcolor{black!15}{\fontsize{44}{55}\selectfont Verdades}
+% \end{textblock}
+%
+% \begin{textblock}{47}(85,70)
+% \centering \textcolor{black!15}{{\fontsize{52}{65}\selectfont Empíricas}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(100,28)
+% \LARGE  \textcolor{black!15}{\rotatebox[origin=tr]{-3}{\scalebox{9}{\scalebox{1}[-1]{$p$}}}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(66,43)
+% \LARGE  \textcolor{black!15}{\scalebox{6}{$=$}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(36,29)
+% \LARGE  \textcolor{black!15}{\scalebox{9}{$p$}}
+% \end{textblock}
+%
+% %
+% %
+% % \begin{textblock}{160}(01,81)
+% % \footnotesize \textcolor{black!5}{\textbf{\small Seminario ``Acuerdos intersubjetivos''\\
+% % Comunidad Bayesiana Plurinacional} \\}
+% % \end{textblock}
+%
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain,noframenumbering]
+\begin{textblock}{160}(0,43)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/modelosGraficos}
+\end{textblock}
+
+
+\begin{textblock}{160}(4,4)
+\LARGE \textcolor{black!85}{\fontsize{22}{0}\selectfont \textbf{Modelos gráficos e inferencia}}
+\end{textblock}
+% \begin{textblock}{160}(4,12)
+% \LARGE \textcolor{black!85}{\fontsize{22}{0}\selectfont \textbf{algoritmos de inferencia}}
+% \end{textblock}
+
+
+\begin{textblock}{55}[0,0](72,23)
+\begin{turn}{0}
+\parbox{10cm}{\sloppy\setlength\parfillskip{0pt}
+\textcolor{black!85}{Unidad 1} \\
+\small\textcolor{black!85}{Acuerdos intersubjetivos en contextos de incertidumbre.} \\
+\small\textcolor{black!85}{Especificación gráfica de modelos causales. Evaluación} \\
+\small\textcolor{black!85}{de modelos causales. La emergencia del sobreajuste y el} \\
+\small\textcolor{black!85}{balance natural de las reglas de la probabilidad.} \\
+}
+\end{turn}
+\end{textblock}
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Teoría de la información\\
+\large \only<2->{El problema de la comunicación con la realidad}
+\end{textblock}
+
+\vspace{1.2cm}
+
+\only<1>{
+\begin{textblock}{160}(0,40) \centering
+\Large \textbf{El problema de la comunicación con la realidad}
+\end{textblock}
+}
+
+% \only<2->{
+% \begin{textblock}{140}(10,48)
+% Quisiéramos que lo recibido sea igual a lo enviado. \\[.05cm]
+%
+% \normalsize
+%
+% \hspace{0.5cm} $\bullet$ Solución física (me acerco para escuchar mejor)
+%
+% \only<3->{\hspace{0.5cm} $\bullet$ Solución inferencial (interpretar la señal con ruido)}
+% \end{textblock}
+% }
+
+
+\only<2->{
+\begin{textblock}{160}(0,28) \centering \Large
+
+Quisiéramos que el mensaje recibido sea igual al enviado
+\end{textblock}
+}
+
+\only<3->{
+\begin{textblock}{140}(10,44) \centering
+\Large Soluciones \\[0.05cm]
+
+\large
+
+Física: acercarme para escuchar mejor \\
+\only<3>{Inferencia: interpretar la señal con ruido}\only<4->{\textbf{Inferencia: interpretar la señal con ruido} \\[1.1cm]}
+\only<5->{\Large ¿Cuál es el dato de la realidad?}
+\end{textblock}
+}
+
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4) \centering
+\LARGE Base empírica \\
+\large \only<-9>{¿Cuál es el dato de la realidad?}\only<10>{\textbf{El dato se construye}}
+\end{textblock}
+
+\only<2>{
+\begin{textblock}{160}(0,28) \centering
+ \Large ¿Cuál es el conjunto de elementos del mundo \\ que sirven de evidencia indubitable (dato)?
+\end{textblock}
+}
+
+\only<3-9>{
+\begin{textblock}{130}(15,21)
+ $\bullet$ BE Filosófica: $\emptyset$ \\
+ \only<4->{$\bullet$ BE Epistemológica: Precios\\ }
+ \only<5>{$\bullet$ Teoría: Inflación}\only<6->{$\bullet$ BE Metodológica$_1$: Inflación \\}
+\only<7>{$\bullet$ Teoría: Producto Bruto Interno}\only<8->{$\bullet$ BE Metodológica$_2$: Producto Bruto Interno\\}
+\only<9>{$\bullet$ Teoría: Política pública}
+\end{textblock}
+}
+
+\only<10>{
+\begin{textblock}{130}(15,25) \Large \centering
+Depende del conjunto de supuestos \\
+que una comunidad no pone en duda!
+\end{textblock}
+}
+
+\only<4>{
+\begin{textblock}{160}(0,48) \centering
+\includegraphics[width=0.62\textwidth, page={1}]{figuras/baseEmpirica.pdf}
+\end{textblock}}
+\only<5>{
+\begin{textblock}{160}(0,48) \centering
+\includegraphics[width=0.62\textwidth, page={2}]{figuras/baseEmpirica.pdf}
+\end{textblock}}
+\only<6>{
+\begin{textblock}{160}(0,48) \centering
+\includegraphics[width=0.62\textwidth, page={3}]{figuras/baseEmpirica.pdf}
+\end{textblock}}
+\only<7>{
+\begin{textblock}{160}(0,48) \centering
+\includegraphics[width=0.62\textwidth, page={4}]{figuras/baseEmpirica.pdf}
+\end{textblock}}
+\only<8>{
+\begin{textblock}{160}(0,48) \centering
+\includegraphics[width=0.62\textwidth, page={5}]{figuras/baseEmpirica.pdf}
+\end{textblock}}
+\only<9->{
+\begin{textblock}{160}(0,48) \centering
+\includegraphics[width=0.62\textwidth, page={6}]{figuras/baseEmpirica.pdf}
+\end{textblock}}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE
+ Los datos como funciones proposicionales
+\end{textblock}
+\vspace{0.75cm}
+
+\end{frame}
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE
+ Los datos como funciones proposicionales
+\end{textblock}
+\vspace{0.75cm}
+
+\begin{textblock}{160}(0,20)
+\begin{equation*}
+ f(x) = y
+\end{equation*}
+\end{textblock}
+
+\begin{textblock}{160}(43,33)
+\begin{itemize}
+ \item[$x$]
+    \textbf{\en{Unit of analysis}\es{Unidad de análisis}} (UA)
+ \item[$f$]
+   \en{\textbf{Variable} of the unit of analysis}
+   \es{\textbf{Variable} de la unidad de análisis} (V)
+ \item[$y$]
+   \en{\textbf{Value} of the variable}
+   \es{\textbf{Resultado} o valor de la variable} (R)
+\end{itemize}
+\end{textblock}
+
+
+\only<2>{
+\begin{textblock}{160}(0,65) \centering
+ \textit{Altura}(Gustavo) = $1.78$m
+\end{textblock}
+}
+
+\only<3-4>{
+\begin{textblock}{160}(0,65) \centering
+ \textit{Ideología}(Partido Comunista) = Comunista \\
+ \only<4>{P(\textit{Ideología}(Partido Comunista) = Comunista) = 0.8}
+\end{textblock}
+}
+
+\only<5>{
+\begin{textblock}{160}(0,65) \centering
+ \textit{Habilidad}(Maradona) $>$ \textit{Habilidad}(Messi)
+\end{textblock}
+}
+
+\only<6>{
+\begin{textblock}{140}(10,60)
+\begin{framed} \centering
+   \en{The meaning of data is implicit in their \textbf{operationalization}}
+   \es{El significado preciso de la función depende de la \textbf{operacionalización}}
+   \end{framed}
+\end{textblock}
+}
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE La estructura invariante del dato empírico
+\end{textblock}
+\vspace{0.75cm}
+
+
+\begin{textblock}{160}(0,16)
+\centering
+\tikz{
+
+\node[det] (fuente) {};
+\node[const, above=of fuente] (n_fuente) {$\hfrac{\text{Fuente de}}{\text{información}}$};
+\node[const, right=of fuente, yshift=-0.35cm, xshift=0.05cm] (mensaje_enviado) {$\hfrac{\text{Mensaje}}{\text{enviado}}$};
+
+
+\node[det, right=of fuente, xshift=0.6cm ] (transmisor) {};
+\node[const, above=of transmisor] (n_transmisor) {\scriptsize Transmisor};
+\node[const, right=of transmisor, yshift=-0.35cm, xshift=0.05cm] (senal_enviada) {$\hfrac{\text{Señal}}{\text{enviada}}$};
+
+
+\node[det, right=of transmisor, xshift=0.7cm , minimum size=6pt] (perceptor) {};
+\node[const, above=of perceptor] (n_perceptor) {\scriptsize Perceptor};
+\node[const, right=of perceptor, yshift=-0.35cm, xshift=0.05cm] (senal_recibida) {$\hfrac{\text{Señal}}{\text{recibida}}$};
+
+\node[det, below=of perceptor, yshift=0.2cm] (ruido) {};
+\node[const, below=of ruido] (n_ruido) {\scriptsize Rudio};
+
+\node[det, right=of perceptor, xshift=0.7cm] (receptor) {};
+\node[const, above=of receptor] (n_receptor) {\scriptsize Receptor};
+\node[const, right=of receptor, yshift=-0.35cm, xshift=0.05cm] (mensaje_recibido) {$\hfrac{\text{Mensaje}}{\text{recibido}}$};
+
+
+\node[det, right=of receptor, xshift=0.6cm ] (destino) {};
+\node[const, above=of destino] (n_destino) {$\hfrac{\text{Información}}{\text{en destino}}$};
+
+\edge {fuente} {transmisor};
+\edge {transmisor, ruido} {perceptor};
+\edge {perceptor} {receptor};
+\edge {receptor} {destino};
+}
+
+\end{textblock}
+
+\begin{textblock}{140}(10,50)
+\normalsize
+$\bullet$ Fuente: el estado \textit{real} de variable \hfill \textit{habilidad}(Messi)\\
+
+$\bullet$ Mensaje enviado: la dinámica del mundo \hfill Realidad Causal \\
+
+$\bullet$ Transmisor: dimensiones perceptibles de la variable \hfill Ganar/Perder \\
+
+$\bullet$ Perceptor: el cuerpo o instrumento de medición \hfill \textit{Scraper} de \texttt{fifa.com}  \\
+
+$\bullet$ Receptor: el indicador, lo efectivamente registrado \hfill True/False \\
+
+$\bullet$ Mensaje recibido: inferencia de la variable \hfill Modelo Causal \\
+
+$\bullet$ Destino: la estimación  \hfill $P$(\textit{habilidad}(Messi) = y$|$I, M) \\
+
+
+\end{textblock}
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Siglo 20: Frecuentismo\\
+\large \sout{Evaluación} Selección de hipótesis
+\end{textblock}
+
+\only<1>{
+\begin{textblock}{140}(10,18)
+\centering
+\includegraphics[width=0.6\textwidth]{../../auxiliar/static/Elo1980.jpg}
+\end{textblock}
+}
+
+ \only<2->{
+ \begin{textblock}{140}(3,24)
+ \normalsize
+\tikz{
+    \node[det, fill=black!10] (r) {$r$} ;
+    \node[const, right=of r] (dr) {\normalsize $ P(r|d) = \mathbb{I}(r = d > 0)$};
+
+    \node[latent, above=of r, yshift=-0.45cm] (d) {$d$} ; %
+    \node[const, right=of d] (dd) {\normalsize $ P(d|p_a,p_b) = \delta(d = p_i-p_j)$};
+
+    \node[latent, above=of d, xshift=-0.8cm, yshift=-0.45cm] (p1) {$p_a$} ; %
+    \node[latent, above=of d, xshift=0.8cm, yshift=-0.45cm] (p2) {$p_b$} ; %
+
+
+    \node[accion, above=of p1,yshift=0.3cm] (s1) {} ; %
+    \node[const, right=of s1] (ds1) {$s_a$};
+    \node[accion, above=of p2,yshift=0.3cm] (s2) {} ; %
+    \node[const, right=of s2] (ds2) {$s_b$};
+
+    \node[const, right=of p2] (dp2) {\normalsize $P(p_i|s_i) = \N(s_i,\beta^2)$};
+
+    \node[const, above=of dr] (r_name) {\small Resultado};
+    \node[const, above=of dd] (d_name) {\small Diferencia};
+    \node[const, above=of dp2] (p_name) {\small Desempeño};
+
+    \node[const, above=of ds2, yshift=0.1cm] (s_name) {\small Habilidad};
+
+    \edge {d} {r};
+    \edge {p1,p2} {d};
+    \edge {s1} {p1};
+    \edge {s2} {p2};
+
+}
+\end{textblock}
+}
+
+
+
+\only<3>{
+\begin{textblock}{90}(75,24)
+\includegraphics[width=0.75\textwidth]{figuras/probaOfWin_2D}
+\end{textblock}
+}
+
+\only<4>{
+\begin{textblock}{90}(80,38)
+\includegraphics[width=0.8\textwidth]{figuras/probaOfWin}
+\end{textblock}
+}
+
+\only<3-5>{
+\begin{textblock}{90}(65,12)
+\normalsize
+\begin{flalign*}
+ \hspace{-2cm}  P(d\,|\,p_a,p_b) = \iint &\delta(d=p_a-p_b)  \N(p_a|s_a,\beta^2)\N(p_b|s_b,\beta^2) \, dp_a \, dp_b \\
+ \only<4->{&  = \N(\,d\,|\, s_a-s_b, \, 2\beta^2\,)}
+ &&
+ \end{flalign*}
+
+\end{textblock}
+}
+
+\only<5->{
+\begin{textblock}{90}(80,32)
+\normalsize
+\begin{flalign*}
+& P(d>0 \,|\,s_a,s_b, \text{M}) =   1 - \Phi\left( \frac{s_a - s_b}{\sqrt{2}\beta} \right) &&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\only<6->{
+\begin{textblock}{60}(80,54)
+\normalsize
+
+\begin{equation*}
+s_a^{\text{new}} = s_a^{\text{old}} + \Delta
+\end{equation*}
+
+\begin{equation*}
+\hspace{0.3cm} \onslide<7->{\Delta = \underbrace{(1 - P(d > 0 \,|\,s_a,\, s_b))}_{\text{\footnotesize Sorpresa}}}
+\onslide<8>{
+\underbrace{(-1)^{(1-r)} }_{\text{\footnotesize Signo}}
+}
+\end{equation*}
+\end{textblock}
+}
+
+\end{frame}
+
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Siglo 21: El retorno del enfoque bayesiano\\
+\large Aplicación estricta de las reglas de la probabilidad
+\end{textblock}
+
+
+Teorema de Bayes.
+
+\includegraphics[width=0.65\textwidth]{figuras/posterior_win.pdf}
+
+
+
+\end{frame}
+
+\begin{frame}[plain]
+
+
+\begin{textblock}{140}(10,28)
+\Large Ejercicio 1.1 \\[0.4cm]
+
+\large La persona que da la pista a veces se confunde y señala la caja donde está el regalo o la caja que fue elegida previamente por la persona. \\[0.2cm]
+
+\only<2>{
+\large Descubrir el verdadero efecto causal que el regalo y la elección tienen sobre la pista en base a los datos ofrecidos en la práctica. \\[0.1cm]}
+
+\end{textblock}
+
+
+\end{frame}
+
+\begin{frame}[plain,noframenumbering]
+\centering \vspace{0.5cm}
+\includegraphics[width=1\textwidth]{../../auxiliar/static/BP.png}
+\end{frame}
+
+
+
+
+
+%
+% \begin{frame}[plain]
+% \begin{textblock}{96}(0,6.5)\centering
+% {\transparent{0.9}\includegraphics[width=0.8\textwidth]{../../auxiliar/static/inti.png}}
+% \end{textblock}
+%
+% \begin{textblock}{160}(96,5.5)
+% \includegraphics[width=0.35\textwidth]{../../auxiliar/static/pachacuteckoricancha}
+% \end{textblock}
+% \end{frame}
+
+
+
+
+
+\end{document}
+
+
+
