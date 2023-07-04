@@ -111,8 +111,6 @@
 
 \end{frame}
 
-\begin{comment}
-
 \begin{frame}[plain]
 \begin{textblock}{160}(00,04)
 \centering
@@ -1677,7 +1675,6 @@ Datos:
 \end{frame}
 
 
-\end{comment}
 
 
 \begin{frame}[plain]
@@ -1711,6 +1708,90 @@ P(\text{dato}_1|\text{Modelo}) = \only<5->{\phantom}{\sum_{\text{hipótesis}}}  
 
 
 \end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Boole \\
+ \large Valor de verdad continuo
+ \end{textblock}
+ \vspace{1.5cm} \centering
+
+ \includegraphics[width=1\textwidth]{../../auxiliar/static/boole.png}
+
+ \normalsize
+ \hfill George Boole (1854) \href{https://downloads.tuxfamily.org/openmathdep/logic_ante_1900/Laws_of_Thought-Boole.pdf}{\emph{An Investigation of the Laws of Thought}}
+\end{frame}
+
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \LARGE Lógica de primer orden extendida \\
+%  \Large (De una práctica suspendida)
+%  \end{textblock}
+%  \vspace{1.5cm}
+%
+% Dado \ \ $A \Rightarrow B  \equiv P(B|A) = 1$
+%
+% \pause
+%
+% $\bullet$ \ \ $P(B|A) = 1$ (modus ponens) \\
+% $\bullet$ \ \ $P(\neg A| \neg B) = 1$ (modus tollens) \\
+% \pause
+% $\bullet$ \ \ $P(B| \neg A) \leq P(B) $ ($A$ falso implica $B$ menos plausible)
+% $\bullet$ \ \ $P(A|B) \geq P(A) $ ($B$ verdadero implica $A$ más plausible)
+%
+%  \vspace{0.6cm}
+%
+% Dado \ \ $P(B|A) \geq P(B)$ ($A$ verdadero, luego $B$ más plausible) \\
+%
+% \pause
+%
+% $\bullet$ \ \ $P(B|\neg A) \leq P(B)$ ($A$ falso, luego $B$ menos plausible) \\
+% $\bullet$ \ \ $P(A|B) \geq P(A)$ ($B$ verdadero, luego $A$ más plausible) \\
+% $\bullet$ \ \ $P(\neg A|\neg B) \geq P(\neg A)$ ($B$ falso, luego $A$ menos plausible)
+%
+%
+% \end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE El problema de la lógica extendida \\
+ \large La complejidad en memoria
+ \end{textblock}
+ \vspace{1.5cm}
+
+ Tenemos $n=27$ variables, las letras del alfabeto \\
+
+ \pause
+
+ \vspace{0.5cm}
+
+ $\bullet$ En lógica binaria asignamos valores a las variables, y con las reglas de la lógica calculamos las combinaciones. \pause Con 27 bits nos alcanza.  \\
+
+ \vspace{0.5cm}
+
+ \pause
+
+ $\bullet$ En lógica extendida debemos asignar una probabilidad a cada posible combinación de todos los posibles combinaciones de valores de verdad.  \\
+
+ \vspace{0.2cm}
+  \pause
+
+  Necesitamos guardar $2^{27}-1$ números reales  \\[0.2cm]
+
+ \Wider[-2cm]{
+ \begin{itemize}
+ \item[$1$:] $P(A, B, \dots, Z) =  \dots$ \\
+ \item[$.$:] $\dots$ \\
+ \item[$2^{27}-1$:] $P(\neg A, \neg B, \dots, Z) =  \dots$ \\
+ \item[$2^{27}$:] $P(\neg A, \neg B, \dots, \neg Z) =  1 - \sum P(\dots)$
+ \end{itemize}
+ }
+\end{frame}
+
 
 
 
