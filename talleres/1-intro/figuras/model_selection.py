@@ -5,10 +5,13 @@ import matplotlib.pyplot as plt
 from scipy.stats import multivariate_normal as normal
 from scipy.stats import norm 
 import statsmodels.api as sm
+import copy
 #phi = polynomial_basis_function
 
 random.seed(1)
 np.random.seed(1)
+cmap = plt.get_cmap("tab10")
+
 
 def posterior(alpha, beta, t, Phi):
     S_N_inv = alpha * np.eye(Phi.shape[1]) + beta * Phi.T.dot(Phi)
@@ -104,13 +107,16 @@ plt.ylim(-1.5,1.5)
 for i in range(0,10):
     model = sm.OLS(t,data.iloc[:,0:(i+1)]).fit()
     pred = model.params["X0"]*X_grilla[:,0]**0
-    for i in range(1,i+1):
-        pred += model.params["X"+str(i)]*X_grilla[:,0]**i
+    for j in range(1,i+1):
+        pred += model.params["X"+str(j)]*X_grilla[:,0]**j
     plt.plot(X_grilla[:,0], pred)
+    if i == 3:
+        pred3 = copy.deepcopy(pred)
 
 plt.savefig("pdf/model_selection_OLS.pdf",bbox_inches='tight')
 plt.savefig('png/model_selection_OLS.png', bbox_inches='tight', transparent=False)
 plt.close()
+
 
 X_grilla = np.linspace(0, 1, 100).reshape(-1, 1)-0.5
 y_grilla = np.linspace(-1.4, 1.4, 100).reshape(-1, 1)
@@ -118,9 +124,17 @@ y_true = sinus_model(X_grilla , 0)
 plt.plot(X_grilla, y_true, '--', color="black")
 plt.plot(X,t,'.', color='black')
 plt.ylim(-1.5,1.5)
-plt.plot(X_grilla[:,0], pred)
+plt.plot(X_grilla[:,0], pred, color=cmap(9))
 plt.savefig("pdf/model_selection_OLS_best-at-train.pdf",bbox_inches='tight')
 plt.savefig('png/model_selection_OLS_best-at-train.png', bbox_inches='tight', transparent=False)
+plt.close()
+
+plt.plot(X_grilla, y_true, '--', color="black")
+plt.plot(X,t,'.', color='black')
+plt.ylim(-1.5,1.5)
+plt.plot(X_grilla[:,0], pred3, color=cmap(3))
+plt.savefig("pdf/model_selection_OLS_best-at-test.pdf",bbox_inches='tight')
+plt.savefig('png/model_selection_OLS_best-at-test.png', bbox_inches='tight', transparent=False)
 plt.close()
 
 model = sm.OLS(t,data).fit_regularized(method='elastic_net', alpha=0.0001, L1_wt=0.0)
@@ -128,7 +142,7 @@ pred = model.params[0]*X_grilla[:,0]**0
 for i in range(1,10):
     pred += model.params[i]*X_grilla[:,0]**i
 
-plt.plot(X_grilla[:,0], pred)
+plt.plot(X_grilla[:,0], pred, color=cmap(9))
 X_grilla = np.linspace(0, 1, 100).reshape(-1, 1)-0.5
 y_grilla = np.linspace(-1.4, 1.4, 100).reshape(-1, 1)
 y_true = sinus_model(X_grilla , 0)
@@ -164,7 +178,9 @@ def fit(alpha):
             
             ## Otros indicadores.
             w_map_prior = posterior(alpha, beta, t_priori, Phi_priori)[0]
-            prior_maxAposteriori_online[d,0] += np.log(likelihood(w_map_prior, t_posteriori, Phi_posteriori , beta))
+            if N >= 10:
+                # Usamos los primeros 10 como entrenamiento
+                prior_maxAposteriori_online[d,0] += np.log(likelihood(w_map_prior, t_posteriori, Phi_posteriori , beta))
             mean_square_error_MAP[d,0] += (1/N) * ((t_posteriori - Phi_posteriori.dot(w_map_prior))**2)
             
                     
@@ -179,6 +195,8 @@ def fit(alpha):
         t_priori =  t[:0]
         w_maxAprior = posterior(alpha, beta, t_priori, Phi_priori )[0]
         maxApriori.append(likelihood(w_maxAprior , t, Phi, beta)[0])
+
+
 
 
 
@@ -203,16 +221,30 @@ plt.savefig('png/model_selection_evidence.png', bbox_inches='tight',transparent=
 plt.close()    
 
 plt.close()
-plt.plot(np.exp(prior_maxAposteriori_online))
+plt.xticks(ticks=indices)
+ax = plt.gca()
+ax.tick_params(axis='both', labelsize=20)
+total = sum(np.exp(prior_maxAposteriori_online))
+for i in range(10):
+    plt.bar(indices[i], np.exp(prior_maxAposteriori_online[i])/total, align='center', color=cmap(i))
+
+#plt.plot(np.exp(prior_maxAposteriori_online))
 plt.savefig("pdf/model_selection_maxApriori_online.pdf",bbox_inches='tight')
 plt.savefig('png/model_selection_maxApriori_online.png', bbox_inches='tight',transparent=False)
 plt.close()
 
 plt.close()
-plt.plot(maxAposteriori)
+total = sum(maxAposteriori)
+plt.xticks(ticks=indices)
+ax = plt.gca()
+ax.tick_params(axis='both', labelsize=20)
+for i in range(10):
+    plt.bar(indices[i], maxAposteriori[i]/total, align='center', color=cmap(i))
+
+
 plt.savefig("pdf/model_selection_maxLikelihood.pdf",bbox_inches='tight')
 plt.savefig("png/model_selection_maxLikelihood.png",bbox_inches='tight',transparent=False)
-plt.close()        
+plt.close()
 
 
 prior_predictive_online = np.zeros((10,1))

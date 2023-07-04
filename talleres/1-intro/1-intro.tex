@@ -25,6 +25,7 @@
 \newcommand{\gray}{\color{black!55}}
 \usepackage{ulem} % sout
 \usepackage{mdframed}
+\usepackage{comment}
 \usepackage{listings}
 \lstset{
   aboveskip=3mm,
@@ -110,6 +111,7 @@
 
 \end{frame}
 
+\begin{comment}
 
 \begin{frame}[plain]
 \begin{textblock}{160}(00,04)
@@ -1453,6 +1455,7 @@ $P(\text{Modelo}_i|\text{Datos})$
 \end{frame}
 
 
+
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
 \centering \LARGE Evaluación de modelos causales
@@ -1674,6 +1677,7 @@ Datos:
 \end{frame}
 
 
+\end{comment}
 
 
 \begin{frame}[plain]
@@ -1684,7 +1688,7 @@ Datos:
 
 \begin{textblock}{160}(0,20)
 \begin{equation*}
-\underbrace{P(\text{Modelo},\text{\En{Data}\Es{Datos}})}_{\hfrac{\text{\footnotesize\En{Initial belief compatible}\Es{Creencia compatible }}}{\text{\footnotesize \En{with the data}\Es{con los datos}}}} = \underbrace{P(\text{Modelo})}_{\hfrac{\text{\footnotesize\En{Initial intersubjective}\Es{Acuerdo intersubjetivo}}}{\text{\footnotesize\En{agreement}\Es{inicial}}}} \underbrace{P(\text{data}_1 |\text{Modelo})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 1}} \, \underbrace{P(\text{data}_2 | \text{data}_1 , \text{Modelo})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 2}} \dots
+\underbrace{P(\text{Modelo},\text{\En{Data}\Es{Datos}})}_{\hfrac{\text{\footnotesize\En{Initial belief compatible}\Es{Creencia compatible }}}{\text{\footnotesize \En{with the data}\Es{con los datos}}}} = \underbrace{P(\text{Modelo})}_{\hfrac{\text{\footnotesize\En{Initial intersubjective}\Es{Acuerdo intersubjetivo}}}{\text{\footnotesize\En{agreement}\Es{inicial}}}} \underbrace{P(\text{dato}_1 |\text{Modelo})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 1}} \, \underbrace{P(\text{dato}_2 | \text{dato}_1 , \text{Modelo})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 2}} \dots
 \end{equation*}
 \end{textblock}
 
@@ -1700,13 +1704,15 @@ Un 0 (cero) en la secuencia hace falsa la hipótesis para siempre \\
 \only<4->{
 \begin{textblock}{140}(10,66)\centering
 \begin{equation*}
-P(\text{data}_1|\text{Modelo}) = \only<5->{\phantom}{\sum_{\text{hipótesis}}}  P(\text{data}_1| \text{hipótesis}, \text{Modelo}) \only<5->{\phantom}{P(\text{hipótesis} | \text{Modelo})}
+P(\text{dato}_1|\text{Modelo}) = \only<5->{\phantom}{\sum_{\text{hipótesis}}}  P(\text{dato}_1| \text{hipótesis}, \text{Modelo}) \only<5->{\phantom}{P(\text{hipótesis} | \text{Modelo})}
 \end{equation*}
 \end{textblock}
 }
 
 
 \end{frame}
+
+
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
@@ -1939,15 +1945,6 @@ P(\text{data}_1|\text{Modelo}) = \only<5->{\phantom}{\sum_{\text{hipótesis}}}  
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE Siglo 18: lógica de Boole
-\end{textblock}
-
-Valor de verdad continuo, no discreto.
-
-\end{frame}
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
 \centering \LARGE Siglo 19: Física estadística \\
 \large Máxima incertidumbre dadas restricciones
 \end{textblock}
@@ -2147,367 +2144,250 @@ Restricciones: \normalsize
 \end{frame}
 
 
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+% \centering \LARGE Siglo 19: Física estadística \\
+% \large Entropía
+% \end{textblock}
+%
+% %
+% % \only<3-5>{
+% % \begin{textblock}{140}(8,26)
+% % \begin{tikzpicture}[scale=0.50]
+% % % Draw the surrounding box
+% %   \draw[red!60, thick] (-0.2, -0.4) rectangle (10.9, 4.4);
+% % \end{tikzpicture}
+% % \end{textblock}
+% % }
+% %
+% % \only<-5>{
+% % \begin{textblock}{140}(10,28)
+% % \begin{tikzpicture}[scale=0.50]
+% %   % Grid lines
+% %   \draw[step=1cm, black!60!white] (0,0) grid (5,4);
+% %   % Points
+% %   % \foreach \x/\y in {0.5/0.5, 1.5/1.5, 2.5/2.5, 3.5/3.5, 4.5/1.5, 1.5/3.5, 3.5/1.5, 4.5/2.5, 2.5/0.5, 0.5/3.5} {
+% %   % \fill[red] (\x, \y) circle (0.1);
+% %   \foreach \x/\y/\radius in {0.5/0.5/0.15, 1.5/1.5/0.15, 2.5/2.5/0.15, 3.5/3.5/0.15, 4.5/1.5/0.15, 1.5/3.5/0.15, 3.5/1.5/0.15, 4.5/2.5/0.15, 2.5/0.5/0.15, 0.5/3.5/0.15} {
+% %     \fill[black!65] (\x, \y) circle (\radius);
+% %   }
+% % \end{tikzpicture}
+% % \only<2->{\begin{tikzpicture}[scale=0.50]
+% %   % Grid lines
+% %   \draw[step=1cm, black!60!white] (0,0) grid (5,4);
+% %   % Points
+% %   % \foreach \x/\y in {0.5/0.5, 1.5/1.5, 2.5/2.5, 3.5/3.5, 4.5/1.5, 1.5/3.5, 3.5/1.5, 4.5/2.5, 2.5/0.5, 0.5/3.5} {
+% %   % \fill[red] (\x, \y) circle (0.1);
+% %   \foreach \x/\y/\radius in {1.5/0.5/0.15, 0.5/1.5/0.15, 3.5/2.5/0.15, 3.5/3.5/0.15, 4.5/1.5/0.15, 1.5/3.5/0.15, 3.5/1.5/0.15, 4.5/0.5/0.15, 2.5/1.5/0.15, 0.5/2.5/0.15} {
+% %     \fill[black!65] (\x, \y) circle (\radius);
+% %   }
+% %
+% % \end{tikzpicture}}
+% % \end{textblock}
+% %
+% % \begin{textblock}{140}(10,54)
+% % $\begin{array}{l}
+% % N_A = 10 \\
+% % V_A = 20
+% % \end{array}
+% % $ \small
+% %
+% % \begin{flalign*}
+% % & \ \ W_A = \binom{20}{10} &&
+% % \end{flalign*}
+% % \end{textblock}
+% % }
+% %
+% % \only<2-5>{
+% % \begin{textblock}{140}(40,54)
+% % $\begin{array}{l}
+% % N_B = 10 \\
+% % V_B = 20
+% % \end{array}
+% % $ \small
+% %
+% % \begin{flalign*}
+% % & \ \ W_B = \binom{20}{10} &&
+% % \end{flalign*}
+% %
+% % \end{textblock}
+% % }
+% %
+% % \only<4-5>{
+% % \begin{textblock}{140}(70,24)
+% % \begin{flalign*}
+% % N_{AB} &= N_A + N_B \\
+% % V_{AB} &= V_A + V_B \\
+% % \only<4>{\phantom}{\log} \, \bm{W_{AB}} &= \bm{W_A} \only<4>{\phantom}{+}  \bm{W_B} \\ &&
+% % \end{flalign*}
+% % \end{textblock}
+% % }
+%
+% \only<1->{
+% \begin{textblock}{140}(16,20)
+% \begin{flalign*}
+% S = \log W = &
+% \only<1>{\log \frac{N!}{\prod_i n_i!}}
+% \only<2->{\log N! - \sum_i \log n_i!}
+% \phantom{\frac{N!}{\prod_i n_i}} \\
+% & \only<6-7>{= N \log N - N - \big(\sum_i n_i \log n_i - n_i\big)}
+% \only<8>{= N \log N - N - \sum_i n_i \log n_i - \sum_i n_i}
+% \only<9->{= N \log N - \cancel{N} - \sum_i n_i \log n_i + \cancel{\sum_i n_i} } \phantom{\cancel{\sum_i n_i} } \\
+% & \only<10->{= (\sum_i n_i) \log N - \sum_i n_i \log n_i  } \\
+% & \only<11>{= \sum_i n_i ( \log N - \log n_i )  }
+% \only<12>{= \sum_i n_i  \log \frac{N}{n_i}   }
+% \only<13->{= - \sum_i n_i  \log \frac{n_i}{N}   } \phantom{\frac{N}{n_i} } \\
+% \only<14>{\frac{S}{N} & = - \sum_i \frac{n_i}{N}  \log \frac{n_i}{N}   }
+% \only<15->{\frac{S}{N} & = - \sum_i p_i  \log p_i   } \only<16>{= \text{Entropía}}
+% \phantom{\frac{N}{n_i} }
+% \\&&
+% \end{flalign*}
+% \end{textblock}
+% }
+%
+%
+% \only<3-6>{
+% \begin{textblock}{140}(10,52)
+% \begin{flalign*}
+% \log N! = \sum_{k=1}^N \log k & \only<4->{\approx \int_1^N \log k \ dk} \\ \only<5->{&= N \log N - N \cancel{+ 1}} &&
+% \end{flalign*}
+% \end{textblock}
+% }
+%
+% \only<4>{
+% \begin{textblock}{70}(80,48)
+% \includegraphics[width=\textwidth, page=1]{figuras/stirling.pdf}
+% \end{textblock}
+% }
+%
+% \only<5-6>{
+% \begin{textblock}{70}(80,48)
+% \includegraphics[width=\textwidth, page=2]{figuras/stirling.pdf}
+% \end{textblock}
+% }
+%
+%
+% \end{frame}
+
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE Siglo 19: Física estadística \\
-\large Entropía
+\centering  \LARGE Modelo lineal
 \end{textblock}
 
-%
-% \only<3-5>{
-% \begin{textblock}{140}(8,26)
-% \begin{tikzpicture}[scale=0.50]
-% % Draw the surrounding box
-%   \draw[red!60, thick] (-0.2, -0.4) rectangle (10.9, 4.4);
-% \end{tikzpicture}
-% \end{textblock}
-% }
-%
-% \only<-5>{
-% \begin{textblock}{140}(10,28)
-% \begin{tikzpicture}[scale=0.50]
-%   % Grid lines
-%   \draw[step=1cm, black!60!white] (0,0) grid (5,4);
-%   % Points
-%   % \foreach \x/\y in {0.5/0.5, 1.5/1.5, 2.5/2.5, 3.5/3.5, 4.5/1.5, 1.5/3.5, 3.5/1.5, 4.5/2.5, 2.5/0.5, 0.5/3.5} {
-%   % \fill[red] (\x, \y) circle (0.1);
-%   \foreach \x/\y/\radius in {0.5/0.5/0.15, 1.5/1.5/0.15, 2.5/2.5/0.15, 3.5/3.5/0.15, 4.5/1.5/0.15, 1.5/3.5/0.15, 3.5/1.5/0.15, 4.5/2.5/0.15, 2.5/0.5/0.15, 0.5/3.5/0.15} {
-%     \fill[black!65] (\x, \y) circle (\radius);
-%   }
-% \end{tikzpicture}
-% \only<2->{\begin{tikzpicture}[scale=0.50]
-%   % Grid lines
-%   \draw[step=1cm, black!60!white] (0,0) grid (5,4);
-%   % Points
-%   % \foreach \x/\y in {0.5/0.5, 1.5/1.5, 2.5/2.5, 3.5/3.5, 4.5/1.5, 1.5/3.5, 3.5/1.5, 4.5/2.5, 2.5/0.5, 0.5/3.5} {
-%   % \fill[red] (\x, \y) circle (0.1);
-%   \foreach \x/\y/\radius in {1.5/0.5/0.15, 0.5/1.5/0.15, 3.5/2.5/0.15, 3.5/3.5/0.15, 4.5/1.5/0.15, 1.5/3.5/0.15, 3.5/1.5/0.15, 4.5/0.5/0.15, 2.5/1.5/0.15, 0.5/2.5/0.15} {
-%     \fill[black!65] (\x, \y) circle (\radius);
-%   }
-%
-% \end{tikzpicture}}
-% \end{textblock}
-%
-% \begin{textblock}{140}(10,54)
-% $\begin{array}{l}
-% N_A = 10 \\
-% V_A = 20
-% \end{array}
-% $ \small
-%
-% \begin{flalign*}
-% & \ \ W_A = \binom{20}{10} &&
-% \end{flalign*}
-% \end{textblock}
-% }
-%
-% \only<2-5>{
-% \begin{textblock}{140}(40,54)
-% $\begin{array}{l}
-% N_B = 10 \\
-% V_B = 20
-% \end{array}
-% $ \small
-%
-% \begin{flalign*}
-% & \ \ W_B = \binom{20}{10} &&
-% \end{flalign*}
-%
-% \end{textblock}
-% }
-%
-% \only<4-5>{
-% \begin{textblock}{140}(70,24)
-% \begin{flalign*}
-% N_{AB} &= N_A + N_B \\
-% V_{AB} &= V_A + V_B \\
-% \only<4>{\phantom}{\log} \, \bm{W_{AB}} &= \bm{W_A} \only<4>{\phantom}{+}  \bm{W_B} \\ &&
-% \end{flalign*}
-% \end{textblock}
-% }
 
-\only<1->{
-\begin{textblock}{140}(16,20)
-\begin{flalign*}
-S = \log W = &
-\only<1>{\log \frac{N!}{\prod_i n_i!}}
-\only<2->{\log N! - \sum_i \log n_i!}
-\phantom{\frac{N!}{\prod_i n_i}} \\
-& \only<6-7>{= N \log N - N - \big(\sum_i n_i \log n_i - n_i\big)}
-\only<8>{= N \log N - N - \sum_i n_i \log n_i - \sum_i n_i}
-\only<9->{= N \log N - \cancel{N} - \sum_i n_i \log n_i + \cancel{\sum_i n_i} } \phantom{\cancel{\sum_i n_i} } \\
-& \only<10->{= (\sum_i n_i) \log N - \sum_i n_i \log n_i  } \\
-& \only<11>{= \sum_i n_i ( \log N - \log n_i )  }
-\only<12>{= \sum_i n_i  \log \frac{N}{n_i}   }
-\only<13->{= - \sum_i n_i  \log \frac{n_i}{N}   } \phantom{\frac{N}{n_i} } \\
-\only<14>{\frac{S}{N} & = - \sum_i \frac{n_i}{N}  \log \frac{n_i}{N}   }
-\only<15->{\frac{S}{N} & = - \sum_i p_i  \log p_i   } \only<16>{= \text{Entropía}}
-\phantom{\frac{N}{n_i} }
-\\&&
-\end{flalign*}
-\end{textblock}
-}
-
-
-\only<3-6>{
-\begin{textblock}{140}(10,52)
-\begin{flalign*}
-\log N! = \sum_{k=1}^N \log k & \only<4->{\approx \int_1^N \log k \ dk} \\ \only<5->{&= N \log N - N \cancel{+ 1}} &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<4>{
-\begin{textblock}{70}(80,48)
-\includegraphics[width=\textwidth, page=1]{figuras/stirling.pdf}
-\end{textblock}
-}
-
-\only<5-6>{
-\begin{textblock}{70}(80,48)
-\includegraphics[width=\textwidth, page=2]{figuras/stirling.pdf}
-\end{textblock}
-}
-
-
-\end{frame}
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
-\centering \LARGE Siglo 20: Teoría de la información\\
-\large \only<2->{El problema de la comunicación con la realidad}
-\end{textblock}
-
-\vspace{1.2cm}
-
-\only<1>{
-\begin{textblock}{160}(0,40) \centering
-\Large \textbf{El problema de la comunicación con la realidad}
-\end{textblock}
-}
-
-% \only<2->{
-% \begin{textblock}{140}(10,48)
-% Quisiéramos que lo recibido sea igual a lo enviado. \\[.05cm]
-%
-% \normalsize
-%
-% \hspace{0.5cm} $\bullet$ Solución física (me acerco para escuchar mejor)
-%
-% \only<3->{\hspace{0.5cm} $\bullet$ Solución inferencial (interpretar la señal con ruido)}
-% \end{textblock}
-% }
-
-
-\only<2->{
-\begin{textblock}{160}(0,28) \centering \Large
-
-Quisiéramos que el mensaje recibido sea igual al enviado
-\end{textblock}
-}
-
-\only<3->{
-\begin{textblock}{140}(10,44) \centering
-\Large Soluciones \\[0.05cm]
-
-\large
-
-Física: acercarme para escuchar mejor \\
-\only<3>{Inferencia: interpretar la señal con ruido}\only<4->{\textbf{Inferencia: interpretar la señal con ruido} \\[1.1cm]}
-\only<5->{\Large ¿Cuál es el dato de la realidad?}
-\end{textblock}
-}
-
-\end{frame}
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4) \centering
-\LARGE Base empírica \\
-\large \only<-9>{¿Cuál es el dato de la realidad?}\only<10>{\textbf{El dato se construye}}
-\end{textblock}
-
-\only<2>{
-\begin{textblock}{160}(0,28) \centering
- \Large ¿Cuál es el conjunto de elementos del mundo \\ que sirven de evidencia indubitable (dato)?
-\end{textblock}
-}
-
-\only<3-9>{
-\begin{textblock}{130}(15,21)
- $\bullet$ BE Filosófica: $\emptyset$ \\
- \only<4->{$\bullet$ BE Epistemológica: Precios\\ }
- \only<5>{$\bullet$ Teoría: Inflación}\only<6->{$\bullet$ BE Metodológica$_1$: Inflación \\}
-\only<7>{$\bullet$ Teoría: Producto Bruto Interno}\only<8->{$\bullet$ BE Metodológica$_2$: Producto Bruto Interno\\}
-\only<9>{$\bullet$ Teoría: Política pública}
-\end{textblock}
-}
-
-\only<10>{
-\begin{textblock}{130}(15,25) \Large \centering
-Depende del conjunto de supuestos \\
-que una comunidad no pone en duda!
-\end{textblock}
-}
-
-\only<4>{
-\begin{textblock}{160}(0,48) \centering
-\includegraphics[width=0.62\textwidth, page={1}]{figuras/baseEmpirica.pdf}
-\end{textblock}}
-\only<5>{
-\begin{textblock}{160}(0,48) \centering
-\includegraphics[width=0.62\textwidth, page={2}]{figuras/baseEmpirica.pdf}
-\end{textblock}}
-\only<6>{
-\begin{textblock}{160}(0,48) \centering
-\includegraphics[width=0.62\textwidth, page={3}]{figuras/baseEmpirica.pdf}
-\end{textblock}}
-\only<7>{
-\begin{textblock}{160}(0,48) \centering
-\includegraphics[width=0.62\textwidth, page={4}]{figuras/baseEmpirica.pdf}
-\end{textblock}}
-\only<8>{
-\begin{textblock}{160}(0,48) \centering
-\includegraphics[width=0.62\textwidth, page={5}]{figuras/baseEmpirica.pdf}
-\end{textblock}}
-\only<9->{
-\begin{textblock}{160}(0,48) \centering
-\includegraphics[width=0.62\textwidth, page={6}]{figuras/baseEmpirica.pdf}
-\end{textblock}}
-
-
-\end{frame}
-
-
-\begin{frame}[plain]
- \begin{textblock}{160}(0,4)
- \centering \LARGE
- Los datos como funciones proposicionales
-\end{textblock}
-\vspace{0.75cm}
-
-\end{frame}
-
-\begin{frame}[plain]
- \begin{textblock}{160}(0,4)
- \centering \LARGE
- Los datos como funciones proposicionales
-\end{textblock}
-\vspace{0.75cm}
-
-\begin{textblock}{160}(0,20)
+\begin{textblock}{160}(0,18)
 \begin{equation*}
- f(x) = y
+\begin{split}
+y & = w_0 + w_1 x \\[0.2cm]
+p(t | x, \bm{w}, \beta ) &= \N(t \,|\, y(x, \bm{w}), \beta^2) \\[0.6cm]
+\onslide<2->{
+p(w_i) &= \N(w_i \,|\, 0, \sigma_{i}^2) \\[0cm]}
+\end{split}
 \end{equation*}
 \end{textblock}
 
-\begin{textblock}{160}(43,33)
-\begin{itemize}
- \item[$x$]
-    \textbf{\en{Unit of analysis}\es{Unidad de análisis}} (UA)
- \item[$f$]
-   \en{\textbf{Variable} of the unit of analysis}
-   \es{\textbf{Variable} de la unidad de análisis} (V)
- \item[$y$]
-   \en{\textbf{Value} of the variable}
-   \es{\textbf{Resultado} o valor de la variable} (R)
-\end{itemize}
-\end{textblock}
+\only<3->{
+\begin{textblock}{160}(0,54)
+\begin{figure}[H]
+    \centering
+    \tikz{
 
+    \node[latent, fill=black!100, minimum size=2pt] (x) {} ; %
+    \node[const, right=of x] (c_x) {$x_i$};
+    \node[latent, fill=black!20, yshift=-1.5cm] (t) {$t_i$} ; %
+    \node[latent, fill=black!100, yshift=-1.5cm , xshift=-2cm,minimum size=2pt] (beta)
+    {} ; %
+    \node[const, above=of beta] (c_beta) {$\beta$};
+    \node[latent, fill=black!0, yshift=-1.5cm, xshift=2cm] (w) {$\bm{w}$};
+    \node[latent, fill=black!100, xshift=2cm, minimum size=2pt] (alpha) {} ; %
+    \node[const, right=of alpha] (c_alpha) {$\sigma$};
 
-\only<2>{
-\begin{textblock}{160}(0,65) \centering
- \textit{Altura}(Gustavo) = $1.78$m
-\end{textblock}
-}
+    \edge {x,beta,w} {t};
+    \edge {alpha} {w};
 
-\only<3-4>{
-\begin{textblock}{160}(0,65) \centering
- \textit{Ideología}(Partido Comunista) = Comunista \\
- \only<4>{P(\textit{Ideología}(Partido Comunista) = Comunista) = 0.8}
-\end{textblock}
-}
+    \node[invisible, fill=black!0, minimum size=0pt, xshift=0.52cm] (data_inv) {} ; %
 
-\only<5>{
-\begin{textblock}{160}(0,65) \centering
- \textit{Habilidad}(Maradona) $>$ \textit{Habilidad}(Messi)
+    \plate {no} {(x)(t)(data_inv)} {$i: $ Datos}; %
+    }
+\end{figure}
 \end{textblock}
 }
 
-\only<6>{
-\begin{textblock}{140}(10,60)
-\begin{framed} \centering
-   \en{The meaning of data is implicit in their \textbf{operationalization}}
-   \es{El significado preciso de la función depende de la \textbf{operacionalización}}
-   \end{framed}
-\end{textblock}
-}
 \end{frame}
 
 
 \begin{frame}[plain]
+
+\Wider[-3cm]{
+ \begin{figure}
+\begin{subfigure}[t]{0.32\textwidth}
+\onslide<3->{\caption*{Verosimilitud}}
+\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}
+\caption*{Priori\onslide<3->{/Posteriori}}
+\includegraphics[width=\textwidth]{figuras/pdf/linearRegression_posterior_0.pdf}
+\end{subfigure}
+\begin{subfigure}[t]{0.32\textwidth}
+\onslide<2->{
+\caption*{Espacio de datos}
+\includegraphics[width=\textwidth]{figuras/pdf/linearRegression_dataSpace_0.pdf}}
+\end{subfigure}
+
+
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<3->{\includegraphics[width=\textwidth]{figuras/pdf/linearRegression_likelihood_1.pdf}}
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<3->{\includegraphics[width=\textwidth]{figuras/pdf/linearRegression_posterior_1.pdf}}
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<3->{\includegraphics[width=\textwidth]{figuras/pdf/linearRegression_dataSpace_1.pdf}}
+\end{subfigure}
+
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<4->{\includegraphics[width=\textwidth]{figuras/pdf/linearRegression_likelihood_2.pdf}}
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<4->{\includegraphics[width=\textwidth]{figuras/pdf/linearRegression_posterior_2.pdf}}
+\end{subfigure}
+\begin{subfigure}[c]{0.32\textwidth}
+\onslide<4->{\includegraphics[width=\textwidth]{figuras/pdf/linearRegression_dataSpace_2.pdf}}
+\end{subfigure}
+
+\end{figure}
+}
+\end{frame}
+
+
+
+\begin{frame}[plain]
 \begin{textblock}{160}(0,4)
- \centering \LARGE La estructura invariante del dato empírico
+\centering \Large Modelos lineales
 \end{textblock}
-\vspace{0.75cm}
+ \vspace{1.25cm}
 
+\only<1->{
+\begin{textblock}{80}(0,18)\centering
+\ \ Función objetivo \\
 
-\begin{textblock}{160}(0,16)
-\centering
-\tikz{
+$\N(y \,| \, \text{sen}(x), \beta^2) \ \ x \in [-\pi,\pi]$ \\[0.2cm]
 
-\node[det] (fuente) {};
-\node[const, above=of fuente] (n_fuente) {$\hfrac{\text{Fuente de}}{\text{información}}$};
-\node[const, right=of fuente, yshift=-0.35cm, xshift=0.05cm] (mensaje_enviado) {$\hfrac{\text{Mensaje}}{\text{enviado}}$};
-
-
-\node[det, right=of fuente, xshift=0.6cm ] (transmisor) {};
-\node[const, above=of transmisor] (n_transmisor) {\scriptsize Transmisor};
-\node[const, right=of transmisor, yshift=-0.35cm, xshift=0.05cm] (senal_enviada) {$\hfrac{\text{Señal}}{\text{enviada}}$};
-
-
-\node[det, right=of transmisor, xshift=0.7cm , minimum size=6pt] (perceptor) {};
-\node[const, above=of perceptor] (n_perceptor) {\scriptsize Perceptor};
-\node[const, right=of perceptor, yshift=-0.35cm, xshift=0.05cm] (senal_recibida) {$\hfrac{\text{Señal}}{\text{recibida}}$};
-
-\node[det, below=of perceptor, yshift=0.2cm] (ruido) {};
-\node[const, below=of ruido] (n_ruido) {\scriptsize Rudio};
-
-\node[det, right=of perceptor, xshift=0.7cm] (receptor) {};
-\node[const, above=of receptor] (n_receptor) {\scriptsize Receptor};
-\node[const, right=of receptor, yshift=-0.35cm, xshift=0.05cm] (mensaje_recibido) {$\hfrac{\text{Mensaje}}{\text{recibido}}$};
-
-
-\node[det, right=of receptor, xshift=0.6cm ] (destino) {};
-\node[const, above=of destino] (n_destino) {$\hfrac{\text{Información}}{\text{en destino}}$};
-
-\edge {fuente} {transmisor};
-\edge {transmisor, ruido} {perceptor};
-\edge {perceptor} {receptor};
-\edge {receptor} {destino};
+       \includegraphics[width=0.85\textwidth]{figuras/pdf/model_selection_true_and_sample}
+\end{textblock}
 }
 
+\only<2->{
+\begin{textblock}{80}(75,22)
+\begin{align*}
+y &= w_0 + w_1 \, x_1 + w_2 \, x_2^2 + w_3 \, x_3^3 \\[1cm]
+\onslide<3->{& y  = \sum_{i=0}^{M-1} w_i \phi_i(\bm{x}) = \bm{w}^T \bm{\phi}(\bm{x}) \\[0.1cm]
+\text{¿}&\text{Cuál es el mejor modelo lineal?}
+}
+\end{align*}
 \end{textblock}
-
-\begin{textblock}{140}(10,50)
-\normalsize
-$\bullet$ Fuente: el estado \textit{real} de variable \hfill \textit{habilidad}(Messi)\\
-
-$\bullet$ Mensaje enviado: la dinámica del mundo \hfill Realidad Causal \\
-
-$\bullet$ Transmisor: dimensiones perceptibles de la variable \hfill Ganar/Perder \\
-
-$\bullet$ Perceptor: el cuerpo o instrumento de medición \hfill \textit{Scraper} de \texttt{fifa.com}  \\
-
-$\bullet$ Receptor: el indicador, lo efectivamente registrado \hfill True/False \\
-
-$\bullet$ Mensaje recibido: inferencia de la variable \hfill Modelo Causal \\
-
-$\bullet$ Destino: la estimación  \hfill $P$(\textit{habilidad}(Messi) = y$|$I, M) \\
-
-
-\end{textblock}
-
+}
 
 \end{frame}
 
@@ -2515,125 +2395,200 @@ $\bullet$ Destino: la estimación  \hfill $P$(\textit{habilidad}(Messi) = y$|$I,
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE Siglo 20: Frecuentismo\\
+\centering \LARGE Siglo 20: Frecuentismo \\
 \large \sout{Evaluación} Selección de hipótesis
 \end{textblock}
 
-\only<1>{
-\begin{textblock}{140}(10,18)
-\centering
-\includegraphics[width=0.6\textwidth]{../../auxiliar/static/Elo1980.jpg}
-\end{textblock}
-}
 
- \only<2->{
- \begin{textblock}{140}(3,24)
- \normalsize
-\tikz{
-    \node[det, fill=black!10] (r) {$r$} ;
-    \node[const, right=of r] (dr) {\normalsize $ P(r|d) = \mathbb{I}(r = d > 0)$};
-
-    \node[latent, above=of r, yshift=-0.45cm] (d) {$d$} ; %
-    \node[const, right=of d] (dd) {\normalsize $ P(d|p_a,p_b) = \delta(d = p_i-p_j)$};
-
-    \node[latent, above=of d, xshift=-0.8cm, yshift=-0.45cm] (p1) {$p_a$} ; %
-    \node[latent, above=of d, xshift=0.8cm, yshift=-0.45cm] (p2) {$p_b$} ; %
-
-
-    \node[accion, above=of p1,yshift=0.3cm] (s1) {} ; %
-    \node[const, right=of s1] (ds1) {$s_a$};
-    \node[accion, above=of p2,yshift=0.3cm] (s2) {} ; %
-    \node[const, right=of s2] (ds2) {$s_b$};
-
-    \node[const, right=of p2] (dp2) {\normalsize $P(p_i|s_i) = \N(s_i,\beta^2)$};
-
-    \node[const, above=of dr] (r_name) {\small Resultado};
-    \node[const, above=of dd] (d_name) {\small Diferencia};
-    \node[const, above=of dp2] (p_name) {\small Desempeño};
-
-    \node[const, above=of ds2, yshift=0.1cm] (s_name) {\small Habilidad};
-
-    \edge {d} {r};
-    \edge {p1,p2} {d};
-    \edge {s1} {p1};
-    \edge {s2} {p2};
-
-}
-\end{textblock}
-}
-
-
-
-\only<3>{
-\begin{textblock}{90}(75,24)
-\includegraphics[width=0.75\textwidth]{figuras/probaOfWin_2D}
-\end{textblock}
-}
-
-\only<4>{
-\begin{textblock}{90}(80,38)
-\includegraphics[width=0.8\textwidth]{figuras/probaOfWin}
-\end{textblock}
-}
-
-\only<3-5>{
-\begin{textblock}{90}(65,12)
-\normalsize
-\begin{flalign*}
- \hspace{-2cm}  P(d\,|\,p_a,p_b) = \iint &\delta(d=p_a-p_b)  \N(p_a|s_a,\beta^2)\N(p_b|s_b,\beta^2) \, dp_a \, dp_b \\
- \only<4->{&  = \N(\,d\,|\, s_a-s_b, \, 2\beta^2\,)}
- &&
- \end{flalign*}
-
-\end{textblock}
-}
-
-\only<5->{
-\begin{textblock}{90}(80,32)
-\normalsize
-\begin{flalign*}
-& P(d>0 \,|\,s_a,s_b, \text{M}) =   1 - \Phi\left( \frac{s_a - s_b}{\sqrt{2}\beta} \right) &&
-\end{flalign*}
-\end{textblock}
-}
-
-
-\only<6->{
-\begin{textblock}{60}(80,54)
-\normalsize
-
+\only<1-10>{
+\begin{textblock}{160}(0,14) \centering
 \begin{equation*}
-s_a^{\text{new}} = s_a^{\text{old}} + \Delta
-\end{equation*}
-
-\begin{equation*}
-\hspace{0.3cm} \onslide<7->{\Delta = \underbrace{(1 - P(d > 0 \,|\,s_a,\, s_b))}_{\text{\footnotesize Sorpresa}}}
-\onslide<8>{
-\underbrace{(-1)^{(1-r)} }_{\text{\footnotesize Signo}}
-}
+ \underset{\bm{w}}{\text{ max }} P(\bm{t} | \bm{x}, \bm{w}, \beta) = \underset{\bm{w}}{\text{ min }} \sum_{i=1}^{n}  (t_i - \bm{w}^T\bm{\phi}(\bm{x}_i))^2
 \end{equation*}
 \end{textblock}
 }
+
+
+\only<11>{
+\begin{textblock}{160}(0,20) \centering
+\Large ¿Qué pasa si empezamos a ver datos $x \notin [-\pi,\pi]$?
+\end{textblock}
+}
+
+
+\begin{textblock}{80}(0,34)\centering
+\only<2-3>{\includegraphics[width=0.9\textwidth]{figuras/pdf/model_selection_OLS.pdf}}\only<4>{\includegraphics[width=0.9\textwidth]{figuras/pdf/model_selection_OLS_best-at-train.pdf}}
+\end{textblock}
+
+
+
+\only<3-4>{
+\begin{textblock}{80}(80,35)\centering
+\includegraphics[width=0.9\textwidth]{figuras/pdf/model_selection_maxLikelihood.pdf}
+\end{textblock}
+}
+
+
+\only<5-9>{
+\begin{textblock}{140}(10,36)\centering
+\begin{align*}
+P(\text{dato}|\text{Modelo}) & = \only<6->{\phantom}{\sum_{\text{hipótesis}}}  P(\text{dato} \, | \, \text{hipótesis}, \text{Modelo}) \only<6->{\phantom}{P(\text{hipótesis} | \text{Modelo})} \\
+\only<7->{& = P(\text{dato} \, | \, \overbrace{\underset{h}{\text{arg max}} \ P(\text{dato}|h, \text{Modelo})}^{\text{Hipótesis que mejor predice}},  \, \text{Modelo} )} \\[0.5cm]
+\onslide<9>{P(\text{dato}_{\textbf{Testear}}|\text{Modelo}) & = P(\text{dato}_{\textbf{Testear}} \, | \, \underset{h}{\text{arg max}} \ P(\text{dato}_{\textbf{Entrenar}}|h, \text{Modelo}),  \, \text{Modelo} )}
+\end{align*}
+
+\onslide<9>{Testeo y Entrenamiento}
+
+\end{textblock}
+}
+
+
+\only<8>{
+\begin{textblock}{140}(10,72)\centering
+\Large
+
+¿Predecimos o ``post-decimos''?
+\end{textblock}
+}
+
+
+
+\only<10->{
+\begin{textblock}{160}(0,33.5)\centering
+\phantom{y} Con testeo y entrenamiento
+
+\includegraphics[width=0.43\textwidth]{figuras/pdf/model_selection_OLS_best-at-test.pdf} \hspace{0.4cm}
+\onslide<10->{\includegraphics[width=0.42\textwidth]{figuras/pdf/model_selection_maxApriori_online.pdf}}
+\end{textblock}
+}
+
 
 \end{frame}
 
+
+
+\begin{frame}[plain]
+
+\centering
+\LARGE
+
+¿La aplicación estricta de la probabilidad  \\
+
+produce sobreajuste (\textit{overfitting})?
+
+
+\end{frame}
 
 
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE Siglo 21: El retorno del enfoque bayesiano\\
+\centering  \LARGE Siglo 21: Enfoque bayesiano \\
 \large Aplicación estricta de las reglas de la probabilidad
 \end{textblock}
 
+\begin{textblock}{80}(80,22)\Large
+\begin{equation*}
+P(\text{Modelo}|\text{Datos})
+\end{equation*}
+\end{textblock}
 
-Teorema de Bayes.
 
-\includegraphics[width=0.65\textwidth]{figuras/posterior_win.pdf}
+\begin{textblock}{160}(0,32)
+     \centering
+       \includegraphics[width=0.45\textwidth]{figuras/pdf/model_selection_MAP_non-informative}
+       \includegraphics[width=0.445\textwidth]{figuras/pdf/model_selection_evidence}
+\end{textblock}
 
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE La función de costo epistémica \\
+\end{textblock}
+
+
+\begin{textblock}{160}(0,22) \centering
+\Large Todos los datos son de testeo y entrenamiento:
+\large
+\begin{equation*}
+\underbrace{P(\text{\En{Data}\Es{Datos}} = \{d_1, d_2, \dots \}|\text{Modelo})}_{\text{\small Evidencia: predicción del modelo}}  =  \underbrace{P(d_1 |\text{Modelo})}_{\text{\small Predic\En{tion}\Es{ción} 1}} \, \underbrace{P(d_2 | d_1 , \text{Modelo})}_{\text{\small Predic\En{tion}\Es{ción} 2}} \dots
+\end{equation*}
+\end{textblock}
+
+\only<2->{
+\begin{textblock}{140}(10,56)\centering
+\Large La predicción se hace con todas las hipótesis \large
+\begin{align*}
+P(\text{dato}_1|\text{Modelo}) & = \sum_{\text{hipótesis}}  P(\text{dato}_1| \text{hipótesis}, \text{Modelo}) P(\text{hipótesis} | \text{Modelo}) \\[0.2cm]
+%\onslide<3>{P(\text{Datos}) & = \sum_{\text{Modelo}} P(\text{Datos}\,| \text{Modelo}) \, P(\text{Modelo})}
+\end{align*}
+\end{textblock}
+}
 
 
 \end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE  Evidencia \\
+\large Balance natural entre complejidad y predicci\'on
+\end{textblock}
+
+
+ \begin{textblock}{120}(20,12)
+  \centering
+  \includegraphics[width=0.9\textwidth]{figuras/pdf/evidencia_de_modelos_alternativos}
+ \end{textblock}
+
+  \end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE  La verdadera predicción \\
+\large Predicción con la contribución de todos los modelos
+\end{textblock}
+
+
+\begin{textblock}{160}(0,21)
+\begin{equation*}
+P(\text{Datos}) =  \sum_{\text{Modelo}} P(\text{Datos}|\text{Modelo}) P(\text{Modelo})
+\end{equation*}
+\end{textblock}
+
+%
+% \begin{textblock}{160}(0,35)\large
+% \begin{equation*}
+% P(\text{Modelo}|\text{Datos})
+% \end{equation*}
+% \end{textblock}
+
+
+\only<2>{
+\begin{textblock}{70}(5,50)
+     \centering
+
+     Si aparecen datos $x \notin [-\pi, \pi]$ van a poder ser explicados con los modelos más complejos
+\end{textblock}
+
+
+\begin{textblock}{80}(80,40)
+     \centering
+       \includegraphics[width=0.8\textwidth]{figuras/pdf/model_selection_evidence} \hfill
+\end{textblock}
+}
+
+\end{frame}
+
+
+
+
+
+
 
 \begin{frame}[plain]
 
