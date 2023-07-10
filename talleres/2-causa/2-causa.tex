@@ -844,6 +844,25 @@ Datos:
 \end{textblock}
 }
 
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Identificación de modelo causal\\
+ \large El conocimiento experto
+ \end{textblock}
+ \vspace{0.75cm}
+
+
+ \begin{textblock}{160}(0,42) \Large \centering
+ La principal fuente de información para la identificación
+
+ modelos causales alternativos es el conocimiento experto.
+ \end{textblock}
+
+
+
 
 \end{frame}
 
@@ -851,16 +870,285 @@ Datos:
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
  \centering \LARGE Identificación de efecto causal\\
- \large Sin intervenciones.
+ \large Con observación, sin intervenciones.
  \end{textblock}
  \vspace{0.75cm}
 
 
+\only<1-2>{
+\begin{textblock}{160}(0,24)
+\begin{equation*}
+P(y|\text{do}(x) = a, \text{Modelo Causal}) - P(y|\text{do}(x) = b, \text{Modelo Causal})
+\end{equation*}
+\end{textblock}
+}
+
+\only<2>{
+\begin{textblock}{160}(0,44) \centering
+\Large ¿Es posible evaluar el efecto causal sin hacer intervenciones?
+\large
+\begin{equation*}
+P(y|\text{do}(x) = a, \text{Modelo Causal}) \overset{?}{=} P(y| x = a, Z, \text{Modelo Causal})
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<3>{
+\begin{textblock}{140}(10,27) \centering
+\includegraphics[width=0.70\textwidth, page=1]{figuras/simpson.pdf}
+\end{textblock}
+}
+\only<4>{
+\begin{textblock}{140}(10,27) \centering
+\includegraphics[width=0.70\textwidth, page=2]{figuras/simpson.pdf}
+\end{textblock}
+}
+
+
+\only<3->{
+\begin{textblock}{150}(5,14) \centering
+\begin{flalign*}
+& P(\text{Derrumbes}|do(\text{Intensidad del sismo})) = \only<3>{?}\only<4>{P(\text{Derrumbes}|\text{Intensidad del sismo}, \text{Ciudad})}
+&&
+\end{flalign*}
+\end{textblock}
+}
+
+
 \end{frame}
+
+
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
- \centering \LARGE Modelos \only<4->{\sout{Gráficos}}\only<1-3>{Gráficos} \\
+ \centering \LARGE Flujo de inferencia \\
+ \end{textblock}
+ \vspace{0.75cm}
+
+% \only<1>{
+%  \begin{textblock}{160}(0,23) \centering
+%  \tikz{
+%     \node[det] (u) {U} ; %
+%     \node[const, above=of u] (nu) {Genotipo} ; %
+%     \node[det, below=of u, xshift=-1.2cm] (f) {F} ; %
+%     \node[const, left=of f] (nf) {Fuma} ; %
+%     \node[det, below=of u, xshift=1.2cm] (c) {C};
+%     \node[const, right=of c] (nc) {Cancer} ; %
+%
+%     \edge {u} {f,c};
+%     \edge {f} {c};
+%     }
+%
+% \vspace{1cm}
+%  $P( \text{Cancer}|do(\text{Fuma}) ) \overset{?}{=}  P(\text{Cancer}|\text{Fuma})$
+% \end{textblock}
+% }
+
+
+\only<1-2>{
+\begin{textblock}{160}(0,14) \centering
+ \tikz{
+    \node[det] (l) {$l$} ; %
+    \node[det, above=of l] (a) {$a$} ; %
+    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+    \node[det, above=of a,xshift=-1.5cm] (e) {$e$} ; %
+    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+    \node[det, above=of t,xshift=-1.5cm] (c) {$c$} ;
+
+
+    \edge {a} {l};
+    \edge {t,e} {a};
+    \edge {t} {r};
+    \edge {c} {e,t};
+
+    \node[const, left= of e, xshift=-0.1cm] (cpd_e) {Entradera:};
+    \node[const, right= of t, xshift=0.1cm] (cpd_t) {:Terremoto};
+    \node[const, right= of c, xshift=0.1cm] (cpd_c) {:Ciudad};
+    \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
+    \node[const, right= of r, xshift=0.1cm] (cpd_r) {:Redes};
+    \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
+
+    }
+\end{textblock}
+}
+
+\only<3>{
+\begin{textblock}{160}(0,14) \centering
+ \tikz{
+    \node[det] (l) {$l$} ; %
+    \node[det, above=of l] (a) {$a$} ; %
+    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+    \node[det, double, double distance=0.5mm, above=of a,xshift=-1.5cm] (e) {$e$} ;
+    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+    \node[det, above=of t,xshift=-1.5cm] (c) {$c$} ;
+
+
+    \edge {a} {l};
+    \edge {t,e} {a};
+    \edge {t} {r};
+    \edge {c} {t};
+
+     \node[const, left= of e, xshift=-0.1cm] (cpd_e) {Entradera:};
+     \node[const, right= of t, xshift=0.1cm] (cpd_t) {:Terremoto};
+     \node[const, right= of c, xshift=0.1cm] (cpd_c) {:Ciudad};
+     \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
+     \node[const, right= of r, xshift=0.1cm] (cpd_r) {:Redes};
+     \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
+
+    }
+\end{textblock}
+}
+
+
+\only<2->{
+\begin{textblock}{160}(0,76) \centering
+\begin{equation*}
+P( \text{Redes} | do(\text{Entradera}) ) \overset{?}{=}  P(\text{Redes}|\text{Entradera})
+\end{equation*}
+\end{textblock}
+}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Flujo de inferencia \\
+ \large Sum-product algorithm
+\end{textblock}
+
+\only<2->{
+\begin{textblock}{80}(45,34)
+\begin{description}
+ \onslide<3->{\item[$v(n)$ :] Vecinos del nodo $n$}
+ \item[$m_{x \rightarrow f}(x)$ :] Mensaje de variable $x$ a factor $f$
+ \item[$m_{f \rightarrow x}(x)$ :] Mensaje de factor $f$ a variable $x$
+\end{description}
+\end{textblock}
+}
+
+
+\only<1-2>{
+\begin{textblock}{80}(45,20)
+\centering
+Algoritmo para calcular cualquier marginal \\ mediante pasaje de mensajes entre nodos
+\end{textblock}
+}
+
+
+\only<3->{
+\begin{textblock}{80}(45,20)
+\begin{equation*}
+P(x) = \prod_{f \in v(x)} m_{f \rightarrow x}(x)
+\end{equation*}
+\end{textblock}
+}
+
+\only<4->{
+\begin{textblock}{80}(45,56)
+\begin{equation*}\label{eq:m_v_f}
+m_{x \rightarrow f}(x) = \prod_{h \in \only<5>{\textcolor{red}}{v(x) \setminus \{f\}} } m_{h \rightarrow x}(x)
+\end{equation*}
+\end{textblock}
+}
+
+\only<6->{
+\begin{textblock}{80}(45,68)
+\begin{equation*}\label{eq:m_f_v}
+ m_{f \rightarrow x}(x) = \onslide<8->{\sum_{\bm{h}} \Big(} \onslide<7->{f(\bm{h},x)} \prod_{h \in v(f) \setminus \{x\} } m_{h \rightarrow f}(h) \onslide<8->{\Big)}
+\end{equation*}
+\end{textblock}
+}
+
+\only<1->{
+\begin{textblock}{40}(0,14)
+\centering
+\begin{figure}[H]
+\centering
+  \scalebox{.8}{
+\tikz{ %
+        \node[factor] (fa) {} ;
+        \node[det, below=of fa, minimum size=0.55cm, yshift=0.4cm] (a) {$a$} ; %
+
+        \node[factor, below=of a, yshift=0.4cm] (fl) {} ;
+        \node[det, below=of fl, minimum size=0.55cm,yshift=0.4cm] (l) {$l$} ; %
+
+        \node[det, above=of fa, minimum size=0.55cm, xshift=-0.8cm, yshift=-0.4cm] (e) {$e$} ; %
+        \node[factor, above=of e, yshift=-0.4cm] (fe) {} ;
+
+        \node[det,minimum size=0.55cm, above=of fa, xshift=0.8cm, yshift=-0.4cm] (t) {$t$} ; %
+        \node[factor, above=of t, yshift=-0.4cm] (ft) {} ;
+        \node[factor, below=of t, xshift=0.8cm, yshift=0.4cm] (fr) {} ;
+        \node[det,minimum size=0.55cm, below=of fr, yshift=0.4cm] (r) {$r$} ; %
+
+        \node[det, above=of fe, minimum size=0.55cm, xshift=0.8cm, yshift=-0.4cm] (c) {$c$} ; %
+        \node[factor, above=of c, yshift=-0.4cm] (fc) {} ;
+
+
+        \edge {fc} {c};
+        \edge[-] {c} {fe,ft};
+        \edge[-] {fa} {e,t};
+        \edge {fa} {a};
+        \edge {fe} {e};
+        \edge {ft} {t};
+        \edge[-] {fr} {t};
+        \edge {fr} {r};
+        \edge[-] {fl} {a};
+        \edge {fl} {l};
+        }
+}
+\end{figure}
+\end{textblock}
+}
+%
+% % %
+% \only<10>{
+% \begin{textblock}{160}(0,87)
+% \centering \tiny
+% \href{https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=910572}{Kschischang FR, Frey BJ, Loeliger HA. Factor graphs and the sum-product algorithm. 2001}
+% \end{textblock}
+% }
+
+\end{frame}
+
+
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Flujo de inferencia \\
+ \large Ejemplo
+ \end{textblock}
+ \centering
+ \vspace{0.75cm}
+
+ \tikz{
+    \node[det] (l) {$l$} ; %
+    \node[det, above=of l] (a) {$a$} ; %
+    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+    \node[det, above=of a,xshift=-1.5cm] (e) {$e$} ; %
+    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+
+    \edge {a} {l};
+    \edge {t,e} {a};
+    \edge {t} {r};
+
+    \node[const, left= of e, xshift=-0.1cm] (cpd_e) {Entradera:};
+    \node[const, right= of t, xshift=0.1cm] (cpd_t) {:Terremoto};
+    \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
+    \node[const, right= of r, xshift=0.1cm] (cpd_r) {:Redes};
+    \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
+
+    }
+
+
+
+ \end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Ejemplo \\
  \large o redes bayesianas
 \end{textblock}
  \centering
