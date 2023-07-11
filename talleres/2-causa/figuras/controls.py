@@ -17,6 +17,8 @@ import time
 random.seed(2023-7-7)
 np.random.seed(2023-7-7)
 cmap = plt.get_cmap("tab10")
+N = 1000
+
 
 def plot_parametros(mean,cov,real,nombre_params,nombre_archivo,pos=(0,0)):
     plt.xticks(ticks=real)
@@ -37,6 +39,28 @@ def plot_parametros(mean,cov,real,nombre_params,nombre_archivo,pos=(0,0)):
     plt.savefig("pdf/controles-{}.pdf".format(nombre_archivo),bbox_inches='tight')
     plt.close()
 
+######################################################################
+# Modelo complejo
+
+z1 = np.random.uniform(-3,3, size=N)
+w1 = 3*z1 + np.random.normal(size=N,scale=1)
+z2 = np.random.uniform(-3,3, size=N)
+w2 = 2*z2 + np.random.normal(size=N,scale=1)
+z3 = -2*z1 + 2*z2 + np.random.normal(size=N,scale=1)
+x = -1*w1 + 2*z3 + np.random.normal(size=N,scale=1)
+w3 = 2*x + np.random.normal(size=N,scale=1)
+y = 2 - 1*w3 - z3 + w2 + np.random.normal(size=N,scale=1)
+
+PHI0 = np.concatenate([np.ones(N).reshape(N, 1), x.reshape(N, 1), z3.reshape(N, 1),w2.reshape(N, 1)], axis=1)
+
+blm0= BayesianLinearModel(basis=lambda x: x)
+blm0.update(PHI0, y.reshape(N,1) )
+
+mean0 = blm0.location
+cov0 = blm0.dispersion
+real0 = [2,-2,-1,1]
+
+plot_parametros(mean0,cov0,real0,nombre_params=["c0","c1","c2","c3"],nombre_archivo="modeloComplejos")
 
 
 ########################################################################
@@ -44,7 +68,6 @@ def plot_parametros(mean,cov,real,nombre_params,nombre_archivo,pos=(0,0)):
 # \edge {z} {x,y}
 # \edge {x} {y}
 
-N = 10000
 Z1s = np.random.uniform(-3,3, size=N)
 X1s = 1 + 3*Z1s + 2*Z1s**3 + np.random.normal(size=N,scale=6)
 Y1s = -1 - 2*X1s + 6*Z1s**2 + np.random.normal(size=N,scale=1)
