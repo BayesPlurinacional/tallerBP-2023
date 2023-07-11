@@ -1004,7 +1004,7 @@ P(y|\text{do}(x) = a, \text{Modelo Causal}) \overset{?}{=} P(y| x = a, Z, \text{
 \only<2->{
 \begin{textblock}{160}(0,76) \centering
 \begin{equation*}
-P( \text{Redes} | do(\text{Entradera}) ) \overset{?}{=}  P(\text{Redes}|\text{Entradera})
+P( \text{Llamada} | do(\text{Entradera}) ) \overset{?}{=}  P(\text{Llamada}|\text{Entradera})
 \end{equation*}
 \end{textblock}
 }
@@ -1018,7 +1018,7 @@ P( \text{Redes} | do(\text{Entradera}) ) \overset{?}{=}  P(\text{Redes}|\text{En
  \large Sum-product algorithm
 \end{textblock}
 
-\only<2->{
+\only<2-8>{
 \begin{textblock}{80}(45,34)
 \begin{description}
  \onslide<3->{\item[$v(n)$ :] Vecinos del nodo $n$}
@@ -1037,7 +1037,7 @@ Algoritmo para calcular cualquier marginal \\ mediante pasaje de mensajes entre 
 }
 
 
-\only<3->{
+\only<3-9>{
 \begin{textblock}{80}(45,20)
 \begin{equation*}
 P(x) = \prod_{f \in v(x)} m_{f \rightarrow x}(x)
@@ -1045,18 +1045,18 @@ P(x) = \prod_{f \in v(x)} m_{f \rightarrow x}(x)
 \end{textblock}
 }
 
-\only<4->{
+\only<4-9>{
 \begin{textblock}{80}(45,56)
 \begin{equation*}\label{eq:m_v_f}
-m_{x \rightarrow f}(x) = \prod_{h \in \only<5>{\textcolor{red}}{v(x) \setminus \{f\}} } m_{h \rightarrow x}(x)
+m_{x \rightarrow f}(x) = \prod_{g \in \only<5>{\textcolor{red}}{v(x) \setminus \{f\}} } m_{g \rightarrow x}(x)
 \end{equation*}
 \end{textblock}
 }
 
-\only<6->{
+\only<6-9>{
 \begin{textblock}{80}(45,68)
 \begin{equation*}\label{eq:m_f_v}
- m_{f \rightarrow x}(x) = \onslide<8->{\sum_{\bm{h}} \Big(} \onslide<7->{f(\bm{h},x)} \prod_{h \in v(f) \setminus \{x\} } m_{h \rightarrow f}(h) \onslide<8->{\Big)}
+ m_{f \rightarrow x}(x) = \onslide<8->{\sum_{\bm{y}} \Big(} \onslide<7->{f(\bm{y},x)} \prod_{y \in v(f) \setminus \{x\} } m_{y \rightarrow f}(y) \onslide<8->{\Big)}
 \end{equation*}
 \end{textblock}
 }
@@ -1101,14 +1101,13 @@ m_{x \rightarrow f}(x) = \prod_{h \in \only<5>{\textcolor{red}}{v(x) \setminus \
 \end{figure}
 \end{textblock}
 }
-%
-% % %
-% \only<10>{
-% \begin{textblock}{160}(0,87)
-% \centering \tiny
-% \href{https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=910572}{Kschischang FR, Frey BJ, Loeliger HA. Factor graphs and the sum-product algorithm. 2001}
-% \end{textblock}
-% }
+
+
+\only<9>{
+\begin{textblock}{110}(35,40) \Large
+\centering El método de inferencia más eficiente
+\end{textblock}
+}
 
 \end{frame}
 
@@ -1116,11 +1115,12 @@ m_{x \rightarrow f}(x) = \prod_{h \in \only<5>{\textcolor{red}}{v(x) \setminus \
  \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
  \centering \LARGE Flujo de inferencia \\
- \large Ejemplo
+ \large Independencia condicional
  \end{textblock}
  \centering
  \vspace{0.75cm}
 
+ \begin{textblock}{68}(0,25)
  \tikz{
     \node[det] (l) {$l$} ; %
     \node[det, above=of l] (a) {$a$} ; %
@@ -1132,364 +1132,143 @@ m_{x \rightarrow f}(x) = \prod_{h \in \only<5>{\textcolor{red}}{v(x) \setminus \
     \edge {t,e} {a};
     \edge {t} {r};
 
-    \node[const, left= of e, xshift=-0.1cm] (cpd_e) {Entradera:};
-    \node[const, right= of t, xshift=0.1cm] (cpd_t) {:Terremoto};
+    \node[const, above= of e, yshift=0.1cm] (cpd_e) {Entradera:};
+    \node[const, above= of t, yshift=0.1cm] (cpd_t) {Terremoto:};
     \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
-    \node[const, right= of r, xshift=0.1cm] (cpd_r) {:Redes};
+    \node[const, left= of r, xshift=-0.1cm] (cpd_r) {Redes:};
     \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
 
     }
-
-
-
- \end{frame}
-
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \LARGE Ejemplo \\
- \large o redes bayesianas
-\end{textblock}
- \centering
- \vspace{0.75cm}
-
-\begin{textblock}{160}(0,20)
- \tikz{
-    \node[det] (l) {\only<1>{E}\only<2>{$A$}\only<3>{$l$}} ; %
-    \node[det, above=of l] (a) {\only<1>{C}\only<3>{$a$}} ; %
-    \node[det, above=of a,xshift=1.5cm] (t) {\only<1>{B}\only<3>{$t$}} ; %
-    \node[det, above=of a,xshift=-1.5cm] (e) {\only<1>{A}\only<3>{$e$}} ; %
-    \node[det, below=of t,xshift=1.5cm] (r) {\only<1>{D}\only<3>{$r$}} ; %
-
-    \edge {a} {l};
-    \edge {t,e} {a};
-    \edge {t} {r};
-
-    \node[const, left= of e, xshift=-0.1cm] (cpd_e) {\only<3>{Entradera:}};
-    \node[const, right= of t, xshift=0.1cm] (cpd_t) {\only<3>{:Terremoto}};
-    \node[const, left= of a, xshift=-0.1cm] (cpd_a) {\only<3>{Alarma:}};
-    \node[const, right= of r, xshift=0.1cm] (cpd_r) {\only<3>{:Redes}};
-    \node[const, left= of l, xshift=-0.1cm] (cpd_l) {\only<3>{Llamada:}};
-
-    \node[invisible, left=of e, xshift=-3cm] (inv_left) {};
-    \node[invisible, right=of r, xshift=2cm] (inv_right) {};
-
-    }
 \end{textblock}
 
-\only<4>{
-\begin{textblock}{160}(0,18)
-Los humanos razonamos en términos causales.
 
-Mecanismos causales que relacionan a las variables entre sí.
-\end{textblock}
-}
-
-\end{frame}
-
-
- \begin{frame}[plain]
-    \begin{textblock}{160}(0,4)
-    \centering \LARGE Modelos gráficos causales
-    \end{textblock}
-    \centering
-    \vspace{0.75cm}
-
-    \begin{itemize}
-     \item[$\bullet$] Permite especificar todas las hipótesis intuitivamente.
-     \item[$\bullet$] Representa la probabilidad conjunta de forma completa y eficiente.
-     \item[$\bullet$] Proporciona información para hacer inferencia eficientemente.
-     \item[$\bullet$] Codifica el efecto de las intervenciones y los contrafactuales
-    \end{itemize}
-
- \end{frame}
-
-
-
- \begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large
- Mecanismos Causales
+\only<1->{
+\begin{textblock}{90}(68,24)
+\centering
+ \begin{tabular}{c c c}
+ & \onslide<2->{$\hfrac{\text{Intermedio}}{\text{no observable}}$} &   \onslide<3->{$\hfrac{\text{Intermedio}}{\text{observable}}}$ \\
+ & & \\
+ $ e \rightarrow a \rightarrow l $    & \onslide<2->{$P(l) \overset{?}{=} P(l|e)$} & \onslide<3->{$P(l|a) \overset{?}{=} P(l|e,a)$} \\
+ %$ l \leftarrow a \leftarrow t $      &  \onslide<4->{$P(t) \overset{?}{=} P(t|l)$}  & \onslide<5->{$P(t|a) \overset{?}{=} P(t|a,l)$} \\
+ $ a \leftarrow t \rightarrow r $     & \onslide<4->{$P(r) \overset{?}{=} P(r|a)$} & \onslide<5->{$P(r|t) \overset{?}{=} P(r|t,a)$} \\
+ $ e \rightarrow a \leftarrow t $     & \onslide<6->{$P(t) \overset{?}{=} P(t|e)$} & \onslide<7->{$P(t|a) \overset{?}{=} P(t|e,a)$} \\
+            $\overset{\downarrow}{l}$  &  & \onslide<8->{$P(t|l) \overset{?}{=} P(t|e,l)$}
+ \end{tabular}
  \end{textblock}
- \vspace{0.75cm}
+ }
 
- \begin{align*}
-  \onslide<4->{e &= u_e \\
-  t &= u_t \\}
-  \onslide<1->{r &= f(t,u_r) = t \vee u_r \\}
-  \onslide<2->{a &= f(e,t,u_a) = e \vee t \vee u_a \\}
-  \onslide<3->{l &= f(a,u_l) = a \vee u_l}
- \end{align*}
+
  \end{frame}
 
- \begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large
- Proabilidad conjunta
- \end{textblock}
- \vspace{0.75cm}
-
-
-\only<1>{
-\begin{textblock}{140}(10,34)
-\begin{mdframed}[backgroundcolor=black!15]
- \centering
-  Los modelos son \'utiles para definir distribuciones
-
-  de probabilidad en espacios de alta dimensión.
-\end{mdframed}
-\end{textblock}
-}
-
-
-\only<2>{
-\begin{textblock}{130}(18,33)
-\begin{flalign*}
- & P(e,t,a,r,l) = &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<3>{
-\begin{textblock}{130}(18,33)
-\begin{flalign*}
- & P(e,t,a,r,l) = P(e)\,P(t|e)\,P(a|t,e)\,P(r|a,t,e)\,P(l|a,r,t,e) &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<4>{
-\begin{textblock}{130}(18,33)
-\begin{flalign*}
- & P(e,t,a,r,l) = P(e)\,P(t|\cancel{e})\,P(a|t,e)\,P(r|\cancel{a},t,\cancel{e})\,P(l|a,\cancel{r},\cancel{t},\cancel{e}) &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<5>{
-\begin{textblock}{130}(18,33)
-\begin{flalign*}
- & P(e,t,a,r,l) = P(e)\,P(t)\,P(a|t,e)\,P(r|t)\,P(l|a) &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<6>{
-\begin{textblock}{130}(17.3,33)
-\begin{flalign*}
- & \underbrace{P(e,t,a,r,l)}_{\text{Complejidad } 2^n} = P(e)\,P(t)\,P(a|t,e)\,P(r|t)\,P(l|a) &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<7>{
-\begin{textblock}{130}(17.3,33)
-\begin{flalign*}
- & \underbrace{P(e,t,a,r,l)}_{\text{Complejidad } 2^n} = \underbrace{P(e)}_{2}\underbrace{P(t)}_{2}\underbrace{P(a|t,e)}_{2^3}\underbrace{P(r|t)}_{2^2}\underbrace{P(l|a)}_{2^2} &&
-\end{flalign*}
-\end{textblock}
-}
-
-
-
-%
-%  \only<1->{
-%  \begin{textblock}{160}(0,14)
-% \begin{align*}
-%   \underbrace{P(e,t,r,a,l)}_{\text{Complejidad } 2^n} = \onslide<2->{\underbrace{P(e)P(t)P(r|t)P(a|e,t)P(l|a)}_{\text{Complejidad } 2 + 2 + 2^2 + 2^3 + 2^2}}
-%  \end{align*}
+%  \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \Large
+%  Modelo Causal \\
+%  \large Prior redes sociales
 %  \end{textblock}
-% }
+%  \vspace{0.75cm}
 %
-% \begin{textblock}{160}(0,34)
-%  \onslide<3>{
-%  \begin{align*}
-%  P(e|t,r,a,l) & = P(e) \\
-%  P(t|e,r,a,l) & = P(t) \\
-%  P(r|e,t,a,l) & = p(r|t) \\
-%  P(a|e,t,r,l) & = p(a|e,t) \\
-%  P(l|e,t,r,a) & = p(l|a) \\
-%  \end{align*}
+%  \centering
+%
+%
+%  \begin{textblock}{160}(0,25)
+%   $P(r|t)$ \\[0.1cm]
+%     \begin{tabular}{|c|c|c|}
+%         \hline
+%         & \, $r^0$ \, & \, $r^1$ \,  \\ \hline
+%        $(t^0)$ & \only<3-4>{$1$}\only<5>{$0.99$} & \only<3-4>{$0$}\only<5>{$0.01$}   \\ \hline
+%        $(t^1)$ & \only<3-4>{$0$}\only<5>{$0.01$} & \only<3-4>{$1$}\only<5>{$0.99$}   \\ \hline
+%     \end{tabular}
+% \end{textblock}
+%
+%
+%  \begin{textblock}{140}(10,54)
+% \onslide<2->{
+%  \begin{itemize}
+%   \item[$\bullet$] Siempre que hay un terremoto, en alguna de mis redes sociales (whatsapp, facebook, twitter, instagram), se habla del tema.
+%   \only<4->{\item[$\bullet$] También puedo mirar mal, o por algún momento no haya nada, o que por algún otro motivo nadie pueda comunicarse}
+%  \end{itemize}
 % }
 % \end{textblock}
 %
+%
+%  \end{frame}
+%
+%
+%  \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \Large
+%  Modelo Causal \\
+%  \large Prior llamada
+%  \end{textblock}
+%  \vspace{0.75cm}
+%
+%  \centering
+%
+%
+%  \begin{textblock}{160}(0,25)
+%   $P(l|a)$ \\[0.1cm]
+%     \begin{tabular}{|c|c|c|}
+%         \hline
+%         & \, $l^0$ \, & \, $l^1$ \,  \\ \hline
+%        $(a^0)$ & \onslide<3>{$0.99$} & \onslide<3>{$0.01$}   \\ \hline
+%        $(a^1)$ & \onslide<3>{$0.01$} & \onslide<3>{$0.99$}   \\ \hline
+%     \end{tabular}
+% \end{textblock}
+%
+%
+%  \begin{textblock}{140}(10,54)
+% \onslide<2->{
+%  \begin{itemize}
+%   \item[$\bullet$] Siempre que se activa la alarma, me llaman desde el call center de la empresa (si no pasa nada raro)
+%  \end{itemize}
+% }
+% \end{textblock}
+%
+%  \end{frame}
 
- \end{frame}
-
-
-
- \begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large
- Modelo Causal \\
- \large Prior Entradera
- \end{textblock}
- \vspace{0.75cm}
-
- \centering
-
- \begin{textblock}{160}(0,25)
-  $P(e)$ \\[0.1cm]
-    \begin{tabular}{|c|c|}
-        \hline
-        \,$e^0$\, & \,$e^1$\, \\ \hline
-        \onslide<3>{$999/1000$} & \onslide<3>{$1/1000$}   \\ \hline
-    \end{tabular}
-  \end{textblock}
-
-\begin{textblock}{160}(10,54)
-\onslide<2->{
- \begin{itemize}
-  \item[$\bullet$] Una vez cada 3 años
-  \item[$\bullet$] Una casa cada 1000 por día
- \end{itemize}
-}
-\end{textblock}
-
-
- \end{frame}
-
- \begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large
- Modelo Causal \\
- \large Prior Terremoto
- \end{textblock}
- \vspace{0.75cm}
-
- \centering
-
- \begin{textblock}{160}(0,25)
-  $P(t)$ \\[0.1cm]
-    \begin{tabular}{|c|c|}
-        \hline
-        \,$t^0$\, & \,$t^1$\, \\ \hline
-        \onslide<3>{$362/365$} & \onslide<3>{$3/365$}   \\ \hline
-    \end{tabular}
-\end{textblock}
-
-
- \begin{textblock}{160}(10,54)
-\onslide<2->{
- \begin{itemize}
-  \item[$\bullet$] Hay 3 terremotos (leves) por años
- \end{itemize}
-}
-\end{textblock}
-
-
- \end{frame}
-
- \begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large
- Modelo Causal \\
- \large Prior redes sociales
- \end{textblock}
- \vspace{0.75cm}
-
- \centering
-
-
- \begin{textblock}{160}(0,25)
-  $P(r|t)$ \\[0.1cm]
-    \begin{tabular}{|c|c|c|}
-        \hline
-        & \, $r^0$ \, & \, $r^1$ \,  \\ \hline
-       $(t^0)$ & \only<3-4>{$1$}\only<5>{$0.99$} & \only<3-4>{$0$}\only<5>{$0.01$}   \\ \hline
-       $(t^1)$ & \only<3-4>{$0$}\only<5>{$0.01$} & \only<3-4>{$1$}\only<5>{$0.99$}   \\ \hline
-    \end{tabular}
-\end{textblock}
-
-
- \begin{textblock}{140}(10,54)
-\onslide<2->{
- \begin{itemize}
-  \item[$\bullet$] Siempre que hay un terremoto, en alguna de mis redes sociales (whatsapp, facebook, twitter, instagram), se habla del tema.
-  \only<4->{\item[$\bullet$] También puedo mirar mal, o por algún momento no haya nada, o que por algún otro motivo nadie pueda comunicarse}
- \end{itemize}
-}
-\end{textblock}
-
-
- \end{frame}
-
-
- \begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large
- Modelo Causal \\
- \large Prior llamada
- \end{textblock}
- \vspace{0.75cm}
-
- \centering
-
-
- \begin{textblock}{160}(0,25)
-  $P(l|a)$ \\[0.1cm]
-    \begin{tabular}{|c|c|c|}
-        \hline
-        & \, $l^0$ \, & \, $l^1$ \,  \\ \hline
-       $(a^0)$ & \onslide<3>{$0.99$} & \onslide<3>{$0.01$}   \\ \hline
-       $(a^1)$ & \onslide<3>{$0.01$} & \onslide<3>{$0.99$}   \\ \hline
-    \end{tabular}
-\end{textblock}
-
-
- \begin{textblock}{140}(10,54)
-\onslide<2->{
- \begin{itemize}
-  \item[$\bullet$] Siempre que se activa la alarma, me llaman desde el call center de la empresa (si no pasa nada raro)
- \end{itemize}
-}
-\end{textblock}
-
- \end{frame}
-
-
- \begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large
- Modelo Causal \\
- \large Prior alarma
- \end{textblock}
- \vspace{0.75cm}
-
- \centering
-
-
- \begin{textblock}{160}(0,18)
-  $P(l|a)$ \\[0.1cm]
-    \begin{tabular}{|c|c|c|}
-        \hline
-        & \hspace{1cm} $a^0$ \hspace{1cm} & \hspace{1cm} $a^1$ \hspace{1cm} \\ \hline
-       $(e^0, t^0)$ & \only<10->{$0.99$}\only<4-9>{$P(\overline{\alpha})$} & \only<11->{$0.01$}\only<4-10>{$P(\alpha)$} \\ \hline
-       $(e^1, t^0)$ & \only<13->{$\approx 0.01$}\only<12>{$0.99 \cdot 0.01$}\only<7-11>{$P(\overline{\alpha} \cap \overline{\varepsilon})$}\only<6>{$P(\overline{\alpha \cup \varepsilon})$} & \only<14->{$\approx 0.99$} \only<5-13>{$P(\alpha \cup \varepsilon)$}  \\ \hline
-       $(e^0, t^1)$ & \only<15->{$\approx 0.01$}\only<8-14>{$P(\overline{\alpha} \cap \overline{\tau})$} &\only<15->{$\approx0.99$}\only<8-14>{$P(\alpha \cup \tau)$}  \\ \hline
-       $(e^1, t^1)$ & \only<16>{$\approx 0.0001$} \only<9-15>{$P(\overline{\alpha} \cap \overline{\varepsilon}  \cap \overline{\tau})$} & \only<16>{$\approx 0.9999$} \only<9-15>{$P(\alpha \cup \varepsilon \cup \tau)$}  \\ \hline
-    \end{tabular}
-\end{textblock}
-
-
- \begin{textblock}{140}(10,52)
-\onslide<2->{
- \begin{itemize}
-  \item[$\bullet$] Siempre que entra alguien a la casa o que hay un terremoto se activa la alarma (si no pasa nada raro):
-  \onslide<3->{
-  \begin{description}
-   \item[$\alpha$] Se activa sola: $P(\alpha) = 0.01$
-   \item[$\overline{\varepsilon}$] No se activa a pesar de entradera: $P(\overline{\varepsilon}) = 0.01$
-   \item[$\overline{\tau}$] No se activa a pesar de terremoto: $P(\overline{\tau}) = 0.01$
-  \end{description}
-}
- \end{itemize}
-}
-\end{textblock}
-
- \end{frame}
-
+%
+%  \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \Large
+%  Modelo Causal \\
+%  \large Prior alarma
+%  \end{textblock}
+%  \vspace{0.75cm}
+%
+%  \centering
+%
+%
+%  \begin{textblock}{160}(0,18)
+%   $P(l|a)$ \\[0.1cm]
+%     \begin{tabular}{|c|c|c|}
+%         \hline
+%         & \hspace{1cm} $a^0$ \hspace{1cm} & \hspace{1cm} $a^1$ \hspace{1cm} \\ \hline
+%        $(e^0, t^0)$ & \only<10->{$0.99$}\only<4-9>{$P(\overline{\alpha})$} & \only<11->{$0.01$}\only<4-10>{$P(\alpha)$} \\ \hline
+%        $(e^1, t^0)$ & \only<13->{$\approx 0.01$}\only<12>{$0.99 \cdot 0.01$}\only<7-11>{$P(\overline{\alpha} \cap \overline{\varepsilon})$}\only<6>{$P(\overline{\alpha \cup \varepsilon})$} & \only<14->{$\approx 0.99$} \only<5-13>{$P(\alpha \cup \varepsilon)$}  \\ \hline
+%        $(e^0, t^1)$ & \only<15->{$\approx 0.01$}\only<8-14>{$P(\overline{\alpha} \cap \overline{\tau})$} &\only<15->{$\approx0.99$}\only<8-14>{$P(\alpha \cup \tau)$}  \\ \hline
+%        $(e^1, t^1)$ & \only<16>{$\approx 0.0001$} \only<9-15>{$P(\overline{\alpha} \cap \overline{\varepsilon}  \cap \overline{\tau})$} & \only<16>{$\approx 0.9999$} \only<9-15>{$P(\alpha \cup \varepsilon \cup \tau)$}  \\ \hline
+%     \end{tabular}
+% \end{textblock}
+%
+%
+%  \begin{textblock}{140}(10,52)
+% \onslide<2->{
+%  \begin{itemize}
+%   \item[$\bullet$] Siempre que entra alguien a la casa o que hay un terremoto se activa la alarma (si no pasa nada raro):
+%   \onslide<3->{
+%   \begin{description}
+%    \item[$\alpha$] Se activa sola: $P(\alpha) = 0.01$
+%    \item[$\overline{\varepsilon}$] No se activa a pesar de entradera: $P(\overline{\varepsilon}) = 0.01$
+%    \item[$\overline{\tau}$] No se activa a pesar de terremoto: $P(\overline{\tau}) = 0.01$
+%   \end{description}
+% }
+%  \end{itemize}
+% }
+% \end{textblock}
+%
+%  \end{frame}
+%
 
  \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
@@ -1575,9 +1354,55 @@ Mecanismos causales que relacionan a las variables entre sí.
 
  }
 \end{textblock}
+
+\only<2>{
+\begin{textblock}{160}(10,66)
+ \begin{itemize}
+  \item[$\bullet$] Una vez cada 3 años
+  \item[$\bullet$] Una casa cada 1000 por día
+ \end{itemize}
+\end{textblock}
+}
+
+\only<3>{
+ \begin{textblock}{160}(10,66)
+ \begin{itemize}
+  \item[$\bullet$] Hay 3 terremotos por años
+ \end{itemize}
+\end{textblock}
+}
+
+\only<4>{
+ \begin{textblock}{160}(10,66)
+ \begin{itemize}
+   \item[$\bullet$] Se activa sola: $P(\alpha) = 0.01$
+   \item[$\bullet$] No se activa a pesar de entradera: $P(\overline{\varepsilon}) = 0.01$
+   \item[$\bullet$] No se activa a pesar de terremoto: $P(\overline{\tau}) = 0.01$
+ \end{itemize}
+\end{textblock}
+}
+
+\only<5>{
+ \begin{textblock}{160}(10,66)
+ \begin{itemize}
+   \item[$\bullet$] Siempre se habla de los terremotos en las redes (si no pasa nada raro)
+ \end{itemize}
+\end{textblock}
+}
+
+\only<6>{
+ \begin{textblock}{160}(10,66)
+ \begin{itemize}
+   \item[$\bullet$] Llaman siempre que se activa la alarma (si no pasa nada raro)
+ \end{itemize}
+\end{textblock}
+}
+
+
+
 \end{frame}
 
- \begin{comment}
+
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
@@ -1802,61 +1627,61 @@ Mecanismos causales que relacionan a las variables entre sí.
 
 \end{frame}
 
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large
- Grafo de factorización
-\end{textblock}
-
-\begin{textblock}{40}(5,12)
-\centering
-\begin{figure}[H]
-\centering
-  \scalebox{0.8}{
-\tikz{ %
-
-
-        \node[factor] (fa) {} ;
-        \node[const,right=of fa] (pa) {$P(a|e,t)$} ;
-        \node[det, below=of fa, yshift=0.1cm] (a) {$a$} ; %
-
-        \node[factor, below=of a] (fl) {} ;
-        \node[const,right=of fl] (pl) {$P(l|a)$} ;
-        \node[det, below=of fl,yshift=0.1cm] (l) {$l$} ; %
-
-        \node[det, above=of fa, xshift=-1.6cm,yshift=-0.1cm] (e) {$e$} ; %
-        \node[factor, above=of e,yshift=-0.1cm] (fe) {} ;
-        \node[const,right=of fe] (pe) {$P(e)$} ;
-
-        \node[det, above=of fa, xshift=1.6cm,yshift=-0.1cm] (t) {$t$} ; %
-        \node[factor, above=of t,yshift=-0.1cm] (ft) {} ;
-        \node[const,right=of ft] (pt) {$P(t)$} ;
-        \node[factor, below=of t, xshift=1.6cm,yshift=0.1cm] (fr) {} ;
-        \node[det,below=of fr,yshift=0.1cm] (r) {$r$} ; %
-        \node[const,right=of fr] (pr) {$P(r|t)$} ;
-
-        \edge[-] {fa} {a,e,t};
-        \edge[-] {fe} {e};
-        \edge[-] {ft} {t};
-        \edge[-] {fr} {r,t};
-        \edge[-] {fl} {l,a};
-        }
-}
-\end{figure}
-\end{textblock}
-
-\begin{textblock}{115}(45,30)
-
- \centering Nodos: \\ variables y funciones
-
- \vspace{1cm}
-
- \centering Ejes: \\
-  ``la variable $v$ es argumento de la funci\'on $f$''
-
-\end{textblock}
-\end{frame}
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \Large
+%  Grafo de factorización
+% \end{textblock}
+%
+% \begin{textblock}{40}(5,12)
+% \centering
+% \begin{figure}[H]
+% \centering
+%   \scalebox{0.8}{
+% \tikz{ %
+%
+%
+%         \node[factor] (fa) {} ;
+%         \node[const,right=of fa] (pa) {$P(a|e,t)$} ;
+%         \node[det, below=of fa, yshift=0.1cm] (a) {$a$} ; %
+%
+%         \node[factor, below=of a] (fl) {} ;
+%         \node[const,right=of fl] (pl) {$P(l|a)$} ;
+%         \node[det, below=of fl,yshift=0.1cm] (l) {$l$} ; %
+%
+%         \node[det, above=of fa, xshift=-1.6cm,yshift=-0.1cm] (e) {$e$} ; %
+%         \node[factor, above=of e,yshift=-0.1cm] (fe) {} ;
+%         \node[const,right=of fe] (pe) {$P(e)$} ;
+%
+%         \node[det, above=of fa, xshift=1.6cm,yshift=-0.1cm] (t) {$t$} ; %
+%         \node[factor, above=of t,yshift=-0.1cm] (ft) {} ;
+%         \node[const,right=of ft] (pt) {$P(t)$} ;
+%         \node[factor, below=of t, xshift=1.6cm,yshift=0.1cm] (fr) {} ;
+%         \node[det,below=of fr,yshift=0.1cm] (r) {$r$} ; %
+%         \node[const,right=of fr] (pr) {$P(r|t)$} ;
+%
+%         \edge[-] {fa} {a,e,t};
+%         \edge[-] {fe} {e};
+%         \edge[-] {ft} {t};
+%         \edge[-] {fr} {r,t};
+%         \edge[-] {fl} {l,a};
+%         }
+% }
+% \end{figure}
+% \end{textblock}
+%
+% \begin{textblock}{115}(45,30)
+%
+%  \centering Nodos: \\ variables y funciones
+%
+%  \vspace{1cm}
+%
+%  \centering Ejes: \\
+%   ``la variable $v$ es argumento de la funci\'on $f$''
+%
+% \end{textblock}
+% \end{frame}
 
 
 \begin{frame}[plain]
@@ -1881,99 +1706,6 @@ $a_1 \, b_1 + a_1 \, b_2 + a_2 \, b_1 + a_2 \, b_2  = (a1 + a_2) \, (b_1 + b_2)$
 
 \end{frame}
 
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large
- Sum-product algorithm
-\end{textblock}
-
-\only<2->{
-\begin{textblock}{80}(45,30)
-\begin{description}
- \onslide<3->{\item[$v(n)$ :] Vecinos del nodo $n$}
- \item[$m_{x \rightarrow f}(x)$ :] Mensaje de variable $x$ a factor $f$
- \item[$m_{f \rightarrow x}(x)$ :] Mensaje de factor $f$ a variable $x$
-\end{description}
-\end{textblock}
-}
-
-
-\only<1-3>{
-\begin{textblock}{80}(45,16)
-\centering
-Algoritmo para calcular cualquier marginal \\ mediante pasaje de mensajes entre nodos
-\end{textblock}
-}
-
-
-\only<4->{
-\begin{textblock}{80}(45,16)
-\begin{equation*}
-P(x) = \prod_{f \in v(x)} m_{f \rightarrow x}(x)
-\end{equation*}
-\end{textblock}
-}
-
-\only<5->{
-\begin{textblock}{80}(45,56)
-\begin{equation*}\label{eq:m_v_f}
-m_{x \rightarrow f}(x) = \prod_{h \in \only<6>{\textcolor{red}}{v(x) \setminus \{f\}} } m_{h \rightarrow x}(x)
-\end{equation*}
-\end{textblock}
-}
-
-\only<7->{
-\begin{textblock}{80}(45,68)
-\begin{equation*}\label{eq:m_f_v}
- m_{f \rightarrow x}(x) = \onslide<9->{\sum_{\bm{h}} \Big(} \onslide<8->{f(\bm{h},x)} \prod_{h \in v(f) \setminus \{x\} } m_{h \rightarrow f}(h) \onslide<9->{\Big)}
-\end{equation*}
-\end{textblock}
-}
-
-\only<1->{
-\begin{textblock}{40}(0,20)
-\centering
-\begin{figure}[H]
-\centering
-  \scalebox{.8}{
-\tikz{ %
-
-
-        \node[factor] (fa) {} ;
-        \node[det, below=of fa, minimum size=0.55cm, yshift=0.4cm] (a) {$a$} ; %
-
-        \node[factor, below=of a, yshift=0.4cm] (fl) {} ;
-        \node[det, below=of fl, minimum size=0.55cm,yshift=0.4cm] (l) {$l$} ; %
-
-        \node[det, above=of fa, minimum size=0.55cm, xshift=-0.8cm, yshift=-0.4cm] (e) {$e$} ; %
-        \node[factor, above=of e, yshift=-0.4cm] (fe) {} ;
-
-        \node[det,minimum size=0.55cm, above=of fa, xshift=0.8cm, yshift=-0.4cm] (t) {$t$} ; %
-        \node[factor, above=of t, yshift=-0.4cm] (ft) {} ;
-        \node[factor, below=of t, xshift=0.8cm, yshift=0.4cm] (fr) {} ;
-        \node[det,minimum size=0.55cm, below=of fr, yshift=0.4cm] (r) {$r$} ; %
-
-        \edge[-] {fa} {a,e,t};
-        \edge[-] {fe} {e};
-        \edge[-] {ft} {t};
-        \edge[-] {fr} {r,t};
-        \edge[-] {fl} {l,a};
-        }
-}
-\end{figure}
-\end{textblock}
-}
-
-% %
-\only<10>{
-\begin{textblock}{160}(0,87)
-\centering \tiny
-\href{https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=910572}{Kschischang FR, Frey BJ, Loeliger HA. Factor graphs and the sum-product algorithm. 2001}
-\end{textblock}
-}
-\end{frame}
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
@@ -2055,16 +1787,6 @@ m_{x \rightarrow f}(x) = \prod_{h \in \only<6>{\textcolor{red}}{v(x) \setminus \
 \begin{textblock}{80}(60,70)
  \centering
  Todos los mensajes que \\ bajan son marginales
-\end{textblock}
-}
-
-
- \only<21>{
-\begin{textblock}{80}(60,65)
- \centering
- \begin{align*}
-  P(l=1)\cdot 365 = ?
- \end{align*}
 \end{textblock}
 }
 
@@ -2150,7 +1872,7 @@ Modelo con observables
 \only<13-14>{
 \begin{textblock}{80}(70,60)
 \begin{flalign*}
-  P(l|e^*) & \, = P(l,e^*)/P(e^*) \only<14>{\overset{?}= \, P(l)} &&
+  P(l|e^*) & \, = P(l,e^*)/P(e^*) \only<14>{\neq \, P(l)} &&
 \end{flalign*}
 \end{textblock}
 }
@@ -2158,7 +1880,7 @@ Modelo con observables
 \only<15>{
 \begin{textblock}{80}(69.15,60)
 \begin{flalign*}
-  \underbrace{P(l|e^*)}_{\hfrac{\text{que llamen}}{\text{cuando entran}}} & = P(l,e^*)/P(e^*) \overset{?}=  \underbrace{P(l)}_{\hfrac{\text{que llamen}}{\text{}}} &&
+  \underbrace{P(l|e^*)}_{\hfrac{\text{que llamen}}{\text{cuando entran}}} & = P(l,e^*)/P(e^*) \neq  \underbrace{P(l)}_{\hfrac{\text{que llamen}}{\text{}}} &&
 \end{flalign*}
 \end{textblock}
 }
@@ -2168,31 +1890,213 @@ Modelo con observables
 
 
 
-\begin{frame}[plain]
+ \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \Large Flujos de inferencia
-\end{textblock}
-
-\only<1->{
-\begin{textblock}{160}(0,18)
-\centering
- \begin{tabular}{c c|c}
- & $\hfrac{\text{Intermedio}}{\text{no observable}}$ &   $\hfrac{\text{Intermedio}}{\text{observable}}$ \\
- & & \\
- $ e \rightarrow a \rightarrow l $    & \onslide<2->{$P(l) \overset{?}{=} P(l|e)$} & \onslide<3->{$P(l|a) \overset{?}{=} P(l|e,a)$} \\
- $ l \leftarrow a \leftarrow t $      &  \onslide<4->{$P(t) \overset{?}{=} P(t|l)$}  & \onslide<5->{$P(t|a) \overset{?}{=} P(t|a,l)$} \\
- $ a \leftarrow t \rightarrow r $     & \onslide<6->{$P(r) \overset{?}{=} P(r|a)$} & \onslide<7->{$P(r|t) \overset{?}{=} P(r|t,a)$} \\
- $ e \rightarrow a \leftarrow t $     & \onslide<8->{$P(t) \overset{?}{=} P(t|e)$} & \onslide<9->{$P(t|a) \overset{?}{=} P(t|e,a)$} \\
-            $\overset{\downarrow}{l}$  &  & \onslide<10->{$P(t|l) \overset{?}{=} P(t|e,l)$}
- \end{tabular}
+ \centering \LARGE Flujo de inferencia \\
+ \large Independencia condicional
  \end{textblock}
+ \centering
+ \vspace{0.75cm}
+
+ \only<1-3>{
+ \begin{textblock}{68}(0,25)
+ \tikz{
+    \node[det] (l) {$l$} ; %
+    \node[det, above=of l] (a) {$a$} ; %
+    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+    \node[det, above=of a,xshift=-1.5cm] (e) {$e$} ; %
+    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+
+    \edge {a} {l};
+    \edge {t,e} {a};
+    \edge {t} {r};
+
+    \node[const, above= of e, yshift=0.1cm] (cpd_e) {Entradera:};
+    \node[const, above= of t, yshift=0.1cm] (cpd_t) {Terremoto:};
+    \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
+    \node[const, left= of r, xshift=-0.1cm] (cpd_r) {Redes:};
+    \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
+
+    }
+\end{textblock}
+}
+
+\only<1-3>{
+\begin{textblock}{90}(68,24)
+\centering
+ \begin{tabular}{c c c}
+ & \onslide<1->{$\hfrac{\text{Intermedio}}{\text{no observable}}$} &   \onslide<1->{$\hfrac{\text{Intermedio}}{\text{observable}}}$ \\
+ & & \\
+ $ e \rightarrow a \rightarrow l $    & \only<1>{$P(l) \overset{?}{=} P(l|e)$}\only<2->{$P(l) \neq P(l|e)$} & \only<1-2>{$P(l|a) \overset{?}{=} P(l|e,a)$}\only<3->{$P(l|a) \overset{\phantom{?}}{=} P(l|e,a)$} \\
+ $ a \leftarrow t \rightarrow r $     & \only<1-2>{$P(r) \overset{?}{=} P(r|a)$}\only<3->{$P(r) \neq P(r|a)$} & \only<1-2>{$P(r|t) \overset{?}{=} P(r|t,a)$}\only<3->{$P(r|t) \overset{\phantom{?}}{=} P(r|t,a)$} \\
+ $ e \rightarrow a \leftarrow t $     & \only<1>{$P(t) \overset{?}{=} P(t|e)$}\only<2->{$P(t) \overset{\phantom{?}}{=} P(t|e)$} & \only<1-2>{$P(t|a) \overset{?}{=} P(t|e,a)$}\only<3->{$P(t|a) \neq P(t|e,a)$} \\
+            $\overset{\downarrow}{l}$  &  & \only<1-2>{$P(t|l) \overset{?}{=} P(t|e,l)$}\only<3->{$P(t|l) \neq P(t|e,l)$}
+ \end{tabular}
+\end{textblock}
  }
 
+
+\only<4>{
+\begin{textblock}{140}(10,32) \Large
+ Hay flujo de inferencia entre los extremos de una cadena si:\\[0.3cm] \large
+ \begin{itemize}
+  \item[$\bullet$] Todas las consecuencias comunes (o sus descendientes) son observables
+  \item[$\bullet$] Ning\'una otra variable es observable
+ \end{itemize}
+\end{textblock}
+}
+
+ \end{frame}
+
+
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Flujo de inferencia causal \\
+ \end{textblock}
+ \vspace{0.75cm}
+
+
+\only<2->{
+\begin{textblock}{160}(0,14) \centering
+ \tikz{
+    \node[det] (l) {$l$} ; %
+    \node[det, above=of l] (a) {$a$} ; %
+    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+    \node[det, fill=black!15, above=of a,xshift=-1.5cm] (e) {$e$} ; %
+    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+    \node[det, fill=black!15,above=of t,xshift=-1.5cm] (c) {$c$} ;
+
+
+    \edge {a} {l};
+    \edge {t,e} {a};
+    \edge {t} {r};
+    \edge {c} {e,t};
+
+    \node[const, left= of e, xshift=-0.1cm] (cpd_e) {Entradera:};
+    \node[const, right= of t, xshift=0.1cm] (cpd_t) {:Terremoto};
+    \node[const, right= of c, xshift=0.1cm] (cpd_c) {:Ciudad};
+    \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
+    \node[const, right= of r, xshift=0.1cm] (cpd_r) {:Redes};
+    \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
+
+    }
+\end{textblock}
+}
+
+\only<1>{
+\begin{textblock}{160}(0,14) \centering
+ \tikz{
+    \node[det] (l) {$l$} ; %
+    \node[det, above=of l] (a) {$a$} ; %
+    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+    \node[det, double, double distance=0.5mm, above=of a,xshift=-1.5cm] (e) {$e$} ;
+    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+    \node[det, above=of t,xshift=-1.5cm] (c) {$c$} ;
+
+
+    \edge {a} {l};
+    \edge {t,e} {a};
+    \edge {t} {r};
+    \edge {c} {t};
+
+     \node[const, left= of e, xshift=-0.1cm] (cpd_e) {Entradera:};
+     \node[const, right= of t, xshift=0.1cm] (cpd_t) {:Terremoto};
+     \node[const, right= of c, xshift=0.1cm] (cpd_c) {:Ciudad};
+     \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
+     \node[const, right= of r, xshift=0.1cm] (cpd_r) {:Redes};
+     \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
+
+    }
+\end{textblock}
+}
+
+
+\only<1-2>{
+\begin{textblock}{160}(0,76) \centering
+\begin{equation*}
+P( \text{Llamada} | do(\text{Entradera}) ) = \onslide<2>{ P(\text{Llamada}|\text{Entradera}, \text{Ciudad}) }
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<3>{
+\begin{textblock}{150}(5,75)
+Backdoor criterion
+
+\Large
+ Hay inferencia casual si todos los flujos ``traseros'' permanecen cerrados.
+\end{textblock}
+}
 
 \end{frame}
 
 
-\end{comment}
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Buenos y malos controles \\
+ \end{textblock}
+ \vspace{0.75cm}
+
+
+\only<1->{
+\begin{textblock}{140}(10,26) \normalsize
+$z = u$
+
+$x = 3\,z + 2\,z^3 $
+
+$y = -1 - 2\,x + 6\,z^2 $
+
+\vspace{0.6cm}
+
+\tikz{
+    \node[latent, fill=red!30] (z) {$z$} ; %
+    \node[latent, fill=black!15 , below=of z, xshift=-1.5cm] (x) {$x$} ; %
+    \node[latent, fill=black!15, below=of z, xshift=1.5cm] (y) {$y$} ; %
+    \edge {z} {x,y};
+    \edge {x} {y};
+}
+\end{textblock}
+}
+
+
+% \only<2->{
+% \begin{textblock}{130}(40,16) \normalsize \centering
+% $y \sim w_0 + w_1 x + w_2 z^2$
+%
+% \includegraphics[width=0.70\textwidth]{figuras/pdf/controles-modelo1.pdf}
+% \end{textblock}
+% }
+
+
+
+\end{frame}
+
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Estimación de efecto causal\\
+ \large Modelo lineales
+ \end{textblock}
+ \vspace{0.75cm}
+
+\begin{textblock}{160}(0,24) \centering
+ \tikz{
+    \node[det] (m) {$m$} ; %
+    \node[latent, right=of m] (d) {$d$} ; %
+    \node[det, right=of d,yshift=1.5cm] (o) {$o$} ; %
+    \node[latent, right=of d,yshift=-1.5cm] (s) {$s$} ; %
+    \node[latent, right=of d, xshift = 1.8cm] (a) {$a$} ;
+
+    \edge {m} {d};
+    \edge {d} {o,s};
+    \edge {o} {s};
+    \edge {a} {o,s};
+    }
+\end{textblock}
+
+
+ \end{frame}
+
 
 \begin{frame}[plain,noframenumbering]
 \centering \vspace{0.5cm}

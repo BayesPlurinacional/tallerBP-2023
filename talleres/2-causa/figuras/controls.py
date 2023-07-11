@@ -58,6 +58,8 @@ mean1 = blm1.location
 cov1 = blm1.dispersion
 real1 = [-1,-2,6]
 
+
+
 plot_parametros(mean1,cov1,real1,nombre_params=["1","X1","Z2"],nombre_archivo="modelo1")
 
 
