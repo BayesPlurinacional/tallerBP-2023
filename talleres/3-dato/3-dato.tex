@@ -229,15 +229,6 @@ que una comunidad no pone en duda!
 \end{textblock}
 \vspace{0.75cm}
 
-\end{frame}
-
-\begin{frame}[plain]
- \begin{textblock}{160}(0,4)
- \centering \LARGE
- Los datos como funciones proposicionales
-\end{textblock}
-\vspace{0.75cm}
-
 \begin{textblock}{160}(0,20)
 \begin{equation*}
  f(x) = y
@@ -361,7 +352,7 @@ que una comunidad no pone en duda!
 \onslide<12->{True/False \\}
 
 \onslide<13->{$\bullet$ \only<13-14>{\textbf}{Receptor}: la hipótesis indicadora \hfill}
-\onslide<14->{Modelo Causal  \\}
+\onslide<14->{Reglas de la probabilidad \texttt{+} Modelo Causal\\}
 
 
 \onslide<15->{$\bullet$ \only<15-16>{\textbf}{Mensaje recibido}: la inferencia \hfill}
@@ -377,19 +368,19 @@ que una comunidad no pone en duda!
 Pregunta de investigación (el problema de conocimiento)
 \end{textblock}
 }
-\only<5>{
+\only<5-8>{
 \begin{textblock}{140}(10,84) \centering
-Examen de representatividad (que exprese lo relevante de la variable)
+Examen de representatividad: que la dimensión exprese lo relevante de la variable.
 \end{textblock}
 }
-\only<10>{
+\only<10-12>{
 \begin{textblock}{140}(10,84) \centering
-Examen de confiabilidad (que detecte fielmente la señal enviada)
+Examen de confiabilidad: que el procedimiento detecte fielmente la señal enviada.
 \end{textblock}
 }
-\only<14>{
+\only<14-16>{
 \begin{textblock}{140}(10,84) \centering
-Hipótesis indicadora (reglas de la probabilidad \texttt{+} modelo causal)
+Hipótesis indicadora: los elementos necesarios para hacer inferencia.
 \end{textblock}
 }
 
@@ -448,11 +439,71 @@ Hipótesis indicadora (reglas de la probabilidad \texttt{+} modelo causal)
 
 
 
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Sistema de comunicación \\
+\large con la realidad
+\end{textblock}
+
+\only<1>{
+\begin{textblock}{160}(0,20)
+\centering
+\tikz{
+
+\node[det] (fuente) {\large F};
+\node[const, above=of fuente, yshift=0.1cm] (fx) {\textit{variable}$(\text{Unidad análisis})$};
+\node[const, right=of fx, xshift=0.6cm] (igual) {$=$};
+\node[const, right=of igual, xshift=0.6cm] (v) {valor};
+
+
+\draw[dashed] (-2.1,-0.65) -- (5.3,-0.65);
+\node[const, below=of fx, xshift=-3cm, yshift=-0.65cm] (conceptual) {\footnotesize Nivel conceptual oculto};
+
+\node[const, below=of fuente, yshift=-0.5cm] (realidad1) {$\phantom{\bigg|}\hfrac{\text{\footnotesize Realidad}}{\text{\footnotesize Causal}}\phantom{\bigg|}$};
+\node[det, below=of fuente, yshift=-1.1cm] (dimension) {D};
+
+\draw[dashed] (-2.1,-3.5) -- (5.3,-3.5);
+\node[const, below=of dimension, xshift=-3cm, yshift=0.15cm] (conceptual2) {\footnotesize Nivel de mediación observacional};
+
+\node[const, below=of dimension, yshift=-0.6cm] (realidad2) {$\phantom{\bigg|}\hfrac{\text{\footnotesize Realidad}}{\text{\footnotesize Causal}}\phantom{\bigg|}$};
+\node[det, right=of realidad2, xshift=-0.3cm] (procedimiento) {P};
+\node[const, right=of procedimiento, xshift=0.6cm] (observacion) {$\phantom{\bigg|}\hfrac{\text{\footnotesize El indicador}}{\text{\footnotesize lo observado}}\phantom{\bigg|}$};
+
+\node[det, above=of observacion, yshift=-0.3cm] (hipotesisI) {HI};
+\node[const, above=of hipotesisI, yshift=0.35cm] (inferencia) {$\phantom{\bigg|}\hfrac{\text{\footnotesize Inferencia}}{\text{\footnotesize Causal}}\phantom{\bigg|}$};
+\node[det, above=of inferencia, yshift=-0.4cm] (resultado) {R};
+
+
+\draw[dashed] (-2.1,-5.4) -- (5.3,-5.4);
+\node[const, below=of procedimiento, xshift=-4.9cm, yshift=-0.15cm] (praxis) {\footnotesize Nivel de contacto con la realidad};
+
+
+\edge[-] {fuente,dimension} {realidad1};
+\edge[-] {dimension,procedimiento} {realidad2};
+\edge[-] {procedimiento, hipotesisI} {observacion};
+\edge[-] {hipotesisI, resultado} {inferencia};
+
+\node[const, right=of resultado] (n_resultado) {\small Resultado};
+\node[const, right=of fuente] (n_fuente) {\small Fuente};
+\node[const, right=of dimension] (n_dimension) {\small Dimensiones};
+\node[const, below=of procedimiento] (n_procedimiento) {\small Procedimiento};
+\node[const, right=of hipotesisI] (n_hipotesis) {\small Hipótesis Indicadora};
+
+
+\node[invisible, left=of fx, xshift=-4cm] (il) {};
+\node[invisible, right=of v, xshift=4cm] (ir) {};
+}
+\end{textblock}
+}
+
+\end{frame}
+
+
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE Estimación de habilidad \\
-\large Siglo 20: \sout{Evaluación} Selección de hipótesis
+\centering \LARGE Hipótesis indicadora \\
+\large Estimación de habilidad en el siglo 20
 \end{textblock}
 
 \only<1>{
@@ -562,17 +613,31 @@ s_a^{\text{new}} = s_a^{\text{old}} + \Delta
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
-\centering \LARGE La función de costo epistémica \\
+\centering \LARGE \centering \LARGE La hipótesis indicadora universal\\
+\large La función de costo epistémica \\
 \end{textblock}
 
+\only<2>{
+\begin{textblock}{160}(0,26) \centering
 
+\Large La aplicación estricta de las reglas de la probabilidad!
+
+\large
+\begin{equation*}
+P(\text{Hipótesis}|\text{Datos}) = \frac{\overbrace{P(\text{Hipótesis},\text{\En{Data}\Es{Datos}})}^{\hfrac{\text{\footnotesize\En{Initial belief compatible}\Es{Creencia compatible }}}{\text{\footnotesize \En{with the data}\Es{con los datos}}}}}{P(\text{\En{Data}\Es{Datos} })}
+\end{equation*}
+\end{textblock}
+}
+
+\only<3->{
 \begin{textblock}{160}(0,26)
 \begin{equation*}
 \underbrace{P(\text{Hipótesis},\text{\En{Data}\Es{Datos}})}_{\hfrac{\text{\footnotesize\En{Initial belief compatible}\Es{Creencia compatible }}}{\text{\footnotesize \En{with the data}\Es{con los datos}}}} = \underbrace{P(\text{Hipótesis})}_{\hfrac{\text{\footnotesize\En{Initial intersubjective}\Es{Acuerdo intersubjetivo}}}{\text{\footnotesize\En{agreement}\Es{inicial}}}} \underbrace{P(\text{dato}_1 |\text{Hipótesis})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 1}} \, \underbrace{P(\text{dato}_2 | \text{dato}_1 , \text{Hipótesis})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 2}} \dots
 \end{equation*}
 \end{textblock}
+}
 
-\only<2->{
+\only<4->{
 \begin{textblock}{140}(10,56)\centering \Large
 La sorpresa es el filtro de la creencia previa \\
 
@@ -659,59 +724,65 @@ Teorema de Bayes.
 \centering
 \tikz{
 
-\node[const] (fx) {\textit{variable}$(\text{Unidad análisis})$};
-\node[const, right=of fx, xshift=0.6cm] (igual) {$=$};
-\node[const, right=of igual, xshift=0.6cm] (v) {valor};
-\draw[dashed] (-2.1,-0.75) -- (5.3,-0.75);
-
-\node[const, below=of fx, xshift=-2cm, yshift=-0.1cm] (conceptual) {\scriptsize Nivel conceptual};
+\node[det] (fuente) {};
+\node[const, left=of fuente] (fx) {$f(x)$};
+\node[const, above=of fuente] (n_fuente) {\scriptsize Fuente};
+\node[const, right=of fuente, yshift=-0.35cm, xshift=0.05cm] (mensaje_enviado) {$\hfrac{\only<6-7>{\textbf}{\text{Realidad}}}{\only<6-7>{\textbf}{\text{causal}}}$};
 
 
-\node[const, below=of fx, yshift=-1cm] (realidad) {$\hfrac{\text{\footnotesize Realidad}}{\text{\footnotesize Causal}}$};
-
-\edge[-] {fx} {realidad};
-
-\node[invisible, left=of fx, xshift=-3cm] (il) {};
-\node[invisible, right=of v, xshift=3cm] (ir) {};
-% \node[invisible, left=of fuente, xshift=-0.5cm] (il) {};
-% \node[invisible, right=of destino, xshift=0.5cm] (ir) {};
+\node[det, right=of fuente, xshift=0.6cm ] (transmisor) {};
+\node[const, above=of transmisor] (n_transmisor) {\scriptsize \only<4-5>{\textbf}{Dimensión}};
+\node[const, right=of transmisor, yshift=-0.35cm, xshift=0.05cm] (senal_enviada) {$\hfrac{\text{Realidad}}{\text{causal}}$};
 
 
-% \node[const, above=of fuente] (n_fuente) {$\hfrac{\only<2-3>{\textbf}{\text{Fuente de}}}{\only<2-3>{\textbf}{\text{información}}}$};
-% \node[const, right=of fuente, yshift=-0.35cm, xshift=0.05cm] (mensaje_enviado) {$\hfrac{\only<6-7>{\textbf}{\text{Mensaje}}}{\only<6-7>{\textbf}{\text{enviado}}}$};
-%
-%
-% \node[det, right=of fuente, xshift=0.6cm ] (transmisor) {};
-% \node[const, above=of transmisor] (n_transmisor) {\scriptsize \only<4-5>{\textbf}{Transmisor}};
-% \node[const, right=of transmisor, yshift=-0.35cm, xshift=0.05cm] (senal_enviada) {$\hfrac{\only<8>{\textbf}{\text{Señal}}}{\only<8>{\textbf}{\text{enviada}}}$};
-%
-%
-% \node[det, right=of transmisor, xshift=0.7cm , minimum size=6pt] (perceptor) {};
-% \node[const, above=of perceptor] (n_perceptor) {\scriptsize \only<9-10>{\textbf}{Perceptor}};
-% \node[const, right=of perceptor, yshift=-0.35cm, xshift=0.05cm] (senal_recibida) {$\hfrac{\only<11-12>{\textbf}{\text{Señal}}}{\only<11-12>{\textbf}{\text{recibida}}}$};
-%
-% \node[det, below=of perceptor, yshift=0.2cm] (ruido) {};
-% \node[const, below=of ruido] (n_ruido) {\scriptsize Rudio};
-%
-% \node[det, right=of perceptor, xshift=0.7cm] (receptor) {};
-% \node[const, above=of receptor] (n_receptor) {\scriptsize \only<13-14>{\textbf}{Receptor}};
-% \node[const, right=of receptor, yshift=-0.35cm, xshift=0.05cm] (mensaje_recibido) {$\hfrac{\only<15-16>{\textbf}{\text{Mensaje}}}{\only<15-16>{\textbf}{\text{recibido}}}$};
-%
-%
-% \node[det, right=of receptor, xshift=0.6cm ] (destino) {};
-% \node[const, above=of destino] (n_destino) {$\hfrac{\only<17-18>{\textbf}{\text{Destino de}}}{\only<17-18>{\textbf}{\text{información}}}$};
-%
-% \node[const, right=of destino] (y) {$y$};
-%
-%
-%
-%
-% \edge {fuente} {transmisor};
-% \edge {transmisor, ruido} {perceptor};
-% \edge {perceptor} {receptor};
-% \edge {receptor} {destino};
+\node[det, right=of transmisor, xshift=0.7cm] (perceptor) {};
+\node[const, above=of perceptor] (n_perceptor) {\scriptsize \only<9-10>{\textbf}{Procedimiento}};
+\node[const, right=of perceptor, yshift=-0.2cm, xshift=0.05cm] (senal_recibida) {\scriptsize Indicador};
+
+
+\node[det, right=of perceptor, xshift=0.7cm,yshift=1cm] (receptor) {};
+\node[const, above=of receptor] (n_receptor) {\scriptsize \only<13-14>{\textbf}{Modelo A}};
+\node[const, right=of receptor, yshift=-0.2cm, xshift=0.05cm] (mensaje_recibido) {\scriptsize Inferencia};
+
+\node[const, right=of perceptor, xshift=1.4cm] (punto) {.};
+
+
+\node[det, right=of perceptor, xshift=0.7cm, yshift=-1cm] (receptor2) {};
+\node[const, below=of receptor2] (n_receptor) {\scriptsize \only<13-14>{\textbf}{Modelo B}};
+\node[const, right=of receptor2, yshift=-0.2cm, xshift=0.05cm] (mensaje_recibido) {\scriptsize Inferencia};
+
+
+\node[det, right=of receptor, xshift=0.6cm ] (destino) {};
+\node[const, above=of destino] (n_destino) {\scriptsize Destino A};
+
+\node[const, right=of destino] (y) {$y_1$};
+
+\node[det, right=of receptor2, xshift=0.6cm ] (destino2) {};
+\node[const, above=of destino2] (n_destino) {\scriptsize Destino B};
+
+\node[const, right=of destino2] (y) {$y_2$};
+
+
+\node[invisible, above=of fuente, yshift=0.5cm] (ia) {};
+\node[invisible, left=of fuente, xshift=-0.5cm] (il) {};
+\node[invisible, right=of destino, xshift=0.5cm] (ir) {};
+
+
+\edge {fuente} {transmisor};
+\edge {transmisor} {perceptor};
+\edge[-] {perceptor} {punto};
+\edge {punto} {receptor, receptor2};
+\edge {receptor} {destino};
+\edge {receptor2} {destino2};
 
 }
+
+\vspace{1cm}
+
+\Large \centering
+
+¿Cómo evaluar los sistemas de información alternativos?
+
 \end{textblock}
 }
 
@@ -1281,7 +1352,331 @@ Datos:
 \end{frame}
 
 
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE Información en órdenes de magnitud \\
+ \large Información de Shannon
+\end{textblock}
+\vspace{0.75cm}
 
+\begin{textblock}{160}(0,18)
+\begin{equation*}
+\overbrace{h(x) = - \log_2 P(x)}^{\text{Información de Shannon}}  \hspace{2cm} \onslide<2->{\overbrace{H(X) = \sum_{x\in X} P(x) h(x)}^{\text{Entropía}}}
+\end{equation*}
+\end{textblock}
+
+\only<3->{
+\begin{textblock}{160}(0,40) \centering
+¿Cuál es la menor cantidad de preguntas Sí/No que se
+
+necesitan para identificar un entero entre 0 y 15?
+\end{textblock}
+}
+
+\only<4->{
+\begin{textblock}{140}(10,56) \normalsize
+1) $x \text{ mod } 16 \geq 8$
+\begin{tikzpicture}[scale=0.33]
+  % Grid lines
+  \fill[black!15] (8cm,0) rectangle ++(8cm,1cm);
+  \draw[step=1cm, black!60] (16,1) grid (0,0);
+\end{tikzpicture} \onslide<9>{$r_1 = 0$}
+
+\onslide<5->{
+2) $x \text{ mod } 8 \geq 4$
+\hspace{0.18cm}\begin{tikzpicture}[scale=0.33]
+  % Grid lines
+  \fill[black!15] (4cm,0) rectangle ++(4cm,1cm);
+  \fill[black!15] (12cm,0) rectangle ++(4cm,1cm);
+  \draw[step=1cm, black!60] (16,1) grid (0,0);
+\end{tikzpicture} \onslide<9>{$r_2 = 1$}
+}
+
+\onslide<6->{
+3) $x \text{ mod } 4 \geq 2$
+\hspace{0.18cm}\begin{tikzpicture}[scale=0.33]
+  % Grid lines
+  \fill[black!15] (2cm,0) rectangle ++(2cm,1cm);
+  \fill[black!15] (6cm,0) rectangle ++(2cm,1cm);
+  \fill[black!15] (10cm,0) rectangle ++(2cm,1cm);
+  \fill[black!15] (14cm,0) rectangle ++(2cm,1cm);
+  \draw[step=1cm, black!60] (16,1) grid (0,0);
+\end{tikzpicture} \onslide<9>{$r_3 = 1$}
+}
+
+\onslide<7->{
+4) $x \text{ mod } 2 \geq 1$
+\hspace{0.18cm}\begin{tikzpicture}[scale=0.33]
+  % Grid lines
+  \fill[black!15] (1cm,0) rectangle ++(1cm,1cm);
+  \fill[black!15] (3cm,0) rectangle ++(1cm,1cm);
+  \fill[black!15] (5cm,0) rectangle ++(1cm,1cm);
+  \fill[black!15] (7cm,0) rectangle ++(1cm,1cm);
+  \fill[black!15] (9cm,0) rectangle ++(1cm,1cm);
+  \fill[black!15] (11cm,0) rectangle ++(1cm,1cm);
+  \fill[black!15] (13cm,0) rectangle ++(1cm,1cm);
+  \fill[black!15] (15cm,0) rectangle ++(1cm,1cm);
+  \draw[step=1cm, black!60] (16,1) grid (0,0);
+\end{tikzpicture} \onslide<9>{$r_4 = 0$}
+}\only<8>{\\[-0.4cm]
+\centering
+\begin{align*}
+h(x \text{ mod } N \geq N/2) = - \log_2 \frac{1}{2} = 1 \text{ bit }
+\end{align*}
+}
+\onslide<9>{\\[0.3cm]
+\centering \Large
+Necesitamos $\lceil \log_2 x\rceil$ bits para representar hasta el número $x$
+}
+
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+ \begin{textblock}{160}(0,4)
+ \centering \LARGE Información en órdenes de magnitud\\
+ \large Información de Shannon
+\end{textblock}
+\vspace{0.75cm}
+
+\begin{textblock}{30}(5,30) \centering
+ \ \normalsize Submarino: \\[0.2cm]
+
+\begin{tikzpicture}[scale=0.33] \scriptsize
+  \draw[step=1cm, black!60] (8,8) grid (0,0);
+  \node at (-0.75,0.5) {1};
+  \node at (-0.75, 1.5) {2};
+  \foreach \x/\y in {-0.75/2.5} {\node at (\x, \y) {3};}
+  \foreach \x/\y in {-0.75/3.5} {\node at (\x, \y) {4};}
+  \foreach \x/\y in {-0.75/4.5} {\node at (\x, \y) {5};}
+  \foreach \x/\y in {-0.75/5.5} {\node at (\x, \y) {6};}
+  \foreach \x/\y in {-0.75/6.5} {\node at (\x, \y) {7};}
+  \foreach \x/\y in {-0.75/7.5} {\node at (\x, \y) {8};}
+  \node at (0.5,-0.75) {A};
+  \node at (1.5,-0.75) {B};
+  \node at (2.5,-0.75) {C};
+  \node at (3.5,-0.75) {D};
+  \node at (4.5,-0.75) {E};
+  \node at (5.5,-0.75) {F};
+  \node at (6.5,-0.75) {G};
+  \node at (7.5,-0.75) {H};
+  \only<2-3>{\draw[red, thick] (0.5cm, 0.5cm) circle [radius=0.4cm];}
+  \only<4-6>{\node at (0.5,0.5) {x};}
+  \only<5-6>{\node at (0.5,1.5) {x};}
+  \only<5>{\draw[red, thick] (0.5cm, 1.5cm) circle [radius=0.4cm];}
+  \only<7->{\foreach \x/\y in {
+    0.5/0.5,1.5/0.5,2.5/0.5,3.5/0.5,
+    0.5/1.5,1.5/1.5,2.5/1.5,3.5/1.5,
+    0.5/2.5,1.5/2.5,2.5/2.5,3.5/2.5,
+    0.5/3.5,1.5/3.5,2.5/3.5,3.5/3.5,
+    0.5/4.5,1.5/4.5,2.5/4.5,3.5/4.5,
+    0.5/5.5,1.5/5.5,2.5/5.5,3.5/5.5,
+    0.5/6.5,1.5/6.5,2.5/6.5,3.5/6.5,
+    0.5/7.5,1.5/7.5,2.5/7.5,3.5/7.5} {\node at (\x, \y) {x};} }
+    \only<9->{\foreach \x/\y in {
+    6.5/0.5,7.5/0.5,
+    6.5/1.5,7.5/1.5,
+    6.5/2.5,7.5/2.5,
+    6.5/3.5,7.5/3.5,
+    6.5/4.5,7.5/4.5,
+    6.5/5.5,7.5/5.5,
+    6.5/6.5,7.5/6.5,
+    6.5/7.5,7.5/7.5} {\node at (\x, \y) {x};} }
+    \only<10->{
+      \fill[black!25, draw=black!60] (5cm,7cm) rectangle ++(1cm,1cm);
+    }
+    \only<10>{\draw[red, thick] (5.5cm, 7.5cm) circle [radius=0.4cm];}
+\end{tikzpicture}
+\end{textblock}
+
+\only<2-3>{
+\begin{textblock}{130}(43,20) \normalsize
+\begin{flalign*}
+& \onslide<3->{-\log_2} P(A1 = 1) = \only<2>{1/64}\only<3->{6 \text{ bits }} \\
+&
+&&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\only<4->{
+\begin{textblock}{130}(43,20) \normalsize
+\begin{flalign*}
+& -\log_2 P(A1 = 0) = \log_2 64/63 = 0.0227 \text{ bit } \\
+\onslide<5->{& -\log_2 P(A2 = 0| A1 = 0) = \log_2 63/62} \onslide<6->{= 0.0230 \text{ bit } \\}
+&&
+\end{flalign*}
+\end{textblock}
+}
+
+
+\only<7->{
+\begin{textblock}{130}(43,38) \normalsize
+\begin{flalign*}
+& \log_2 64/63 + \log_2 63/62 + \dots + \log_2 33/32 \\
+\only<8>{& \ \ \, 0.0227 \, \ \  +  \ \ \, 0.0230  \, \ \  + \dots + \ \, 0.0430 \ \ = 1.0 \text{ bit }}
+\only<9->{& \log_2 32/31 + \log_2 31/30 + \dots + \log_2 17/16 \only<9>{= 2.0 \text{ bit }}\only<10->{+\underbrace{\log_2 16/1}_{4.0\text{ bit}} = 6.0 \text{ bit }} \\}
+&&
+\end{flalign*}
+\end{textblock}
+}
+
+\only<11->{
+\begin{textblock}{130}(28,64) \normalsize
+\begin{flalign*}
+& \phantom{\log_2 \frac{\cancel{64}}{\cancel{63}}} \log_2 \frac{64}{\only<11>{63}\only<12->{\cancel{63}}} + \log_2 \frac{\only<11>{63}\only<12->{\cancel{63}}}{\only<11-12>{62}\only<13->{\cancel{62}}} + \dots + \log_2 \frac{\only<11-12>{n+1}\only<13->{\cancel{n+1}}}{\only<11-12>{n}\only<13->{\cancel{n}}} + \log_2 \frac{\only<11-12>{n}\only<13->{\cancel{n}}}{1} \only<14->{= \log_2 \frac{64}{1} = 6.0 \text{ bit}}
+&&
+\end{flalign*}
+\end{textblock}
+}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Tasa de información \\
+\large de los sistemas de comunicación
+\end{textblock}
+
+\only<1>{
+\begin{textblock}{160}(0,26)
+\centering
+\tikz{
+
+\node[det] (fuente) {};
+\node[const, left=of fuente] (fx) {$f(x)$};
+\node[const, above=of fuente] (n_fuente) {\scriptsize Fuente};
+\node[const, right=of fuente, yshift=-0.35cm, xshift=0.05cm] (mensaje_enviado) {$\hfrac{\text{Realidad}}{\text{causal}}$};
+
+
+\node[det, right=of fuente, xshift=0.6cm ] (transmisor) {};
+\node[const, above=of transmisor] (n_transmisor) {\scriptsize Dimensión};
+\node[const, right=of transmisor, yshift=-0.35cm, xshift=0.05cm] (senal_enviada) {$\hfrac{\text{Realidad}}{\text{causal}}$};
+
+\node[const, right=of transmisor, xshift=1.4cm] (punto) {.};
+
+\node[det, right=of transmisor, xshift=0.7cm, yshift=1cm] (perceptor) {};
+\node[const, above=of perceptor] (n_perceptor) {\scriptsize Procedimiento A};
+
+\node[det, right=of transmisor, xshift=0.7cm,yshift=-1cm] (perceptor2) {};
+\node[const, below=of perceptor2] (n_perceptor2) {\scriptsize Procedimiento B};
+
+
+
+\node[det, right=of perceptor, xshift=0.7cm,yshift=-1cm] (receptor) {};
+\node[const, above=of receptor] (n_receptor) {\scriptsize Modelo};
+\node[const, right=of receptor, yshift=-0.2cm, xshift=0.05cm] (mensaje_recibido) {\scriptsize Inferencia};
+
+\node[const, left=of receptor, yshift=-0.45cm,xshift=-0.05cm] (senal_recibidaB) {\scriptsize Indicador B};
+\node[const, left=of receptor, yshift=0.45cm,xshift=-0.05cm] (senal_recibidaA) {\scriptsize Indicador A};
+
+
+\node[const, left=of receptor, xshift=-1.4cm, yshift=0.2cm] (punto2A) {.};
+\node[const, left=of receptor, xshift=0.17cm, yshift=0.2cm] (punto2AR) {.};
+\node[const, left=of receptor, xshift=-1.4cm, yshift=-0.2cm] (punto2B) {.};
+\node[const, left=of receptor, xshift=0.17cm, yshift=-0.2cm] (punto2BR) {.};
+
+
+\node[det, right=of receptor, xshift=0.6cm ] (destino) {};
+\node[const, above=of destino] (n_destino) {\scriptsize Destino};
+
+\node[const, right=of destino] (y) {$y_1$};
+
+
+\node[invisible, above=of fuente, yshift=0.5cm] (ia) {};
+\node[invisible, left=of fuente, xshift=-0.5cm] (il) {};
+\node[invisible, right=of destino, xshift=0.5cm] (ir) {};
+
+
+\edge {fuente} {transmisor};
+\edge[-] {transmisor} {punto};
+\edge {punto} {perceptor, perceptor2};
+\edge[-] {perceptor} {punto2A};
+\edge[-] {perceptor2} {punto2B};
+\edge {punto2A} {punto2AR};
+\edge {punto2B} {punto2BR};
+\edge {receptor} {destino};
+
+}
+
+\vspace{1cm}
+
+\Large \centering
+
+Evaluar procedimientos alternativos.
+
+\end{textblock}
+}
+\end{frame}
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Evaluación de test diagnóstico \\
+\large Test rápido de chagas
+\end{textblock}
+
+\only<1-2>{
+\begin{textblock}{160}(0,16)
+\includegraphics[width=0.4\textwidth]{../../auxiliar/static/test_chagas.png}
+\end{textblock}
+}
+
+\only<2>{
+\begin{textblock}{100}(60,24)
+$P(\text{Diagnóstico}|\text{Estado})$ \\[0.3cm]
+
+\begin{tabular}{|c|c|c|} \hline  \setlength\tabcolsep{0.4cm}
+ & D = Positivo & D = Negativo\\ \hline
+E = Verdadero & Sensibilidad & 1-Sensibilidad \\ \hline
+E = Falso     & 1-Especificidad & Especificidad \\ \hline
+  \end{tabular}
+\end{textblock}
+}
+
+
+\only<3>{
+\begin{textblock}{140}(10,16)
+\scalebox{0.8}{
+\begin{tikzpicture}[scale=0.33]
+    \node[factor] (fp) {};
+    \node[const, left=of fp] (nfp) {Beta$(\cdot,\cdot)$};
+    \node[latent, below=of fp] (p) {$p_c$};
+    \node[factor, below=of p] (fe) {};
+    \node[const, left=of fe] (nfe) {Bernoulli$(p_c)$};
+    \node[latent, below=of fe] (e) {$e_i$};
+    \node[factor, right=of e] (fr) {};
+    \gate {if} {(fr)} {};
+    \node[latent, below=of fr] (r) {$r_{it}$};
+    \node[invisible, below=of r, yshift=-0.4cm] (ir) {};
+    \node[invisible, left=of fr, xshift=-0.4cm] (ifr) {};
+    \node[latent, right=of fr] (s) {$s_{ot}$};
+    \node[factor, right=of s] (fs) {};
+    \node[const, above=of fs] (nfs) {Beta$(\cdot,\cdot)$};
+    \node[invisible, above=of nfs, xshift=0.8cm, yshift=0.1cm] (infs) {};
+
+
+    \edge[-] {fp} {p};
+    \edge[-] {fe} {p,e};
+    \edge[-] {fr} {r,s};
+    \edge[-] {if} {e};
+    \edge[-] {fs} {s};
+
+    \plate {individuo} {(nfe)(e)(r)(fr)(ir)} {$i:$ Individuo}; %
+    \plate {comunidad} {(nfp)(nfe)(fp)(p)(r)(e)(individuo)} {$c:$ Comunidad};
+    \plate {opciones} {(fr)(s)(nfs)(if)} {$o:$ Clase}; %%
+    \plate {test} {(r)(fr)(s)(nfs)(ifr)(infs)} {$t:$ Test}; %%
+\end{tikzpicture}
+}
+\end{textblock}
+}
+
+\end{frame}
 
 
 \begin{frame}[plain,noframenumbering]

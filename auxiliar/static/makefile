@@ -1,4 +1,4 @@
-all: BP.png modelosGraficos.jpeg peligro_predador.jpeg fuego.jpg antartic.jpeg tsimane.jpg treeOfLife-liviano.png reciprocidad.jpeg regalo.png dedo.png cerradura.png deforestacion.jpg pachacuteckoricancha.jpg sidewalk_bubblegum_1997_4.png moneda-euro-liviana.png galton-board.jpg Elo1980.jpg boole.png sum_product.png
+all: BP.png modelosGraficos.jpeg peligro_predador.jpeg fuego.jpg antartic.jpeg tsimane.jpg treeOfLife-liviano.png reciprocidad.jpeg regalo.png dedo.png cerradura.png deforestacion.jpg pachacuteckoricancha.jpg sidewalk_bubblegum_1997_4.png moneda-euro-liviana.png galton-board.jpg Elo1980.jpg boole.png sum_product.png test_chagas.png
 
 BP.png:
 	wget https://raw.githubusercontent.com/glandfried/images/master/logos/BP.png -O BP.png
@@ -61,3 +61,6 @@ boole.png:
 
 sum_product.png:
 	wget https://raw.githubusercontent.com/BayesDeLasProvinciasUnidasDelSur/static/master/sum_product.png
+
+test_chagas.png:
+	wget https://raw.githubusercontent.com/BayesDeLasProvinciasUnidasDelSur/static/master/test_chagas.png
