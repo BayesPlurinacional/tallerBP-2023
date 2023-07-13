@@ -31,13 +31,12 @@
   belowskip=3mm,
   showstringspaces=true,
   columns=flexible,
-  basicstyle={\ttfamily},
+  basicstyle={\footnotesize\ttfamily},
   breaklines=true,
   breakatwhitespace=true,
   tabsize=4,
-  showlines=true
+  showlines=true,
 }
-
 
 \begin{document}
 
@@ -1537,8 +1536,82 @@ Necesitamos $\lceil \log_2 x\rceil$ bits para representar hasta el número $x$
 
 \end{frame}
 
-
 \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Principio de no mentir \\
+\large Máxima incertidumbre dada información disponible
+\end{textblock}
+
+\only<1-2>{
+\begin{textblock}{160}(1,18) \centering \normalsize
+\begin{flalign*}
+P(\text{D}_{_T} = \{\overbrace{n_{s2}, n_{s3}}^{T}, \overbrace{n_{r1}, n_{r0}}^{T} \} \, | \, \text{M})^{1/T} &= \
+P(s2|M)^{n_{s2}/T}  P(s3|M)^{n_{s3}/T} \, P(r1|M)^{n_{r1}/T} \, P(r0|M)^{n_{r0}/T}  \\
+\underbrace{\log \ \ \lim_{T \rightarrow \infty} P(\text{D}|\text{M})^{1/T}}_{\hfrac{\text{\footnotesize Tasa de predicción}}{\text{\footnotesize en orden de magnitud}}} & = \ \  \sum_x \, p_{_{x}} \, \log p_{_{x}}  = -\underbrace{\textbf{Entropía}}_{\hfrac{\text{\footnotesize \phantom{p}Tasa de información}\phantom{p}}{\text{\footnotesize orden de magnitud}}}
+&&
+\end{flalign*}
+
+\vspace{1cm}
+
+\only<2>{
+\Large Maximizar la entropía $ = \underbrace{\text{minimizar la tasa de predicción}}_{\text{Maximizar la \textbf{incertidumbre}}}$
+
+}
+\end{textblock}
+}
+
+
+\only<3->{
+\begin{textblock}{45}(5,26) \centering \normalsize
+Distribuciones de creencias{\footnotesize \\[-0.1cm] (por máxima entropía)}
+\begin{flalign*}
+\text{max } & - \int P(x) \log P(x) \, dx \\
+\text{dado } & \int P(x)\,dx = 1 \\
+              & \int f_k(x) P(x)\,dx = F_k \ \ \forall_k
+&&
+\end{flalign*}
+
+\end{textblock}
+}
+
+\only<4->{
+\begin{textblock}{110}(50,26) \centering
+La familia exponencial \hspace{1cm} \normalsize
+\begin{align*}
+P(x|\theta) & = \frac{1}{Z(\theta)} h(x) \text{exp}(\theta^T \phi(x)) \\[0.2cm]
+\onslide<4>{\text{Con:} & \\
+& x\in \mathbb{X}^m \text{ hipótesis } \\
+& \theta \in \mathbb{R}^d \text{ parámetros naturales } \\
+& \phi(x) \in \mathbb{R}^d \text{ estadísticos suficientes } \\}
+\end{align*}
+\end{textblock}
+}
+
+\only<5>{
+\begin{textblock}{110}(80,48) \small
+$\bullet$ Uniforme$(x|a,b)$
+
+$\bullet$ Bernoulli$(x|p)$
+
+$\bullet$ Beta$(x|\alpha, \beta)$
+
+$\bullet$ Geométrica$(x|p)$
+
+$\bullet$ Multinomial$(x|p,n)$
+
+$\bullet$ Hipergeométrica$(x|n,N,K)$
+
+$\bullet$ Poisson$(x|\lambda)$
+
+$\bullet$ Gaussiana$(x|\mu, \sigma^2)$
+
+$\bullet$ \dots
+\end{textblock}
+}
+
+\end{frame}
+
+\begin{frame}[plain, fragile]
 \begin{textblock}{160}(0,4)
 \centering \LARGE Tasa de información \\
 \large de los sistemas de comunicación
@@ -1615,66 +1688,129 @@ Evaluar procedimientos alternativos.
 }
 \end{frame}
 
-\begin{frame}[plain]
+\begin{frame}[plain, fragile]
 \begin{textblock}{160}(0,4)
 \centering \LARGE Evaluación de test diagnóstico \\
 \large Test rápido de chagas
 \end{textblock}
 
-\only<1-2>{
+\only<1-3>{
 \begin{textblock}{160}(0,16)
 \includegraphics[width=0.4\textwidth]{../../auxiliar/static/test_chagas.png}
 \end{textblock}
 }
 
-\only<2>{
-\begin{textblock}{100}(60,24)
+\only<2-14>{
+\begin{textblock}{100}(60,20) \normalsize
 $P(\text{Diagnóstico}|\text{Estado})$ \\[0.3cm]
 
 \begin{tabular}{|c|c|c|} \hline  \setlength\tabcolsep{0.4cm}
- & D = Positivo & D = Negativo\\ \hline
-E = Verdadero & Sensibilidad & 1-Sensibilidad \\ \hline
-E = Falso     & 1-Especificidad & Especificidad \\ \hline
+ & \hspace{0.1cm} D = Positivo \hspace{0.1cm} & \hspace{0.1cm} D = Negativo \hspace{0.1cm} \\ \hline
+E = Verdadero & \only<2>{\textbf{Sensibilidad}}\only<3->{$s$} & \only<2>{1-Sensibilidad}\only<3->{$1-s$} \\ \hline
+E = Falso     & \only<2>{1-Especificidad}\only<3->{$1-x$} & \only<2>{\textbf{Especificidad}}\only<3->{$x$} \\ \hline
   \end{tabular}
+\only<4->{
+\begin{flalign*}
+& p \sim \text{Beta}(\alpha, \beta) \\
+\only<5-6>{
+  & q = p \, s + (1-p) \, (1-x) \\
+}
+\only<6>{
+  &r = (\underbrace{n_0}_{-}, \underbrace{n_1}_{+})  \sim \text{ Binomial}(q,N) \\
+}
+\only<7->{
+  &r = (\underbrace{n_0}_{--}, \underbrace{n_1}_{-+}, \underbrace{n_2}_{+-}, \underbrace{n_3}_{++}) \sim \text{ Multinomial}(q,N) \\
+}
+\only<8->{
+  & q = (\ q_0\ , \ q_1 \ , \ q_2, \ q_3 \ )\\
+}
+\only<9-11>{
+  & \ \ q_0 = p \, (1-s_a) \, (1-s_b) + (1-p) \, x_a \, x_b \\
+}
+\only<10-11>{
+  & \ \ q_1 = p \, (1-s_a) \, s_b + (1-p) \, x_a \, (1-x_b) \\
+}
+\only<11>{
+  & \ \ q_2 = \dots \\
+}
+&&
+\end{flalign*}
+}
+\end{textblock}
+}
+
+\only<12>{
+\begin{textblock}{100}(50,73) \centering
+Problema no identificable \\ \normalsize
+5 hipótesis ($p,s_a,x_a,s_b,x_b$) y 3 datos ($n_0, n_1, n_2$)
+\end{textblock}
+}
+\only<14>{
+\begin{textblock}{120}(40,73) \centering
+Problema identificable \\ \small
+6 hipótesis ($p_A,p_B,s_a,x_a,s_b,x_b$) y 6 datos ($r_A, r_B$)
 \end{textblock}
 }
 
 
-\only<3>{
-\begin{textblock}{140}(10,16)
-\scalebox{0.8}{
+\only<4->{
+\begin{textblock}{160}(0,14)
+\scalebox{0.85}{
 \begin{tikzpicture}[scale=0.33]
     \node[factor] (fp) {};
     \node[const, left=of fp] (nfp) {Beta$(\cdot,\cdot)$};
-    \node[latent, below=of fp] (p) {$p_c$};
-    \node[factor, below=of p] (fe) {};
-    \node[const, left=of fe] (nfe) {Bernoulli$(p_c)$};
-    \node[latent, below=of fe] (e) {$e_i$};
-    \node[factor, right=of e] (fr) {};
-    \gate {if} {(fr)} {};
-    \node[latent, below=of fr] (r) {$r_{it}$};
-    \node[invisible, below=of r, yshift=-0.4cm] (ir) {};
-    \node[invisible, left=of fr, xshift=-0.4cm] (ifr) {};
-    \node[latent, right=of fr] (s) {$s_{ot}$};
-    \node[factor, right=of s] (fs) {};
-    \node[const, above=of fs] (nfs) {Beta$(\cdot,\cdot)$};
-    \node[invisible, above=of nfs, xshift=0.8cm, yshift=0.1cm] (infs) {};
+    \node[latent, below=of fp] (p) {$p$};
+    \node[const, left=of p] (np) {Prevalencia};
+    \onslide<5->{
+      \node[factor, below=of p, yshift=0.1cm] (fq) {};
+      \node[latent, below=of fq, yshift=0.1cm] (q) {$q$};
+      \node[latent, right=of fq, yshift=0.4cm] (s) {$s$};
+      \node[latent, right=of fq, yshift=-0.4cm] (x) {$x$};
+      \node[const, left=of q] (nq) {$P(\text{Diagnóstico})$};
+    }
+    \onslide<6->{
+      \node[factor, below=of q, yshift=0.1cm] (fr) {};
+      \node[latent, below=of fr, fill=black!15, yshift=0.1cm] (r) {$r$};
+      \node[const, left=of r] (nr) {Resultados};
+      \node[accion, left=of fr, xshift=-0.7cm] (N) {};
+      \node[const, above=of N] (nN) {$N$};
+    }
 
+    \edge {fp} {p};
+    \onslide<5->{
+      \edge[-] {p,s,x} {fq};
+      \edge {fq} {q};
+    }
+    \onslide<6->{
+      \edge[-] {q, N} {fr};
+      \edge {fr} {r};
+    }
 
-    \edge[-] {fp} {p};
-    \edge[-] {fe} {p,e};
-    \edge[-] {fr} {r,s};
-    \edge[-] {if} {e};
-    \edge[-] {fs} {s};
+    \onslide<7->{\plate {test} {(s)(x)} {$t:\text{Test}$};}
+    \onslide<13->{\plate {poblacion} {(fp)(p)(q)(r)(N)(nq)} {$c \in \text{Comunidad}$};}
 
-    \plate {individuo} {(nfe)(e)(r)(fr)(ir)} {$i:$ Individuo}; %
-    \plate {comunidad} {(nfp)(nfe)(fp)(p)(r)(e)(individuo)} {$c:$ Comunidad};
-    \plate {opciones} {(fr)(s)(nfs)(if)} {$o:$ Clase}; %%
-    \plate {test} {(r)(fr)(s)(nfs)(ifr)(infs)} {$t:$ Test}; %%
+    \node[invisible, left=of fp, xshift=-3cm] (il) {};
+    \node[invisible, right=of fp, xshift=3cm] (i3) {};
 \end{tikzpicture}
 }
 \end{textblock}
 }
+
+
+
+
+\begin{frame}[plain, fragile]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Evaluación de test diagnóstico \\
+\large Test rápido de chagas
+\end{textblock}
+
+
+\begin{textblock}{100}(50,20) \normalsize
+\begin{lstlisting}[backgroundcolor=\color{black!10}]
+ print("hello")
+\end{lstlisting}
+\end{textblock}
 
 \end{frame}
 
