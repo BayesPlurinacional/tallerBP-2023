@@ -1764,8 +1764,11 @@ Problema identificable \\ \small
     \onslide<5->{
       \node[factor, below=of p, yshift=0.1cm] (fq) {};
       \node[latent, below=of fq, yshift=0.1cm] (q) {$q$};
-      \node[latent, right=of fq, yshift=0.4cm] (s) {$s$};
-      \node[latent, right=of fq, yshift=-0.4cm] (x) {$x$};
+      \node[latent, right=of fq, xshift=-0.4cm, yshift=0.4cm] (s) {$s$};
+      \node[latent, right=of fq, xshift=-0.4cm, yshift=-0.4cm] (x) {$x$};
+      \node[factor, right=of s, xshift=-0.25cm] (fs) {};
+      \node[factor, right=of x, xshift=-0.25cm] (fx) {};
+      \node[const, above=of fs, xshift=-0.5cm, yshift=0.1cm] (ps) {Beta$(\cdot,\cdot)$};
       \node[const, left=of q] (nq) {$P(\text{Diagnóstico})$};
     }
     \onslide<6->{
@@ -1780,13 +1783,15 @@ Problema identificable \\ \small
     \onslide<5->{
       \edge[-] {p,s,x} {fq};
       \edge {fq} {q};
+      \edge {fs} {s};
+      \edge {fx} {x};
     }
     \onslide<6->{
       \edge[-] {q, N} {fr};
       \edge {fr} {r};
     }
 
-    \onslide<7->{\plate {test} {(s)(x)} {$t:\text{Test}$};}
+    \onslide<7->{\plate {test} {(s)(x)(ps)} {$t:\text{Test}$};}
     \onslide<13->{\plate {poblacion} {(fp)(p)(q)(r)(N)(nq)} {$c \in \text{Comunidad}$};}
 
     \node[invisible, left=of fp, xshift=-3cm] (il) {};
@@ -1796,23 +1801,309 @@ Problema identificable \\ \small
 \end{textblock}
 }
 
+\end{frame}
 
 
 
 \begin{frame}[plain, fragile]
 \begin{textblock}{160}(0,4)
-\centering \LARGE Evaluación de test diagnóstico \\
-\large Test rápido de chagas
+\centering \LARGE Evaluación de test diagnóstico
 \end{textblock}
 
 
-\begin{textblock}{100}(50,20) \normalsize
+\begin{textblock}{160}(0,14)
+\scalebox{0.85}{
+\begin{tikzpicture}[scale=0.33]
+    \node[factor] (fp) {};
+    \node[const, left=of fp] (nfp) {Beta$(\cdot,\cdot)$};
+    \node[latent, below=of fp] (p) {$p$};
+    \node[const, left=of p] (np) {Prevalencia};
+      \node[factor, below=of p, yshift=0.1cm] (fq) {};
+      \node[latent, below=of fq, yshift=0.1cm] (q) {$q$};
+
+      \node[latent, right=of fq, xshift=-0.4cm, yshift=0.4cm] (s) {$s$};
+      \node[latent, right=of fq, xshift=-0.4cm, yshift=-0.4cm] (x) {$x$};
+      \node[factor, right=of s, xshift=-0.25cm] (fs) {};
+      \node[factor, right=of x, xshift=-0.25cm] (fx) {};
+      \node[const, above=of fs, xshift=-0.5cm, yshift=0.1cm] (ps) {Beta$(\cdot,\cdot)$};
+      \node[const, left=of q] (nq) {$P(\text{Diagnóstico})$};
+      \node[factor, below=of q, yshift=0.1cm] (fr) {};
+      \node[latent, below=of fr, fill=black!15, yshift=0.1cm] (r) {$r$};
+      \node[const, left=of r] (nr) {Resultados};
+      \node[accion, left=of fr, xshift=-0.7cm] (N) {};
+      \node[const, above=of N] (nN) {$N$};
+
+    \edge {fp} {p};
+      \edge[-] {p,s,x} {fq};
+      \edge {fs} {s};
+      \edge {fx} {x};
+      \edge {fq} {q};
+      \edge[-] {q, N} {fr};
+      \edge {fr} {r};
+
+    \plate {test} {(s)(x)(ps)} {$t:\text{Test}$};
+    \plate {poblacion} {(fp)(p)(q)(r)(N)(nq)} {$c \in \text{Comunidad}$};
+
+    \node[invisible, left=of fp, xshift=-3cm] (il) {};
+    \node[invisible, right=of fp, xshift=3cm] (i3) {};
+\end{tikzpicture}
+}
+\end{textblock}
+
+
+\begin{textblock}{100}(57,8)
 \begin{lstlisting}[backgroundcolor=\color{black!10}]
- print("hello")
+modelo <- "model{
+  s[1] ~ dbeta(1, 1)
+  s[2] ~ dbeta(1, 1)
+  x[1] ~ dbeta(1, 1)
+  x[2] ~ dbeta(1, 1)
+
+  for(c in 1:Comunidades){
+    p[c] ~ dbeta(1, 1)
+
+    q[1,c] <- p[c]*(1-s[1])*(1-s[2]) + (1-p[c])*x[1]*x[2]
+    q[2,c] <- p[c]*(1-s[1])*s[2] + (1-p[c])*x[1]*(1-x[2])
+    q[3,c] <- p[c]*s[1]*(1-s[2]) + (1-p[c])*(1-x[1])*x[2]
+    q[4,c] <- p[c]*s[1]*s[2] + (1-p[c])*(1-x[1])*(1-x[2])
+
+    r[1:4, c] ~ dmulti(q[1:4, c], N[c])
+  }
+  #data# r, N, Comunidades
+  #monitor# p, s, x
+  #inits# p, s, x
+}"
 \end{lstlisting}
 \end{textblock}
 
 \end{frame}
+
+
+
+\begin{frame}[plain, fragile]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Evaluación de test diagnóstico
+\end{textblock}
+
+
+\begin{textblock}{160}(0,14)
+\scalebox{0.85}{
+\begin{tikzpicture}[scale=0.33]
+    \node[factor] (fp) {};
+    \node[const, left=of fp] (nfp) {Beta$(\cdot,\cdot)$};
+    \node[latent, below=of fp] (p) {$p$};
+    \node[const, left=of p] (np) {Prevalencia};
+      \node[factor, below=of p, yshift=0.1cm] (fq) {};
+      \node[latent, below=of fq, yshift=0.1cm] (q) {$q$};
+
+      \node[latent, right=of fq, xshift=-0.4cm, yshift=0.4cm] (s) {$s$};
+      \node[latent, right=of fq, xshift=-0.4cm, yshift=-0.4cm] (x) {$x$};
+      \node[factor, right=of s, xshift=-0.25cm] (fs) {};
+      \node[factor, right=of x, xshift=-0.25cm] (fx) {};
+      \node[const, above=of fs, xshift=-0.5cm, yshift=0.1cm] (ps) {Beta$(\cdot,\cdot)$};
+      \node[const, left=of q] (nq) {$P(\text{Diagnóstico})$};
+      \node[factor, below=of q, yshift=0.1cm] (fr) {};
+      \node[latent, below=of fr, fill=black!15, yshift=0.1cm] (r) {$r$};
+      \node[const, left=of r] (nr) {Resultados};
+      \node[accion, left=of fr, xshift=-0.7cm] (N) {};
+      \node[const, above=of N] (nN) {$N$};
+
+    \edge {fp} {p};
+      \edge[-] {p,s,x} {fq};
+      \edge {fs} {s};
+      \edge {fx} {x};
+      \edge {fq} {q};
+      \edge[-] {q, N} {fr};
+      \edge {fr} {r};
+
+    \plate {test} {(s)(x)(ps)} {$t:\text{Test}$};
+    \plate {poblacion} {(fp)(p)(q)(r)(N)(nq)} {$c \in \text{Comunidad}$};
+
+    \node[invisible, left=of fp, xshift=-3cm] (il) {};
+    \node[invisible, right=of fp, xshift=3cm] (i3) {};
+\end{tikzpicture}
+}
+\end{textblock}
+
+
+\begin{textblock}{100}(57,8)
+\begin{lstlisting}[backgroundcolor=\color{black!10}]
+library("runjags") # JAGS: Just Another Gibbs Sampler
+
+p = c(0, 0.15, 0.3, 0.45, 0.7) # REALIDAD
+sensitivity = c(0.9, 0.6)
+specificity = c(0.95, 0.9)
+
+r <- matrix(nrow=4, ncol=length(p)) # DATA (simulada)
+r[,1] <- c(839, 104, 44, 7)
+r[,2] <- c(754, 92,  85, 92)
+r[,3] <- c(598, 99, 134, 151)
+r[,4] <- c(503, 75, 187, 240)
+r[,5] <- c(275, 61, 287, 373)
+N <- apply(r, MARGIN=2, FUN=sum); Comunidades = 5
+
+s <- list(chain1=c(0.5,0.99), chain2=c(0.99,0.5)) # INITS
+x <- list(chain1=c(0.5,0.99), chain2=c(0.99,0.5))
+p <- list(chain1=c(0.1, 0.1, 0.1, 0.9, 0.9), chain2=c(0.9, 0.9, 0.9, 0.1, 0.1))
+
+results <- run.jags(modelo, n.chains=2)
+\end{lstlisting}
+\end{textblock}
+
+\end{frame}
+
+
+
+\begin{frame}[plain, fragile]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Evaluación de test diagnóstico
+\end{textblock}
+
+
+\begin{textblock}{160}(0,14)
+\scalebox{0.85}{
+\begin{tikzpicture}[scale=0.33]
+    \node[factor] (fp) {};
+    \node[const, left=of fp] (nfp) {Beta$(\cdot,\cdot)$};
+    \node[latent, below=of fp] (p) {$p$};
+    \node[const, left=of p] (np) {Prevalencia};
+      \node[factor, below=of p, yshift=0.1cm] (fq) {};
+      \node[latent, below=of fq, yshift=0.1cm] (q) {$q$};
+
+      \node[latent, right=of fq, xshift=-0.4cm, yshift=0.4cm] (s) {$s$};
+      \node[latent, right=of fq, xshift=-0.4cm, yshift=-0.4cm] (x) {$x$};
+      \node[factor, right=of s, xshift=-0.25cm] (fs) {};
+      \node[factor, right=of x, xshift=-0.25cm] (fx) {};
+      \node[const, above=of fs, xshift=-0.5cm, yshift=0.1cm] (ps) {Beta$(\cdot,\cdot)$};
+      \node[const, left=of q] (nq) {$P(\text{Diagnóstico})$};
+      \node[factor, below=of q, yshift=0.1cm] (fr) {};
+      \node[latent, below=of fr, fill=black!15, yshift=0.1cm] (r) {$r$};
+      \node[const, left=of r] (nr) {Resultados};
+      \node[accion, left=of fr, xshift=-0.7cm] (N) {};
+      \node[const, above=of N] (nN) {$N$};
+
+    \edge {fp} {p};
+      \edge[-] {p,s,x} {fq};
+      \edge {fs} {s};
+      \edge {fx} {x};
+      \edge {fq} {q};
+      \edge[-] {q, N} {fr};
+      \edge {fr} {r};
+
+    \plate {test} {(s)(x)(ps)} {$t:\text{Test}$};
+    \plate {poblacion} {(fp)(p)(q)(r)(N)(nq)} {$c \in \text{Comunidad}$};
+
+    \node[invisible, left=of fp, xshift=-3cm] (il) {};
+    \node[invisible, right=of fp, xshift=3cm] (i3) {};
+\end{tikzpicture}
+}
+\end{textblock}
+
+
+\begin{textblock}{100}(57,8)
+\begin{lstlisting}[backgroundcolor=\color{black!10}]
+     Lower95 Median  Upper95    #Real
+p[1] 6e-07   0.0071  0.0184     #0.00
+p[2] 0.1213  0.1501  0.1792     #0.15
+p[3] 0.2478  0.2829  0.3207     #0.30
+p[4] 0.3922  0.4324  0.4718     #0.45
+p[5] 0.6573  0.7016  0.7428     #0.70
+s[1] 0.8822  0.9233  0.9646     #0.95
+s[2] 0.5556  0.5829  0.6129     #0.60
+x[1] 0.9429  0.9566  0.9705     #0.95
+x[2] 0.8755  0.8897  0.9034     #0.90
+     SSeff  AC.10    psrf
+p[1]  5575 0.02143  1.0000
+p[2]  6162 0.03274  1.0002
+p[3]  5323 0.01990  1.0000
+p[4]  4992 0.04256  0.9999
+p[5]  3730 0.04781  1.0004
+s[1]  2742 0.08044  1.0009
+s[2]  7065 0.01934  1.0002
+x[1]  4558 0.04616  1.0007
+x[2]  4260 0.04574  1.0001
+\end{lstlisting}
+\end{textblock}
+
+\end{frame}
+
+\begin{frame}[plain, fragile]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Tasa de información \\
+\large de los sistemas de comunicación
+\end{textblock}
+
+\only<1>{
+\begin{textblock}{160}(0,26)
+\centering
+\tikz{
+
+\node[det] (fuente) {};
+\node[const, left=of fuente] (fx) {$f(x)$};
+\node[const, above=of fuente] (n_fuente) {\scriptsize Fuente};
+\node[const, right=of fuente, yshift=-0.35cm, xshift=0.05cm] (mensaje_enviado) {$\hfrac{\text{Realidad}}{\text{causal}}$};
+
+
+\node[det, right=of fuente, xshift=0.6cm ] (transmisor) {};
+\node[const, above=of transmisor] (n_transmisor) {\scriptsize Dimensión};
+\node[const, right=of transmisor, yshift=-0.35cm, xshift=0.05cm] (senal_enviada) {$\hfrac{\text{Realidad}}{\text{causal}}$};
+
+\node[const, right=of transmisor, xshift=1.4cm] (punto) {.};
+
+\node[det, right=of transmisor, xshift=0.7cm, yshift=1cm] (perceptor) {};
+\node[const, above=of perceptor] (n_perceptor) {\scriptsize Procedimiento A};
+
+\node[det, right=of transmisor, xshift=0.7cm,yshift=-1cm] (perceptor2) {};
+\node[const, below=of perceptor2] (n_perceptor2) {\scriptsize Procedimiento B};
+
+
+
+\node[det, right=of perceptor, xshift=0.7cm,yshift=-1cm] (receptor) {};
+\node[const, above=of receptor] (n_receptor) {\scriptsize Modelo};
+\node[const, right=of receptor, yshift=-0.2cm, xshift=0.05cm] (mensaje_recibido) {\scriptsize Inferencia};
+
+\node[const, left=of receptor, yshift=-0.45cm,xshift=-0.05cm] (senal_recibidaB) {\scriptsize Indicador B};
+\node[const, left=of receptor, yshift=0.45cm,xshift=-0.05cm] (senal_recibidaA) {\scriptsize Indicador A};
+
+
+\node[const, left=of receptor, xshift=-1.4cm, yshift=0.2cm] (punto2A) {.};
+\node[const, left=of receptor, xshift=0.17cm, yshift=0.2cm] (punto2AR) {.};
+\node[const, left=of receptor, xshift=-1.4cm, yshift=-0.2cm] (punto2B) {.};
+\node[const, left=of receptor, xshift=0.17cm, yshift=-0.2cm] (punto2BR) {.};
+
+
+\node[det, right=of receptor, xshift=0.6cm ] (destino) {};
+\node[const, above=of destino] (n_destino) {\scriptsize Destino};
+
+\node[const, right=of destino] (y) {$y_1$};
+
+
+\node[invisible, above=of fuente, yshift=0.5cm] (ia) {};
+\node[invisible, left=of fuente, xshift=-0.5cm] (il) {};
+\node[invisible, right=of destino, xshift=0.5cm] (ir) {};
+
+
+\edge {fuente} {transmisor};
+\edge[-] {transmisor} {punto};
+\edge {punto} {perceptor, perceptor2};
+\edge[-] {perceptor} {punto2A};
+\edge[-] {perceptor2} {punto2B};
+\edge {punto2A} {punto2AR};
+\edge {punto2B} {punto2BR};
+\edge {receptor} {destino};
+
+}
+
+\vspace{1cm}
+
+\Large \centering
+
+¿Con qué procedimiento nos quedamos?
+
+\end{textblock}
+}
+\end{frame}
+
 
 
 \begin{frame}[plain,noframenumbering]
