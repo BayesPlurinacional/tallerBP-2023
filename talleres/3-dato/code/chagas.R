@@ -68,5 +68,5 @@ p <- list(chain1=c(0.1, 0.1, 0.1, 0.9, 0.9), chain2=c(0.9, 0.9, 0.9, 0.1, 0.1))
 
 # And run the model:
 results <- run.jags(modelo, n.chains=2)
-results
+plot(results)
 

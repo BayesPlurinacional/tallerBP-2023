@@ -1,0 +1,376 @@
+\newif\ifen
+\newif\ifes
+\newif\iffr
+\newcommand{\fr}[1]{\iffr#1 \fi}
+\newcommand{\En}[1]{\ifen#1\fi}
+\newcommand{\Es}[1]{\ifes#1\fi}
+\estrue
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\usepackage{siunitx}
+\input{../../auxiliar/tex/diapo_encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+\estrue
+\usepackage{todonotes}
+\setbeameroption{show notes}
+%
+\newcommand{\gray}{\color{black!55}}
+\usepackage{ulem} % sout
+\usepackage{mdframed}
+\usepackage{listings}
+\lstset{
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=true,
+  columns=flexible,
+  basicstyle={\footnotesize\ttfamily},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showlines=true,
+}
+
+\begin{document}
+
+\color{black!85}
+\large
+%
+% \begin{frame}[plain,noframenumbering]
+%
+%
+% \begin{textblock}{160}(0,0)
+% \includegraphics[width=1\textwidth]{../../auxiliar/static/deforestacion}
+% \end{textblock}
+%
+% \begin{textblock}{80}(18,9)
+% \textcolor{black!15}{\fontsize{44}{55}\selectfont Verdades}
+% \end{textblock}
+%
+% \begin{textblock}{47}(85,70)
+% \centering \textcolor{black!15}{{\fontsize{52}{65}\selectfont Empíricas}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(100,28)
+% \LARGE  \textcolor{black!15}{\rotatebox[origin=tr]{-3}{\scalebox{9}{\scalebox{1}[-1]{$p$}}}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(66,43)
+% \LARGE  \textcolor{black!15}{\scalebox{6}{$=$}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(36,29)
+% \LARGE  \textcolor{black!15}{\scalebox{9}{$p$}}
+% \end{textblock}
+%
+% %
+% %
+% % \begin{textblock}{160}(01,81)
+% % \footnotesize \textcolor{black!5}{\textbf{\small Seminario ``Acuerdos intersubjetivos''\\
+% % Comunidad Bayesiana Plurinacional} \\}
+% % \end{textblock}
+%
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[plain,noframenumbering]
+\begin{textblock}{160}(0,-4.3) \centering
+\includegraphics[width=1\textwidth]{../../auxiliar/static/antartic}
+\end{textblock}
+
+\begin{textblock}{160}(0,0) \centering
+\tikz{
+\node[det, fill=black,draw=black] (k) {\textcolor{black}{--------------------------------------------------------------------------------------------------------------------------------------}} ;
+}
+\end{textblock}
+
+\begin{textblock}{160}(5,0)
+\tikz{
+\node[det, fill=black,draw=black,text width=0.01cm] (k) {\textcolor{black}{--------------------------------------------------------------------------------------------------------------------------------------}} ;
+}
+\end{textblock}
+
+
+\begin{textblock}{160}(0,4) \centering
+\LARGE \hspace{1cm} \textcolor{black!20}{\fontsize{22}{0}\selectfont \textbf{Modelos de historia \\ \hspace{1cm} completa}}
+\end{textblock}
+
+
+\begin{textblock}{55}[0,1](8,70)
+\begin{turn}{90}
+\parbox{6cm}{\footnotesize
+\textcolor{black!10}{Millones de km$^2$ de hielo Antártico}}
+\end{turn}
+\end{textblock}
+
+
+\begin{textblock}{160}(20,63)
+\textcolor{black!10}{Unidad 4 \\ \small
+Redes bayesianas de historia completa. \\
+El problema de usar el posterior como prior del siguiente evento\\
+El algoritmo de inferencia por loopy belief propagation. \\
+Consideraciones de inferencia causal en series temporales. \\
+}
+\end{textblock}
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Series de tiempo \\
+\large Creencias adaptativas
+\end{textblock}
+
+
+\only<1-4>{
+\begin{textblock}{160}(0,26) \centering
+
+\Large La función de costo epistémica
+
+\large
+\begin{equation*}
+\underbrace{P(\text{Hipótesis},\text{\En{Data}\Es{Datos}})}_{\hfrac{\text{\footnotesize\En{Initial belief compatible}\Es{Creencia compatible }}}{\text{\footnotesize \En{with the data}\Es{con los datos}}}} = \underbrace{P(\text{Hipótesis})}_{\hfrac{\text{\footnotesize\En{Initial intersubjective}\Es{Acuerdo intersubjetivo}}}{\text{\footnotesize\En{agreement}\Es{inicial}}}} \underbrace{P(\text{dato}_1 |\text{Hipótesis})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 1}} \, \underbrace{P(\text{dato}_2 | \text{dato}_1 , \text{Hipótesis})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 2}} \dots
+\end{equation*}
+
+\vspace{0.8cm}
+
+
+\only<2>{
+\Large Un único 0 en la secuencia de predicciones
+
+hace falsa la hipótesis para siempre.\\
+}\only<3-4>{
+\Large Esa persona no está apta para realizar esa tarea.
+
+\only<4>{\textbf{¿Para siempre?!}}
+}
+
+\end{textblock}
+}
+\only<5>{ \centering
+\begin{textblock}{160}(0,-93)
+\includegraphics[width=0.9\textwidth]{../../auxiliar/static/lifeHistory.jpeg}
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Estimación de habilidad \\
+\large en la industria del videojuego
+\end{textblock}
+
+
+ \only<1->{
+ \begin{textblock}{140}(3,24)
+ \normalsize
+\tikz{
+    \node[det, fill=black!10] (r) {$r$} ;
+    \node[const, right=of r] (dr) {\normalsize $ P(r|d) = \mathbb{I}(r = d > 0)$};
+
+    \node[latent, above=of r, yshift=-0.45cm] (d) {$d$} ; %
+    \node[const, right=of d] (dd) {\normalsize $ p(d|p_a,p_b) = \delta(d = p_a-p_b)$};
+
+    \node[latent, above=of d, xshift=-0.8cm, yshift=-0.45cm] (p1) {$p_a$} ; %
+    \node[latent, above=of d, xshift=0.8cm, yshift=-0.45cm] (p2) {$p_b$} ; %
+
+
+    \node[latent, above=of p1, yshift=-0.35cm] (s1) {$s_a$} ; %
+    \node[latent, above=of p2, yshift=-0.35cm] (s2) {$s_b$} ; %
+    \node[const, right=of s2] (ds2) {$p(s_i) = \N(s_i|\mu_i,\sigma_i^2)$};
+
+    \node[const, right=of p2] (dp2) {\normalsize $p(p_i|s_i) = \N(p_i|s_i,\beta^2)$};
+
+    \node[const, above=of dr] (r_name) {\small Resultado};
+    \node[const, above=of dd] (d_name) {\small Diferencia};
+    \node[const, above=of dp2] (p_name) {\small Desempeño};
+
+    \node[const, above=of ds2, yshift=0.1cm] (s_name) {\small Habilidad};
+
+    \edge {d} {r};
+    \edge {p1,p2} {d};
+    \edge {s1} {p1};
+    \edge {s2} {p2};
+
+}
+\end{textblock}
+}
+
+
+\only<2>{
+\begin{textblock}{100}(60,22) \centering
+Prior \ $\rightarrow$ \ Posterior
+
+\includegraphics[width=0.85\textwidth,page=4]{../3-dato/figuras/posterior_win.pdf}
+\end{textblock}
+}
+
+
+\only<3->{
+\begin{textblock}{100}(60,24) \centering
+¿Cómo estimamos una habilidad en el tiempo?
+
+\Large \vspace{0.8cm}
+
+\only<4->{
+¿Si usamos el último posterior como
+
+prior del siguiente evento?
+
+\vspace{0.6cm} \large
+
+Posterior$_t$ $\rightarrow$ Prior$_{t+1}$
+}
+
+\only<5->{
+\begin{equation*}
+\underbrace{\N(\text{Habilidad}_{t+1} \, | \, \text{Habilidad}_{t} , \gamma^2)}_{\text{Prior}_{t+1}}
+\end{equation*}
+}
+\end{textblock}
+}
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(20,4)
+\centering \LARGE Estimación de habilidad \\
+\large en la industria del videojuego
+\end{textblock}
+
+\only<1->{
+ \begin{textblock}{140}(2,6)
+ \normalsize
+\tikz{
+    \node[det, fill=black!10] (r) {$r$} ;
+    \node[factor, above=of r, yshift=-0.4cm] (fr) {};
+    \node[const, left=of fr] (dr) {\normalsize $\mathbb{I}(r = d > 0)$};
+
+    \node[latent, above=of fr, yshift=-0.55cm] (d) {$d$} ; %
+    \node[factor, above=of d, yshift=-0.4cm] (fd) {};
+
+    \node[const, left=of fd] (dd) {\normalsize $\delta(d = p_a-p_b)$};
+
+    \node[latent, above=of fd, xshift=-0.8cm, yshift=-0.55cm] (p1) {$p_a$} ; %
+    \node[latent, above=of fd, xshift=0.8cm, yshift=-0.55cm] (p2) {$p_b$} ; %
+
+    \node[factor, above=of p1, yshift=-0.4cm] (fp1) {};
+    \node[factor, above=of p2, yshift=-0.4cm] (fp2) {};
+
+    \node[latent, above=of fp1, yshift=-0.55cm] (s1) {$s_a$} ; %
+    \node[latent, above=of fp2, yshift=-0.55cm] (s2) {$s_b$} ; %
+
+    \node[factor, above=of s1, yshift=-0.4cm] (fs1) {};
+    \node[factor, above=of s2, yshift=-0.4cm] (fs2) {};
+
+
+    \node[const, left=of fs1] (ds2) {$\N(s_i|\mu_i,\sigma_i^2)$};
+
+    \node[const, left=of fp1] (dp2) {\normalsize $\N(p_i|s_i,\beta^2)$};
+
+    \node[const, left=of r] (r_name) {\small Resultado};
+    \node[const, left=of d] (d_name) {\small Diferencia};
+    \node[const, left=of p1] (p_name) {\small Desempeño};
+
+    \node[const, left=of s1, yshift=0.1cm] (s_name) {\small Habilidad \ };
+
+    \edge {d} {r};
+    \edge[-] {p1,p2} {fd};
+    \edge {fd} {d};
+    \edge[-] {s1} {fp1};
+    \edge[-] {s2} {fp2};
+    \edge {fp1} {p1};
+    \edge {fp2} {p2};
+    \edge {fs1} {s1};
+    \edge {fs2} {s2};
+
+    \onslide<2->{
+      \path[draw, ->, fill=black!50] (fs2) edge[bend left,draw=black!50] node[right,color=black!75] {\large\only<2>{$\N(s_b|\mu_b,\sigma^2)$}} (s2);
+    }
+    \onslide<3->{
+      \path[draw, ->, fill=black!50] (s2) edge[bend left,draw=black!50] node[right,color=black!75] {\large\only<3>{$\N(s_b|\mu_b,\sigma^2)$}} (fp2);
+    }
+    \onslide<4->{
+      \path[draw, ->, fill=black!50] (fp2) edge[bend left,draw=black!50] node[right,color=black!75] {\large$\only<4-5>{\int \N(p_b|s_b,\beta^2) \N(s_b|\mu_b,\sigma^2) \, ds_b }\only<5>{= p(p_b)}$} (p2);
+    }
+}
+\end{textblock}
+}
+
+
+
+\only<6->{
+\begin{textblock}{120}(65,18)
+  \begin{flalign*}
+   p(p_b) &= \int \N(p_b|s_b,\beta^2) \N(s_b|\mu_b,\sigma_b^2) ds_b \\
+    \only<9>{& \overset{*}{=} \int \N(p_a|\mu_a,\beta^2 + \sigma_a^2) \, \N(s_a | \mu_*,\sigma_{*}^2)ds_a}
+    \only<10>{& \overset{*}{=} \int \underbrace{\N(p_a|\mu_a,\beta^2 + \sigma_a^2)}_{\text{const.}} \underbrace{\N(s_a | \mu_*,\sigma_{*}^2)ds_a}_{1}}
+    \only<11>{& \overset{*}{=} \phantom{\int} \, \N(p_a|\mu_a,\beta^2 + \sigma_a^2) \phantom{\N(s_a | \mu_*,\sigma_{*}^2)ds_a}}
+    &&
+  \end{flalign*}
+\end{textblock}
+}
+
+
+\only<7-8>{
+\begin{textblock}{120}(40,34)
+  \begin{figure}[H]
+     \centering
+     \onslide<7->{
+     \begin{subfigure}[b]{0.4\textwidth}
+       \includegraphics[page=1,width=1\textwidth]{figuras/paso_1_multiplicacion_normales_image}
+     \end{subfigure}}
+     \onslide<8->{
+     \begin{subfigure}[b]{0.4\textwidth}
+       \includegraphics[page=1,width=\textwidth]{figuras/paso_1_multiplicacion_normales_p}
+     \end{subfigure}}
+  \end{figure}
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain,noframenumbering]
+\centering \vspace{0.5cm}
+\includegraphics[width=1\textwidth]{../../auxiliar/static/BP.png}
+\end{frame}
+
+
+
+
+
+%
+% \begin{frame}[plain]
+% \begin{textblock}{96}(0,6.5)\centering
+% {\transparent{0.9}\includegraphics[width=0.8\textwidth]{../../auxiliar/static/inti.png}}
+% \end{textblock}
+%
+% \begin{textblock}{160}(96,5.5)
+% \includegraphics[width=0.35\textwidth]{../../auxiliar/static/pachacuteckoricancha}
+% \end{textblock}
+% \end{frame}
+
+
+
+
+
+\end{document}
+
+
+
