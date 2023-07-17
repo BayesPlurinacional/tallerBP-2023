@@ -1,0 +1,318 @@
+\newif\ifen
+\newif\ifes
+\newif\iffr
+\newcommand{\fr}[1]{\iffr#1 \fi}
+\newcommand{\En}[1]{\ifen#1\fi}
+\newcommand{\Es}[1]{\ifes#1\fi}
+\estrue
+\documentclass[shownotes,aspectratio=169]{beamer}
+
+\usepackage{siunitx}
+\input{../../auxiliar/tex/diapo_encabezado.tex}
+\input{../../auxiliar/tex/tikzlibrarybayesnet.code.tex}
+ \mode<presentation>
+ {
+ %   \usetheme{Madrid}      % or try Darmstadt, Madrid, Warsaw, ...
+ %   \usecolortheme{default} % or try albatross, beaver, crane, ...
+ %   \usefonttheme{serif}  % or try serif, structurebold, ...
+  \usetheme{Antibes}
+  \setbeamertemplate{navigation symbols}{}
+ }
+\estrue
+\usepackage{todonotes}
+\setbeameroption{show notes}
+%
+\newcommand{\gray}{\color{black!55}}
+\usepackage{ulem} % sout
+\usepackage{mdframed}
+\usepackage{listings}
+\lstset{
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=true,
+  columns=flexible,
+  basicstyle={\footnotesize\ttfamily},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=4,
+  showlines=true,
+}
+
+\begin{document}
+
+\color{black!85}
+\large
+%
+% \begin{frame}[plain,noframenumbering]
+%
+%
+% \begin{textblock}{160}(0,0)
+% \includegraphics[width=1\textwidth]{../../auxiliar/static/deforestacion}
+% \end{textblock}
+%
+% \begin{textblock}{80}(18,9)
+% \textcolor{black!15}{\fontsize{44}{55}\selectfont Verdades}
+% \end{textblock}
+%
+% \begin{textblock}{47}(85,70)
+% \centering \textcolor{black!15}{{\fontsize{52}{65}\selectfont Empíricas}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(100,28)
+% \LARGE  \textcolor{black!15}{\rotatebox[origin=tr]{-3}{\scalebox{9}{\scalebox{1}[-1]{$p$}}}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(66,43)
+% \LARGE  \textcolor{black!15}{\scalebox{6}{$=$}}
+% \end{textblock}
+%
+% \begin{textblock}{80}(36,29)
+% \LARGE  \textcolor{black!15}{\scalebox{9}{$p$}}
+% \end{textblock}
+%
+% %
+% %
+% % \begin{textblock}{160}(01,81)
+% % \footnotesize \textcolor{black!5}{\textbf{\small Seminario ``Acuerdos intersubjetivos''\\
+% % Comunidad Bayesiana Plurinacional} \\}
+% % \end{textblock}
+%
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\begin{frame}[plain,noframenumbering]
+
+\begin{textblock}{160}(0,-15)
+\includegraphics[width=1\textwidth]{../../auxiliar/static/tsimane}
+\end{textblock}
+
+
+% VERSION 2
+\begin{textblock}{160}(6,36)
+\LARGE \rotatebox[origin=tr]{18}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{La función}}}
+\end{textblock}
+\begin{textblock}{160}(41,32)
+\LARGE \rotatebox[origin=tr]{23}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{de}}}
+\end{textblock}
+\begin{textblock}{160}(50.5,23)
+\LARGE \rotatebox[origin=tr]{28}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{costo}}}
+\end{textblock}
+\begin{textblock}{160}(68,5.3)
+\LARGE \rotatebox[origin=tr]{26}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{epistémico}}}
+\end{textblock}
+\begin{textblock}{160}(104,5.5)
+\LARGE \rotatebox[origin=tr]{8}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{-}}}
+\end{textblock}
+\begin{textblock}{160}(110,3)
+\LARGE \rotatebox[origin=tr]{-14}{\textcolor{black!95}{\fontsize{22}{0}\selectfont \textbf{evolutiva}}}
+\end{textblock}
+
+
+\begin{textblock}{55}[0,0](119,22)
+\begin{turn}{-57}
+\parbox{7cm}{\sloppy\setlength\parfillskip{0pt}
+\textcolor{black!0}{\ \ \ \ \ Unidad 5} \\
+\small\textcolor{black!5}{\hspace{-0.15cm} Apuestas óptimas.} \\
+\small\textcolor{black!5}{\hspace{-0.85cm} Ventajas a favor de la:} \\
+\small\textcolor{black!5}{\hspace{-1.45cm} Diversificación (propiedad epistémica)}\\
+\small\textcolor{black!5}{\hspace{-1.7cm} Cooperación (propiedad evolutiva)}\\
+\small\textcolor{black!5}{ \hspace{-1.75cm}Especialización (propiedad de especiación)} \\
+\small\textcolor{black!5}{\hspace{-2cm} Heterogeniedad (propiedad ecológica).\\ }}
+\end{turn}
+\end{textblock}
+
+
+\end{frame}
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Toma de decisiones \\
+\large Apuestas de vida
+\end{textblock}
+
+
+\only<1->{
+\begin{textblock}{160}(0,24) \centering
+
+\Large \only<1>{La función de costo epistémica\phantom{evolutiva}}\only<2->{La función de costo evolutiva\phantom{epistémica}}
+
+\large
+\only<1>{\begin{equation*}
+\underbrace{P(\text{Hipótesis},\text{\En{Data}\Es{Datos}})}_{\hfrac{\text{\footnotesize\En{Initial belief compatible}\Es{Creencia compatible }}}{\text{\footnotesize \En{with the data}\Es{con los datos}}}} = \underbrace{P(\text{Hipótesis})}_{\hfrac{\text{\footnotesize\En{Initial intersubjective}\Es{Acuerdo inter-}}}{\text{\footnotesize\En{agreement}\Es{subjetivo inicial}}}} \ \underbrace{P(\text{dato}_1 |\text{Hipótesis})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 1}} \, \underbrace{P(\text{dato}_2 | \text{dato}_1 , \text{Hipótesis})}_{\text{\footnotesize Predic\En{tion}\Es{ción} 2}} \dots
+\end{equation*}
+}\only<2->{\begin{equation*}
+\underbrace{\text{P}(\text{Variante},\text{\En{Data}\Es{Datos}})}_{\hfrac{\text{\footnotesize\En{Initial belief compatible}\Es{Tamaño actual}}}{\text{\footnotesize \En{with the data}\Es{de la población}}}} = \underbrace{\text{P}(\text{Variante})}_{\hfrac{\text{\footnotesize\En{Initial intersubjective}\Es{Tamaño inicial}}}{\text{\footnotesize\En{agreement}\Es{de la población}}}} \underbrace{\text{ R}(\text{dato}_1|\text{Variante})}_{\text{\footnotesize Reproducción $\geq 1$}} \, \underbrace{\text{ S}(\text{dato}_2|\text{dato}_1,\text{Variante}) }_{\text{\footnotesize $0 \leq$ Supervivencia $\leq 1$  }} \dots
+\end{equation*}
+}
+
+\end{textblock}
+}
+
+
+
+\only<3->{
+\begin{textblock}{160}(0,60) \centering \Large
+Un 0 en la secuencia de tasas de reproducción y
+
+supervivencia produce una extinción irreversible
+
+\vspace{0.6cm}
+
+\only<4>{
+\textbf{¿Cuáles son las variantes que más crecen?}
+}
+
+\end{textblock}
+}
+
+
+\end{frame}
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE La complejidad de la vida \\
+\only<3>{\large Transiciones evolutivas mayores}
+\end{textblock}
+
+
+\only<1-2>{
+\begin{textblock}{140}(10,22) \centering
+\includegraphics[width=1\textwidth]{../../auxiliar/static/biomassBarOn.png}
+\end{textblock}
+}
+
+\only<1>{
+\begin{textblock}{160}(0,22)
+\tikz{
+  \node[det, draw=white, minimum size=9cm] (c) {};
+  \node[invisible, left=of c, xshift=-6.7cm] (i) {};
+  \node[det, right= of i,draw=white, minimum size=1cm, xshift=5.46cm,yshift=0.05cm] (c2) {};
+}
+\end{textblock}
+}
+
+
+\only<3>{
+\begin{textblock}{160}(0,28) \centering
+\begin{figure}[ht!]
+    \centering
+  \scalebox{1.2}{
+  \tikz{
+      \node[accion] (i1) {} ;
+      \node[accion, yshift=0.6cm, xshift=0.4cm] (i2) {} ;
+      \node[accion, yshift=0.6cm, xshift=-0.4cm] (i3) {} ;
+      \node[const, yshift=0.3cm, xshift=0.4cm] (i) {};
+
+      \node[const, yshift=-0.8cm] (ni) {$\hfrac{\text{Individuos}}{\text{solitarios}}$};
+
+      \node[const, yshift=1.2cm, xshift=1.5cm] (m1) {$\hfrac{\text{Formación}}{\text{de grupos}}$};
+
+      \node[const, right=of i, xshift=2cm] (c) {};
+      \node[accion, below=of c, yshift=0.35cm, xshift=0.4cm] (c1) {} ;
+      \node[accion, above=of c, yshift=-0.35cm, xshift=0.6cm] (c2) {} ;
+      \node[accion, above=of c, yshift=-0.35cm, xshift=0.2cm] (c3) {} ;
+      \node[const, right=of c, xshift=0.6cm] (cc) {};
+
+      \node[const, right=of ni, xshift=1.3cm] (nc) {$\hfrac{\text{Grupos}}{\text{cooperativos}}$};
+
+      \node[const, right=of m1, xshift=1.2cm] (m2) {$\hfrac{\text{Transición}}{\text{mayor}}$};
+
+      \node[const, right=of cc, xshift=2cm] (t) {};
+      \node[accion, below=of t, yshift=0.35cm, xshift=0.4cm] (t1) {} ;
+      \node[accion, above=of t, yshift=-0.35cm, xshift=0.6cm] (t2) {} ;
+      \node[accion, above=of t, yshift=-0.35cm, xshift=0.2cm] (t3) {} ;
+
+      \node[const, right=of nc, xshift=1.1cm] (nt) {$\hfrac{\text{Unidad de}}{\text{nivel superior}}$};
+
+      \edge {i} {c};
+      \edge {cc} {t};
+
+      \plate {transition} {(t1)(t2)(t3)} {}; %
+      }
+  }
+\end{figure}
+\end{textblock}
+}
+
+
+
+
+
+\end{frame}
+
+
+
+
+\begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Función de costo epistémica\uncover<2->{?}\\
+\uncover<2->{\large Con pagos ad-hoc}
+\end{textblock}
+
+
+\only<1-5>{
+\begin{textblock}{160}(0,24) \centering
+\begin{equation*}
+\underbrace{P(\text{Hipótesis},\text{Datos})}_{\hfrac{\text{\footnotesize \only<1>{\phantom{p}Creencia\phantom{p}}\only<2->{\text{Riqueza}}}}{\text{\footnotesize final}}} = \underbrace{P(\text{Hipótesis})}_{\hfrac{\text{\footnotesize \only<1>{\phantom{p}Creencia\phantom{p}}\only<2->{\text{Riqueza}}}}{\text{\footnotesize inicial}}} \ \underbrace{P(\text{dato}_1 |\text{Hipótesis})}_{\text{\footnotesize \only<1>{Predicción}\only<2->{\text{Apuesta}} 1}} \only<-3>{\uncover<2->{Q_1}}\only<4->{3.0} \underbrace{P(\text{dato}_2 | \text{dato}_1 , \text{Hipótesis})}_{\text{\footnotesize \only<1>{Predicción}\only<2->{\text{Apuesta}} 2}} \only<-3>{\uncover<2->{Q_2}}\only<4->{1.2} \dots
+\end{equation*}
+\end{textblock}
+}
+
+
+\only<5->{
+\begin{textblock}{150}(10,54)
+Casa de apuestas paga: \\[0.2cm] \normalsize
+
+\ \ $\bullet$ Por \textbf{Cara}. $Q_c = 3$
+
+\ \ $\bullet$ Por \textbf{Seca}. $Q_s = 1.2$
+\end{textblock}
+}
+
+\only<4-5>{
+\begin{textblock}{95}(60,46)
+\raggedleft
+\includegraphics[width=0.82\textwidth]{../../auxiliar/static/plata-potosi.jpg}
+\end{textblock}
+}
+
+
+
+\end{frame}
+
+
+
+
+\begin{frame}[plain,noframenumbering]
+\centering \vspace{0.5cm}
+\includegraphics[width=1\textwidth]{../../auxiliar/static/BP.png}
+\end{frame}
+
+
+
+
+
+%
+% \begin{frame}[plain]
+% \begin{textblock}{96}(0,6.5)\centering
+% {\transparent{0.9}\includegraphics[width=0.8\textwidth]{../../auxiliar/static/inti.png}}
+% \end{textblock}
+%
+% \begin{textblock}{160}(96,5.5)
+% \includegraphics[width=0.35\textwidth]{../../auxiliar/static/pachacuteckoricancha}
+% \end{textblock}
+% \end{frame}
+
+
+
+
+
+\end{document}
+
+
+
