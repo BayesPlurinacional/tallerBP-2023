@@ -1,4 +1,4 @@
-all: BP.png modelosGraficos.jpeg peligro_predador.jpeg fuego.jpg antartic.jpeg tsimane.jpg treeOfLife-liviano.png reciprocidad.jpeg regalo.png dedo.png cerradura.png deforestacion.jpg pachacuteckoricancha.jpg sidewalk_bubblegum_1997_4.png moneda-euro-liviana.png galton-board.jpg Elo1980.jpg boole.png sum_product.png test_chagas.png lifeHistory.jpeg biomassBarOn.png plata-potosi.jpg ttt_history.png python.png julia.png R.png
+all: BP.png modelosGraficos.jpeg peligro_predador.jpeg fuego.jpg antartic.jpeg tsimane.jpg treeOfLife-liviano.png reciprocidad.jpeg regalo.png dedo.png cerradura.png deforestacion.jpg pachacuteckoricancha.jpg sidewalk_bubblegum_1997_4.png moneda-euro-liviana.png galton-board.jpg Elo1980.jpg boole.png sum_product.png test_chagas.png lifeHistory.jpeg biomassBarOn.png plata-potosi.jpg ttt_history.png python.png julia.png R.png cara-emoji.png
 
 BP.png:
 	wget https://raw.githubusercontent.com/glandfried/images/master/logos/BP.png -O BP.png
@@ -85,3 +85,6 @@ julia.png:
 
 python.png:
 	wget https://raw.githubusercontent.com/glandfried/images/master/python.png
+
+cara-emoji.png:
+	wget https://raw.githubusercontent.com/glandfried/images/master/cara-emoji.png

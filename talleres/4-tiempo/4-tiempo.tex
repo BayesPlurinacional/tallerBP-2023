@@ -170,6 +170,7 @@ Ejemplo
 
 \begin{comment}
 
+
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
 \centering \LARGE Estimación de habilidad \\
@@ -954,21 +955,42 @@ dirección, del pasado al futuro.
 \end{frame}
 
 
-
-\begin{frame}[plain]
+\begin{frame}[plain, fragile]
 \begin{textblock}{160}(0,4)
 \centering \LARGE TrueSkill Through Time \\
 \large Estado del arte en la industria del videojuego.
 \end{textblock}
 
 
+\begin{textblock}{130}(15,24)
+\begin{lstlisting}[backgroundcolor=\color{black!10}]
+using CSV; using Dates
+using TrueSkillThroughTime
+global const ttt = TrueSkillThroughTime
+
+data = CSV.read("atp.csv")
+dates = Dates.value.(data[:,"time_start"] .- Date("1900-1-1"))
+
+matches = [ r.double == "t" ? [[r.w1_id,r.w2_id],[r.l1_id,r.l2_id]] : [[r.w1_id],[r.l1_id]] for r in eachrow(data) ]
+h = History(composition = matches, times = dates, sigma = 1.6, gamma = 0.036)
+convergence(h, epsilon = 0.01, iterations = 10)
+\end{lstlisting}
+\end{textblock}
+
+\only<2->{
+\begin{textblock}{155}(0,20) \centering
+\tikz{
+  \node[det, draw=white, minimum size=8cm] (x) {.\hspace{16cm}.};
+}
+\end{textblock}
 \begin{textblock}{155}(0,20) \centering
 \includegraphics[width=0.9\textwidth]{figuras/atp.pdf}
 \end{textblock}
-
+}
 
 \end{frame}
 
+\end{comment}
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
@@ -1015,7 +1037,6 @@ dirección, del pasado al futuro.
 
 \end{frame}
 
-\end{comment}
 %
 % \begin{frame}[plain]
 % \begin{textblock}{160}(0,4)
@@ -1072,7 +1093,7 @@ dirección, del pasado al futuro.
 \end{textblock}
 
 \only<1->{
-\begin{textblock}{155}(5,36)
+\begin{textblock}{155}(20,20)
 \raggedright
 \tikz{
     \node[latent, fill=black!20] (y) {$y\only<5->{_0}$} ; %
@@ -1080,7 +1101,6 @@ dirección, del pasado al futuro.
     \only<1-4>{
       \node[const, right=of fy] (py) {$p(y|\bm{w}, x) = \N(\, y \, | \, \only<1>{w_0 + w_1 \, x_1 + w_2 \, x_2^2 + w_3 \, x_3^3}\only<2>{\sum_i w_i \phi_i(x)}\only<3->{\bm{w}^T \bm{\phi}(x)}, \, \beta^2) $};
     }
-
 
     \node[latent, left=of fy, xshift=0.75cm ,fill=black!100, minimum size=2pt] (x) {} ;
 
@@ -1094,38 +1114,75 @@ dirección, del pasado al futuro.
       \node[const, right=of fw] (py) {$p(\bm{w}) = \only<1-3>{\prod_i \N(\, w_i \, | \, 0 , \, \sigma^2)}\only<4->{\N(\, \bm{w} \, | \, 0 , \, \bm{S})}$};
     }
     \only<5->{
-      \node[const, above=of fw] (py) {$p(\bm{w})$};
+      \node[const, above=of fw] (py) {$p(\bm{w}_0)$};
     }
 
 %     \only<5->{
 %       \node[const, right=of fy] (py) {$p(y|\bm{w}, x)$};
 %     }
 
-    \node[invisible, above=of w, yshift=1cm] (ia) {};
-    \node[invisible, left=of y, xshift=-1.3cm] (il) {};
-
     \only<5->{
       \node[factor, right=of w] (fw1) {};
-      \node[latent, right=of fw1] (w1) {$\bm{w_1}$};
-      \node[latent, below=of fw1, yshift=0.75cm,fill=black!100, minimum size=2pt] (z1) {} ;
-      \node[const, left=of z1] (nz1) {$z_1$};
+      \node[latent, right=of fw1, xshift=0.15cm] (w1) {$\bm{w}_1$};
       \node[factor, below=of w1, yshift=0.55cm] (fy1) {};
       \node[latent, below=of fy1, fill=black!15, yshift=0.4cm] (y1) {$y_1$};
-       \node[latent, left=of fy1, xshift=0.75cm ,fill=black!100, minimum size=2pt] (x1) {} ;
+      \node[latent, left=of fy1, xshift=0.75cm ,fill=black!100, minimum size=2pt] (x1) {} ;
       \node[const, left=of x1] (nx1) {$x_1$};
-      \node[const, above=of fw1] (nfw1) {$p(\bm{w}_{t+1}|\bm{w}_t, z_t)$};
-      \node[const, right=of fy1] (nfy1) {$p(y_y|\bm{w}_t, x_t) $};
+
+      \node[factor, right=of w1] (fw2) {};
+      \node[latent, right=of fw2, xshift=0.15cm] (w2) {$\bm{w}_2$};
+      \node[factor, below=of w2, yshift=0.55cm] (fy2) {};
+      \node[latent, below=of fy2, yshift=0.4cm] (y2) {$y_2$};
+      \node[latent, left=of fy2, xshift=0.75cm ,fill=black!100, minimum size=2pt] (x2) {} ;
+      \node[const, left=of x2] (nx2) {$x_2$};
+
+      \only<5-6>{\node[const, above=of fw1] (nfw1) {\normalsize$\N(\bm{w}_{t+1}|\bm{w}_t, R )$};}
+      \node[const, right=of fy2] (nfy2) {\normalsize $\N(\, y_t \, | \, \bm{w}_t^T \bm{\phi}(x_t), \, \beta^2) $};
     }
+
+    \only<6->{
+      \draw[dashed] (4.1,-1.2) -- (4.1,4.5);
+      \node[const, xshift=2.7cm, yshift=-1cm] (pre) {\normalsize Pre-tratamiento};
+      \node[const, xshift=5.6cm, yshift=-1cm] (pre) {\normalsize Post-tratamiento};
+    }
+
+    \only<7->{
+      \node[latent, above=of fw1] (z1) {$\bm{z}_1$};
+      \node[latent, above=of fw2] (z2) {$\bm{z}_2$};
+      \node[factor, left=of z1] (fz1) {};
+      \node[factor, left=of z2, xshift=-0.15cm] (fz2) {};
+      \node[const, above=of fz2] (nfz2) {\normalsize$\N(\bm{z}_{t+1}|\bm{z}_t, Q )$ \ \  };
+    }
+    \only<8->{
+      \node[const, right=of fw2, yshift=0.6cm] (nfwt) {\normalsize$p(\bm{w}_{t+1}|\bm{w}_t,\bm{z}_t) = \N(\bm{w}_{t+1}|\bm{w}_t \Phi(\bm{z}_t), R )$ \ \  };
+    }
+
+
 
     \edge {fw} {w};
     \edge[-] {x,w} {fy};
     \edge {fy} {y};
     \only<5->{
-      \edge[-] {w,z1} {fw1};
+      \edge[-] {w} {fw1};
       \edge {fw1} {w1};
       \edge[-] {x1,w1} {fy1};
       \edge {fy1} {y1};
+      \edge[-] {w1} {fw2};
+      \edge {fw2} {w2};
+      \edge[-] {x2,w2} {fy2};
+      \edge {fy2} {y2};
     }
+    \only<7->{
+      \edge {fz1} {z1};
+      \edge[-] {z1} {fz2};
+      \edge {fz2} {z2};
+      \edge[-] {z1} {fw1};
+      \edge[-] {z2} {fw2};
+    }
+
+
+    \node[invisible, above=of w, yshift=2cm] (ia) {};
+    \node[invisible, left=of y, xshift=-1.3cm] (il) {};
 
     %\plate {no} {(x)(y)(data_inv)(c_x)} {$i: $ Datos\vspace{1cm}}; %
 }
@@ -1133,55 +1190,164 @@ dirección, del pasado al futuro.
 }
 
 
-\only<6->{
-\begin{textblock}{160}(20,18)
-\begin{flalign*}
- %\bm{w}_{t+1} = \Phi(z_t) \bm{w}_{t} + R_t & \nu\\ & p(\nu)
-& p(\bm{w}_{t+1}| \bm{w}_{t}, z_t) =  \N(\, \bm{w}_{t+1} \, | \,  \Phi(z_t) \bm{w}_{t}, \, Q)
-&&
-\end{flalign*}
-\end{textblock}
-}
-
-
-
 \end{frame}
-
 
 
 \begin{frame}[plain]
 \begin{textblock}{160}(0,4)
 \centering \LARGE Modelos lineas para series temporales \\
-\large Structural state-space models
+\large Tendencia lineal local \only<4->{\texttt{+} controles externos}
 \end{textblock}
 
-
-\begin{textblock}{150}(5,74)
+\only<1->{
+\begin{textblock}{155}(20,20)
 \raggedright
 \tikz{
-  \node[latent, fill=black!10] (y0) {$y_{t-1}$};
-  \node[latent, fill=black!10, right=of y0] (y1) {$y_{t}$};
-  \node[latent, right=of y1] (y2) {$y_{t+1}$};
+    \node[latent, fill=black!20] (y) {$y_0$} ; %
+    \node[factor, above=of y, yshift=-0.4cm] (fy) {} ; %
+
+    \node[latent, left=of fy, xshift=0.75cm ,fill=black!100, minimum size=2pt] (x) {} ;
+
+    \node[const, left=of x] (c_x) {$\only<3->{\bm}{x}_0$};
+
+    \node[latent, above=of fy, yshift=-0.55cm] (w) {$\mu_0$};
+
+    \node[factor, left=of w, xshift=0.4cm] (fw) {};
+    \node[const, above=of fw] (py) {$p(\mu_0)$};
+
+      \node[factor, right=of w] (fw1) {};
+      \node[latent, right=of fw1, xshift=0.15cm] (w1) {$\mu_1$};
+      \node[factor, below=of w1, yshift=0.55cm] (fy1) {};
+      \node[latent, below=of fy1, fill=black!15, yshift=0.4cm] (y1) {$y_1$};
+      \node[latent, left=of fy1, xshift=0.75cm ,fill=black!100, minimum size=2pt] (x1) {} ;
+      \node[const, left=of x1] (nx1) {$\only<3->{\bm}{x}_1$};
+
+      \node[factor, right=of w1] (fw2) {};
+      \node[latent, right=of fw2, xshift=0.15cm] (w2) {$\mu_2$};
+      \node[factor, below=of w2, yshift=0.55cm] (fy2) {};
+      \node[latent, below=of fy2, yshift=0.4cm] (y2) {$y_2$};
+      \node[latent, left=of fy2, xshift=0.75cm ,fill=black!100, minimum size=2pt] (x2) {} ;
+      \node[const, left=of x2] (nx2) {$\only<3->{\bm}{x}_2$};
+
+
+      \draw[dashed] (4.1,-1.2) -- (4.1,4.5);
+
+      \only<-2>{
+        \node[const, xshift=2.7cm, yshift=-1cm] (pre) {\normalsize Pre-tratamiento};
+        \node[const, xshift=5.6cm, yshift=-1cm] (post) {\normalsize Post-tratamiento};
+      }
+
+      \node[latent, above=of fw1] (z1) {$\delta_1$};
+      \node[latent, above=of fw2] (z2) {$\delta_2$};
+      \node[factor, left=of z1] (fz1) {};
+      \node[factor, left=of z2, xshift=-0.15cm] (fz2) {};
+      \node[const, above=of fz2] (nfz2) {\normalsize$\N(\delta_{t+1}|\delta_t, q^2)$ \ \  };
+
+      \node[const, right=of fw2, yshift=0.6cm] (nfwt) {\normalsize$p(\mu_{t+1}|\mu_t,\delta_t) = \N(\mu_{t+1}|\mu_t + \delta_t, r^2 )$ \ \  };
+
+      \only<2->{
+        \node[const, right=of z2] (nz2) {\normalsize El cambio};
+        \node[const, right=of w2] (nw2) {\normalsize Lo establecido};
+      }
+
+      \only<3>{
+        \node[const, xshift=4cm, yshift=-1.7cm] (pregunta) {\Large ¿Y la relación con otras series temporales?};
+      }
+
+      \only<4->{
+        \node[latent, right=of y, xshift=-0.15cm , yshift=-1.3cm] (W) {$\bm{w}$};
+        \node[factor, left=of W] (fW) {};
+        \node[const, left=of fW] (pW) {\normalsize $p(\bm{w})$};
+        \node[const, below=of W] (static) {\normalsize Regresión estática};
+        \node[const, right=of fy2] (py2) {\normalsize $\N(y_t|\mu_t + \bm{w}^T \bm{\phi}(\bm{x}_t), \, \beta^2 )$};
+      }
+
+
+    \edge {fw} {w};
+    \edge[-] {x,w} {fy};
+    \edge {fy} {y};
+    \edge[-] {w} {fw1};
+    \edge {fw1} {w1};
+    \edge[-] {x1,w1} {fy1};
+    \edge {fy1} {y1};
+    \edge[-] {w1} {fw2};
+    \edge {fw2} {w2};
+    \edge[-] {x2,w2} {fy2};
+    \edge {fy2} {y2};
+    \edge {fz1} {z1};
+    \edge[-] {z1} {fz2};
+    \edge {fz2} {z2};
+    \edge[-] {z1} {fw1};
+    \edge[-] {z2} {fw2};
+    \only<4->{
+      \edge[-] {W} {fy,fy1,fy2};
+      \edge {fW} {W};
+    }
+
+    \node[invisible, above=of w, yshift=2cm] (ia) {};
+    \node[invisible, left=of y, xshift=-1.3cm] (il) {};
+
+    %\plate {no} {(x)(y)(data_inv)(c_x)} {$i: $ Datos\vspace{1cm}}; %
 }
 \end{textblock}
-
-
-\begin{textblock}{80}(100,24)
-$y_t  =  \bm{\phi}(x)_t^T \, \bm{w}_t + \varepsilon_t$
-\end{textblock}
-
-\begin{textblock}{80}(100,34)
-$\alpha_{t+1} = T_t \, \alpha_t + R_t  \nu_t$
-\end{textblock}
-
-
-\begin{textblock}{80}(100,44)
-$\bullet$ $X_t \in \mathbb{R}^{d \times d}$: matriz de transición.
-$\bullet$ $T_t \in \mathbb{R}^{d \times d}$: matriz de transición.
-\end{textblock}
-
+}
 
 \end{frame}
+
+\begin{frame}[plain, fragile]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Modelos lineas para series temporales \\
+\large Ejemplo. Generación de datos.
+\end{textblock}
+
+\begin{textblock}{140}(10,14)
+\begin{lstlisting}[backgroundcolor=\color{black!10}]
+set.seed(1)
+x <- 100 + arima.sim(model = list(ar = 0.999), n = 100)
+y <- 1.2 * x + rnorm(100)
+y[71:100] <- y[71:100] + 10 # Intervencion
+\end{lstlisting}
+\end{textblock}
+
+\only<2->{
+\begin{textblock}{140}(10,23)
+\centering
+\includegraphics[width=0.8\textwidth]{figuras/causalTimeSeries.pdf}
+\end{textblock}
+}
+
+\end{frame}
+
+
+\begin{frame}[plain, fragile]
+\begin{textblock}{160}(0,4)
+\centering \LARGE Modelos lineas para series temporales \\
+\large Ejemplo. Inferencia.
+\end{textblock}
+
+\begin{textblock}{120}(20,22)
+\begin{lstlisting}[backgroundcolor=\color{black!10}]
+library("CausalImpact")
+# Google "Inferring causal impact using
+# bayesian structural time-series models"
+
+data <- cbind(y,  x)
+pre.period <- c(1, 70)
+post.period <- c(71, 100)
+impact <- CausalImpact(data, pre.period, post.period)
+\end{lstlisting}
+\end{textblock}
+
+\only<2->{
+\begin{textblock}{140}(10,16)
+\centering
+\includegraphics[width=0.9\textwidth]{figuras/causalTimeSeries2.pdf}
+\end{textblock}
+}
+
+\end{frame}
+
+
 
 \begin{frame}[plain,noframenumbering]
 \centering \vspace{0.5cm}

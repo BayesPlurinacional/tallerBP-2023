@@ -9,37 +9,34 @@ setwd(this.dir)
 ###############################
 
 library("CausalImpact")
+library("ggplot2")
 
 set.seed(1)
-x1 <- 100 + arima.sim(model = list(ar = 0.999), n = 100)
-y <- 1.2 * x1 + rnorm(100)
-y[71:100] <- y[71:100] + 10
-data <- cbind(y, x1)
-matplot(data, type="l")
-
-pre.period <- c(1, 70)
-post.period <- c(71, 100)
-
-impact <- CausalImpact(data, pre.period, post.period)
-
-plot(impact)
-
-
-set.seed(1)
-u <- 100 + arima.sim(model = list(ar = 0.999), n = 100)
-x <- u - 10 + rnorm(100)
+x <- 100 + arima.sim(model = list(ar = 0.999), n = 100)
 y <- 1.2 * x + rnorm(100)
 y[71:100] <- y[71:100] + 10
-data <- cbind(y, x)
-matplot(data, type="l")
 
+ymax <- max(x,y)
+ymin <- min(x,y)
+
+plot(y, ylim=c(ymin,ymax), lwd=2,axes = F,ann = F)
+lines(x, lty=2)
+
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1, cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext("Tiempo", side=1, line=2.5,cex = 2)
+mtext("Unidad de medida", side=2, line=2.5,cex = 2)
+
+
+data <- cbind(y,  x)
 pre.period <- c(1, 70)
 post.period <- c(71, 100)
 
 impact <- CausalImpact(data, pre.period, post.period)
 
-plot(impact)
-
+ggsave(paste0(nombre,"2.pdf"), plot=plot(impact))
 
 #######################################
 # end 
