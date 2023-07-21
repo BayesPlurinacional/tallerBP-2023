@@ -9,7 +9,7 @@ setwd(this.dir)
 ###############################
 
 
-par(mar=c(3.75,4.25,0,0))
+par(mar=c(3.75,4.25,0.5,0.5))
 
 
 plot(c(0,1), c(1,1.5), type="l",lwd=2,axes = F,ann = F, ylim=c(0.5,1.5), col=rgb(0,0,0,1))
@@ -115,6 +115,28 @@ text(40,3,expression("log"~1.05^t),srt=0, cex=2.25)
 
 
 
+set.seed(999)
+t = seq(0,10)
+r = 1.05^t
+plot(t,log(r),lwd=2,axes = F,ann = F, col=rgb(0.8,0.2,0.2,1),pch=19, cex=1.5, ylim=c(-max(log(r)),max(log(r))))
+for (n in c(1,10,100,1000,10000)){
+    total = c(0,rbinom(0,n=10,size=1))
+    for (j in seq(n)){
+        m = rbinom(0.5,n=10,size=1)
+        total = total + c(1,cumprod(1.5*m + 0.6*(1-m)))
+    }
+    lines(t,log(total/n) ,lwd=3, col=rgb(0,0,0,(log(n,10)+1)/6 ) )
+}
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,  cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext("Tiempo", side=1, line=2.5,cex = 2)
+mtext("log Riqueza", side=2, line=2.5,cex = 2)
+legend(0,0.5,pch=19,legend = c(expression(10^0), expression(10^1), expression(10^2), expression(10^3), expression(10^4)), col=c(rgb(0,0,0,1/6),rgb(0,0,0,2/6),rgb(0,0,0,3/6),rgb(0,0,0,4/6),rgb(0,0,0,5/6)),bty = "n",cex = 1.5)
+
+
+
 t = seq(0,100)
 r = 1.05^t
 s = c(1,rep(c(0.6,1.5),50))
@@ -126,7 +148,6 @@ axis(lwd=0,side=1,  cex.axis=1.5,line=-0.3)
 axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
 mtext("Tiempo", side=1, line=2.5,cex = 2)
 mtext("Riqueza", side=2, line=2.5,cex = 2)
-text(90,-3,expression("?"),srt=0, cex=5)
 abline(h=1,lty=3)
 
 
@@ -138,11 +159,11 @@ axis(lwd=0,side=1,  cex.axis=1.5,line=-0.3)
 axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
 mtext("Tiempo", side=1, line=2.5,cex = 2)
 mtext("log Riqueza", side=2, line=2.5,cex = 2)
-text(90,-3,expression("?"),srt=0, cex=5)
 
 
 
 
+set.seed(999)
 t = seq(0,1000)
 r = 1.05^t
 plot(t,log(r),lwd=2,axes = F,ann = F, col=rgb(0.8,0.2,0.2,1),pch=19, cex=1.5, ylim=c(-max(log(r))-0.5,max(log(r))))
@@ -157,6 +178,72 @@ axis(lwd=0,side=1,  cex.axis=1.5,line=-0.3)
 axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
 mtext("Tiempo", side=1, line=2.5,cex = 2)
 mtext("log Riqueza", side=2, line=2.5,cex = 2)
+text(900,-16,expression("?"),srt=0, cex=5)
+
+set.seed(999)
+t = seq(0,1000)
+r = 1.05^t
+plot(t,log(r),lwd=2,axes = F,ann = F, col=rgb(0.8,0.2,0.2,1),pch=19, cex=1.5, ylim=c(-max(log(r))-0.5,max(log(r))))
+for (i in seq(33)){
+    m = c(1,rbinom(0.5,n=1000,size=1))
+    lines(t,log(cumprod(1.5*m + 0.6*(1-m))) ,lwd=2, col=rgb(runif(1),runif(1),runif(1)) )
+}
+
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,  cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext("Tiempo", side=1, line=2.5,cex = 2)
+mtext("log Riqueza", side=2, line=2.5,cex = 2)
+
+
+set.seed(9)
+t = seq(0,10000)
+r = 1.05^t
+plot(t,log(r),lwd=2,axes = F,ann = F, col=rgb(0.8,0.2,0.2,1),pch=19, cex=1.5, ylim=c(-max(log(r))-0.5,max(log(r))))
+for (i in seq(33)){
+    m = c(1,rbinom(0.5,n=10000,size=1))
+    lines(t,log(cumprod(1.5*m + 0.6*(1-m))) ,lwd=2, col=rgb(runif(1),runif(1),runif(1)) )
+}
+
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,  cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext("Tiempo", side=1, line=2.5,cex = 2)
+mtext("log Riqueza", side=2, line=2.5,cex = 2)
+#segments(x0=0,x1=10000, y0=0, y1=log(0.6^(1/2)*1.5^(1/2))*10000,lwd=3)
+#text(900,16,expression("5%"),srt=0, cex=2)
+#text(900,-16,expression("-5%"),srt=0, cex=2)
+abline(h=0,lty=3)
+
+
+set.seed(9)
+plot(c(0,100000),c(0,log(1.05)*100000) ,lwd=4,axes = F,ann = F, col=rgb(0.8,0.2,0.2,1),pch=19, cex=1.5,type="l", ylim=c(log(0.6^(1/2)*1.5^(1/2))*100000, log(1.05)*100000) )
+segments(x0=0,x1=100000, y0=0, y1=log(0.6^(1/2)*1.5^(1/2))*100000,lwd=3)
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,  cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext("Tiempo", side=1, line=2.5,cex = 2)
+mtext("log Riqueza", side=2, line=2.5,cex = 2)
+text(90000,2800,expression("5%"),srt=0, cex=2)
+text(90000,-3000,expression("?%"),srt=0, cex=2)
+abline(h=0,lty=3)
+
+
+set.seed(9)
+plot(c(0,100000),c(0,log(1.05)*100000) ,lwd=4,axes = F,ann = F, col=rgb(0.8,0.2,0.2,1),pch=19, cex=1.5,type="l", ylim=c(log(0.6^(1/2)*1.5^(1/2))*100000, log(1.05)*100000) )
+segments(x0=0,x1=100000, y0=0, y1=log(0.6^(1/2)*1.5^(1/2))*100000,lwd=3)
+axis(side=2, labels=NA,cex.axis=0.6,tck=0.015)
+axis(side=1, labels=NA,cex.axis=0.6,tck=0.015)
+axis(lwd=0,side=1,  cex.axis=1.5,line=-0.3)
+axis(lwd=0,side=2,cex.axis=1.5,line=-0.3)
+mtext("Tiempo", side=1, line=2.5,cex = 2)
+mtext("log Riqueza", side=2, line=2.5,cex = 2)
+text(90000,2800,expression("5%"),srt=0, cex=2)
+text(90000,-3000,expression("-5.1%"),srt=0, cex=2)
+abline(h=0,lty=3)
 
 
 #######################################
