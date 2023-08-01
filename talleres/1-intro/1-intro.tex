@@ -1524,21 +1524,21 @@ $P(\text{Modelo}_i|\text{Datos})$
 
 \end{frame}
 
-
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \LARGE Boole \\
- \large Valor de verdad continuo
- \end{textblock}
- \vspace{1.5cm} \centering
-
- \includegraphics[width=1\textwidth]{../../auxiliar/static/boole.png}
-
- \normalsize
- \hfill George Boole (1854) \href{https://downloads.tuxfamily.org/openmathdep/logic_ante_1900/Laws_of_Thought-Boole.pdf}{\emph{An Investigation of the Laws of Thought}}
-\end{frame}
+%
+%
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \LARGE Boole \\
+%  \large Valor de verdad continuo
+%  \end{textblock}
+%  \vspace{1.5cm} \centering
+%
+%  \includegraphics[width=1\textwidth]{../../auxiliar/static/boole.png}
+%
+%  \normalsize
+%  \hfill George Boole (1854) \href{https://downloads.tuxfamily.org/openmathdep/logic_ante_1900/Laws_of_Thought-Boole.pdf}{\emph{An Investigation of the Laws of Thought}}
+% \end{frame}
 
 %
 % \begin{frame}[plain]
@@ -1570,44 +1570,44 @@ $P(\text{Modelo}_i|\text{Datos})$
 %
 %
 % \end{frame}
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \LARGE El problema de la lógica extendida \\
- \large La complejidad en memoria
- \end{textblock}
- \vspace{1.5cm}
-
- Tenemos $n=27$ variables, las letras del alfabeto \\
-
- \pause
-
- \vspace{0.5cm}
-
- $\bullet$ En lógica binaria asignamos valores a las variables, y con las reglas de la lógica calculamos las combinaciones. \pause Con 27 bits nos alcanza.  \\
-
- \vspace{0.5cm}
-
- \pause
-
- $\bullet$ En lógica extendida debemos asignar una probabilidad a cada posible combinación de todos los posibles combinaciones de valores de verdad.  \\
-
- \vspace{0.2cm}
-  \pause
-
-  Necesitamos guardar $2^{27}-1$ números reales  \\[0.2cm]
-
- \Wider[-2cm]{
- \begin{itemize}
- \item[$1$:] $P(A, B, \dots, Z) =  \dots$ \\
- \item[$.$:] $\dots$ \\
- \item[$2^{27}-1$:] $P(\neg A, \neg B, \dots, Z) =  \dots$ \\
- \item[$2^{27}$:] $P(\neg A, \neg B, \dots, \neg Z) =  1 - \sum P(\dots)$
- \end{itemize}
- }
-\end{frame}
-
+%
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \LARGE El problema de la lógica extendida \\
+%  \large La complejidad en memoria
+%  \end{textblock}
+%  \vspace{1.5cm}
+%
+%  Tenemos $n=27$ variables, las letras del alfabeto \\
+%
+%  \pause
+%
+%  \vspace{0.5cm}
+%
+%  $\bullet$ En lógica binaria asignamos valores a las variables, y con las reglas de la lógica calculamos las combinaciones. \pause Con 27 bits nos alcanza.  \\
+%
+%  \vspace{0.5cm}
+%
+%  \pause
+%
+%  $\bullet$ En lógica extendida debemos asignar una probabilidad a cada posible combinación de todos los posibles combinaciones de valores de verdad.  \\
+%
+%  \vspace{0.2cm}
+%   \pause
+%
+%   Necesitamos guardar $2^{27}-1$ números reales  \\[0.2cm]
+%
+%  \Wider[-2cm]{
+%  \begin{itemize}
+%  \item[$1$:] $P(A, B, \dots, Z) =  \dots$ \\
+%  \item[$.$:] $\dots$ \\
+%  \item[$2^{27}-1$:] $P(\neg A, \neg B, \dots, Z) =  \dots$ \\
+%  \item[$2^{27}$:] $P(\neg A, \neg B, \dots, \neg Z) =  1 - \sum P(\dots)$
+%  \end{itemize}
+%  }
+% \end{frame}
+%
 
 
 
@@ -2276,7 +2276,7 @@ $\N(y \,| \, \text{sen}(x), \beta^2) \ \ x \in [-\pi,\pi]$ \\[0.2cm]
 \only<2->{
 \begin{textblock}{80}(75,22)
 \begin{align*}
-y &= w_0 + w_1 \, x_1 + w_2 \, x_2^2 + w_3 \, x_3^3 \\[1cm]
+y &= w_0 + w_1 \, x + w_2 \, x^2 + w_3 \, x^3 \\[1cm]
 \onslide<3->{& y  = \sum_{i=0}^{M-1} w_i \phi_i(x) = \bm{w}^T \bm{\phi}(x) \\[0.1cm]
 \text{¿}&\text{Cuál es el mejor modelo lineal?}
 }
@@ -2484,22 +2484,20 @@ P(\text{Datos}) =  \sum_{\text{Modelo}} P(\text{Datos}|\text{Modelo}) P(\text{Mo
 
 
 
-
-\begin{frame}[plain]
-
-
-\begin{textblock}{140}(10,28)
-\Large Ejercicio 1.1 \\[0.4cm]
-
-\large La persona que da la pista a veces se confunde y señala la caja donde está el regalo o la caja que fue elegida previamente por la persona. \\[0.2cm]
-
-\only<2>{
-\large Descubrir el verdadero efecto causal que el regalo y la elección tienen sobre la pista en base a los datos ofrecidos en la práctica. \\[0.1cm]}
-
-\end{textblock}
-
-
-\end{frame}
+%
+% \begin{frame}[plain]
+% \begin{textblock}{140}(10,28)
+% \Large Ejercicio 1.1 \\[0.4cm]
+%
+% \large La persona que da la pista a veces se confunde y señala la caja donde está el regalo o la caja que fue elegida previamente por la persona. \\[0.2cm]
+%
+% \only<2>{
+% \large Descubrir el verdadero efecto causal que el regalo y la elección tienen sobre la pista en base a los datos ofrecidos en la práctica. \\[0.1cm]}
+%
+% \end{textblock}
+%
+%
+% \end{frame}
 
 \begin{frame}[plain,noframenumbering]
 \centering \vspace{0.5cm}

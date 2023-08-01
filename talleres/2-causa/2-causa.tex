@@ -918,247 +918,198 @@ P(y|\text{do}(x) = a, \text{Modelo Causal}) \overset{?}{=} P(y| x = a, Z, \text{
 
 \end{frame}
 
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \LARGE Flujo de inferencia \\
- \end{textblock}
- \vspace{0.75cm}
-
-% \only<1>{
-%  \begin{textblock}{160}(0,23) \centering
+%
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \LARGE Flujo de inferencia \\
+%  \end{textblock}
+%  \vspace{0.75cm}
+%
+% % \only<1>{
+% %  \begin{textblock}{160}(0,23) \centering
+% %  \tikz{
+% %     \node[det] (u) {U} ; %
+% %     \node[const, above=of u] (nu) {Genotipo} ; %
+% %     \node[det, below=of u, xshift=-1.2cm] (f) {F} ; %
+% %     \node[const, left=of f] (nf) {Fuma} ; %
+% %     \node[det, below=of u, xshift=1.2cm] (c) {C};
+% %     \node[const, right=of c] (nc) {Cancer} ; %
+% %
+% %     \edge {u} {f,c};
+% %     \edge {f} {c};
+% %     }
+% %
+% % \vspace{1cm}
+% %  $P( \text{Cancer}|do(\text{Fuma}) ) \overset{?}{=}  P(\text{Cancer}|\text{Fuma})$
+% % \end{textblock}
+% % }
+%
+%
+% \only<1-2>{
+% \begin{textblock}{160}(0,14) \centering
 %  \tikz{
-%     \node[det] (u) {U} ; %
-%     \node[const, above=of u] (nu) {Genotipo} ; %
-%     \node[det, below=of u, xshift=-1.2cm] (f) {F} ; %
-%     \node[const, left=of f] (nf) {Fuma} ; %
-%     \node[det, below=of u, xshift=1.2cm] (c) {C};
-%     \node[const, right=of c] (nc) {Cancer} ; %
+%     \node[det] (l) {$l$} ; %
+%     \node[det, above=of l] (a) {$a$} ; %
+%     \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+%     \node[det, above=of a,xshift=-1.5cm] (e) {$e$} ; %
+%     \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+%     \node[det, above=of t,xshift=-1.5cm] (c) {$c$} ;
 %
-%     \edge {u} {f,c};
-%     \edge {f} {c};
+%
+%     \edge {a} {l};
+%     \edge {t,e} {a};
+%     \edge {t} {r};
+%     \edge {c} {e,t};
+%
+%     \node[const, left= of e, xshift=-0.1cm] (cpd_e) {Entradera:};
+%     \node[const, right= of t, xshift=0.1cm] (cpd_t) {:Terremoto};
+%     \node[const, right= of c, xshift=0.1cm] (cpd_c) {:Ciudad};
+%     \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
+%     \node[const, right= of r, xshift=0.1cm] (cpd_r) {:Redes};
+%     \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
+%
 %     }
-%
-% \vspace{1cm}
-%  $P( \text{Cancer}|do(\text{Fuma}) ) \overset{?}{=}  P(\text{Cancer}|\text{Fuma})$
 % \end{textblock}
 % }
-
-
-\only<1-2>{
-\begin{textblock}{160}(0,14) \centering
- \tikz{
-    \node[det] (l) {$l$} ; %
-    \node[det, above=of l] (a) {$a$} ; %
-    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
-    \node[det, above=of a,xshift=-1.5cm] (e) {$e$} ; %
-    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
-    \node[det, above=of t,xshift=-1.5cm] (c) {$c$} ;
-
-
-    \edge {a} {l};
-    \edge {t,e} {a};
-    \edge {t} {r};
-    \edge {c} {e,t};
-
-    \node[const, left= of e, xshift=-0.1cm] (cpd_e) {Entradera:};
-    \node[const, right= of t, xshift=0.1cm] (cpd_t) {:Terremoto};
-    \node[const, right= of c, xshift=0.1cm] (cpd_c) {:Ciudad};
-    \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
-    \node[const, right= of r, xshift=0.1cm] (cpd_r) {:Redes};
-    \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
-
-    }
-\end{textblock}
-}
-
-\only<3>{
-\begin{textblock}{160}(0,14) \centering
- \tikz{
-    \node[det] (l) {$l$} ; %
-    \node[det, above=of l] (a) {$a$} ; %
-    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
-    \node[det, double, double distance=0.5mm, above=of a,xshift=-1.5cm] (e) {$e$} ;
-    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
-    \node[det, above=of t,xshift=-1.5cm] (c) {$c$} ;
-
-
-    \edge {a} {l};
-    \edge {t,e} {a};
-    \edge {t} {r};
-    \edge {c} {t};
-
-     \node[const, left= of e, xshift=-0.1cm] (cpd_e) {Entradera:};
-     \node[const, right= of t, xshift=0.1cm] (cpd_t) {:Terremoto};
-     \node[const, right= of c, xshift=0.1cm] (cpd_c) {:Ciudad};
-     \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
-     \node[const, right= of r, xshift=0.1cm] (cpd_r) {:Redes};
-     \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
-
-    }
-\end{textblock}
-}
-
-
-\only<2->{
-\begin{textblock}{160}(0,76) \centering
-\begin{equation*}
-P( \text{Llamada} | do(\text{Entradera}) ) \overset{?}{=}  P(\text{Llamada}|\text{Entradera})
-\end{equation*}
-\end{textblock}
-}
-
-\end{frame}
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \LARGE Flujo de inferencia \\
- \large Sum-product algorithm
-\end{textblock}
-
-\only<2-8>{
-\begin{textblock}{80}(45,34)
-\begin{description}
- \onslide<3->{\item[$v(n)$ :] Vecinos del nodo $n$}
- \item[$m_{x \rightarrow f}(x)$ :] Mensaje de variable $x$ a factor $f$
- \item[$m_{f \rightarrow x}(x)$ :] Mensaje de factor $f$ a variable $x$
-\end{description}
-\end{textblock}
-}
-
-
-\only<1-2>{
-\begin{textblock}{80}(45,20)
-\centering
-Algoritmo para calcular cualquier marginal \\ mediante pasaje de mensajes entre nodos
-\end{textblock}
-}
-
-
-\only<3-9>{
-\begin{textblock}{80}(45,20)
-\begin{equation*}
-P(x) = \prod_{f \in v(x)} m_{f \rightarrow x}(x)
-\end{equation*}
-\end{textblock}
-}
-
-\only<4-9>{
-\begin{textblock}{80}(45,56)
-\begin{equation*}\label{eq:m_v_f}
-m_{x \rightarrow f}(x) = \prod_{g \in \only<5>{\textcolor{red}}{v(x) \setminus \{f\}} } m_{g \rightarrow x}(x)
-\end{equation*}
-\end{textblock}
-}
-
-\only<6-9>{
-\begin{textblock}{80}(45,68)
-\begin{equation*}\label{eq:m_f_v}
- m_{f \rightarrow x}(x) = \onslide<8->{\sum_{\bm{y}} \Big(} \onslide<7->{f(\bm{y},x)} \prod_{y \in v(f) \setminus \{x\} } m_{y \rightarrow f}(y) \onslide<8->{\Big)}
-\end{equation*}
-\end{textblock}
-}
-
-\only<1->{
-\begin{textblock}{40}(0,14)
-\centering
-\begin{figure}[H]
-\centering
-  \scalebox{.8}{
-\tikz{ %
-        \node[factor] (fa) {} ;
-        \node[det, below=of fa, minimum size=0.55cm, yshift=0.4cm] (a) {$a$} ; %
-
-        \node[factor, below=of a, yshift=0.4cm] (fl) {} ;
-        \node[det, below=of fl, minimum size=0.55cm,yshift=0.4cm] (l) {$l$} ; %
-
-        \node[det, above=of fa, minimum size=0.55cm, xshift=-0.8cm, yshift=-0.4cm] (e) {$e$} ; %
-        \node[factor, above=of e, yshift=-0.4cm] (fe) {} ;
-
-        \node[det,minimum size=0.55cm, above=of fa, xshift=0.8cm, yshift=-0.4cm] (t) {$t$} ; %
-        \node[factor, above=of t, yshift=-0.4cm] (ft) {} ;
-        \node[factor, below=of t, xshift=0.8cm, yshift=0.4cm] (fr) {} ;
-        \node[det,minimum size=0.55cm, below=of fr, yshift=0.4cm] (r) {$r$} ; %
-
-        \node[det, above=of fe, minimum size=0.55cm, xshift=0.8cm, yshift=-0.4cm] (c) {$c$} ; %
-        \node[factor, above=of c, yshift=-0.4cm] (fc) {} ;
-
-
-        \edge {fc} {c};
-        \edge[-] {c} {fe,ft};
-        \edge[-] {fa} {e,t};
-        \edge {fa} {a};
-        \edge {fe} {e};
-        \edge {ft} {t};
-        \edge[-] {fr} {t};
-        \edge {fr} {r};
-        \edge[-] {fl} {a};
-        \edge {fl} {l};
-        }
-}
-\end{figure}
-\end{textblock}
-}
-
-
-\only<9>{
-\begin{textblock}{110}(35,40) \Large
-\centering El método de inferencia más eficiente
-\end{textblock}
-}
-
-\end{frame}
-
-
- \begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \LARGE Flujo de inferencia \\
- \large Independencia condicional
- \end{textblock}
- \centering
- \vspace{0.75cm}
-
- \begin{textblock}{68}(0,25)
- \tikz{
-    \node[det] (l) {$l$} ; %
-    \node[det, above=of l] (a) {$a$} ; %
-    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
-    \node[det, above=of a,xshift=-1.5cm] (e) {$e$} ; %
-    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
-
-    \edge {a} {l};
-    \edge {t,e} {a};
-    \edge {t} {r};
-
-    \node[const, above= of e, yshift=0.1cm] (cpd_e) {Entradera:};
-    \node[const, above= of t, yshift=0.1cm] (cpd_t) {Terremoto:};
-    \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
-    \node[const, left= of r, xshift=-0.1cm] (cpd_r) {Redes:};
-    \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
-
-    }
-\end{textblock}
-
-
-\only<1->{
-\begin{textblock}{90}(68,24)
-\centering
- \begin{tabular}{c c c}
- & \onslide<2->{$\hfrac{\text{Intermedio}}{\text{no observable}}$} &   \onslide<3->{$\hfrac{\text{Intermedio}}{\text{observable}}}$ \\
- & & \\
- $ e \rightarrow a \rightarrow l $    & \onslide<2->{$P(l) \overset{?}{=} P(l|e)$} & \onslide<3->{$P(l|a) \overset{?}{=} P(l|e,a)$} \\
- %$ l \leftarrow a \leftarrow t $      &  \onslide<4->{$P(t) \overset{?}{=} P(t|l)$}  & \onslide<5->{$P(t|a) \overset{?}{=} P(t|a,l)$} \\
- $ a \leftarrow t \rightarrow r $     & \onslide<4->{$P(r) \overset{?}{=} P(r|a)$} & \onslide<5->{$P(r|t) \overset{?}{=} P(r|t,a)$} \\
- $ e \rightarrow a \leftarrow t $     & \onslide<6->{$P(t) \overset{?}{=} P(t|e)$} & \onslide<7->{$P(t|a) \overset{?}{=} P(t|e,a)$} \\
-            $\overset{\downarrow}{l}$  &  & \onslide<8->{$P(t|l) \overset{?}{=} P(t|e,l)$}
- \end{tabular}
- \end{textblock}
- }
-
-
- \end{frame}
+%
+% \only<3>{
+% \begin{textblock}{160}(0,14) \centering
+%  \tikz{
+%     \node[det] (l) {$l$} ; %
+%     \node[det, above=of l] (a) {$a$} ; %
+%     \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+%     \node[det, double, double distance=0.5mm, above=of a,xshift=-1.5cm] (e) {$e$} ;
+%     \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+%     \node[det, above=of t,xshift=-1.5cm] (c) {$c$} ;
+%
+%
+%     \edge {a} {l};
+%     \edge {t,e} {a};
+%     \edge {t} {r};
+%     \edge {c} {t};
+%
+%      \node[const, left= of e, xshift=-0.1cm] (cpd_e) {Entradera:};
+%      \node[const, right= of t, xshift=0.1cm] (cpd_t) {:Terremoto};
+%      \node[const, right= of c, xshift=0.1cm] (cpd_c) {:Ciudad};
+%      \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
+%      \node[const, right= of r, xshift=0.1cm] (cpd_r) {:Redes};
+%      \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
+%
+%     }
+% \end{textblock}
+% }
+%
+%
+% \only<2->{
+% \begin{textblock}{160}(0,76) \centering
+% \begin{equation*}
+% P( \text{Llamada} | do(\text{Entradera}) ) \overset{?}{=}  P(\text{Llamada}|\text{Entradera})
+% \end{equation*}
+% \end{textblock}
+% }
+%
+% \end{frame}
+%
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \LARGE Flujo de inferencia \\
+%  \large Sum-product algorithm
+% \end{textblock}
+%
+% \only<2-8>{
+% \begin{textblock}{80}(45,34)
+% \begin{description}
+%  \onslide<3->{\item[$v(n)$ :] Vecinos del nodo $n$}
+%  \item[$m_{x \rightarrow f}(x)$ :] Mensaje de variable $x$ a factor $f$
+%  \item[$m_{f \rightarrow x}(x)$ :] Mensaje de factor $f$ a variable $x$
+% \end{description}
+% \end{textblock}
+% }
+%
+%
+% \only<1-2>{
+% \begin{textblock}{80}(45,20)
+% \centering
+% Algoritmo para calcular cualquier marginal \\ mediante pasaje de mensajes entre nodos
+% \end{textblock}
+% }
+%
+%
+% \only<3-9>{
+% \begin{textblock}{80}(45,20)
+% \begin{equation*}
+% P(x) = \prod_{f \in v(x)} m_{f \rightarrow x}(x)
+% \end{equation*}
+% \end{textblock}
+% }
+%
+% \only<4-9>{
+% \begin{textblock}{80}(45,56)
+% \begin{equation*}\label{eq:m_v_f}
+% m_{x \rightarrow f}(x) = \prod_{g \in \only<5>{\textcolor{red}}{v(x) \setminus \{f\}} } m_{g \rightarrow x}(x)
+% \end{equation*}
+% \end{textblock}
+% }
+%
+% \only<6-9>{
+% \begin{textblock}{80}(45,68)
+% \begin{equation*}\label{eq:m_f_v}
+%  m_{f \rightarrow x}(x) = \onslide<8->{\sum_{\bm{y}} \Big(} \onslide<7->{f(\bm{y},x)} \prod_{y \in v(f) \setminus \{x\} } m_{y \rightarrow f}(y) \onslide<8->{\Big)}
+% \end{equation*}
+% \end{textblock}
+% }
+%
+% \only<1->{
+% \begin{textblock}{40}(0,14)
+% \centering
+% \begin{figure}[H]
+% \centering
+%   \scalebox{.8}{
+% \tikz{ %
+%         \node[factor] (fa) {} ;
+%         \node[det, below=of fa, minimum size=0.55cm, yshift=0.4cm] (a) {$a$} ; %
+%
+%         \node[factor, below=of a, yshift=0.4cm] (fl) {} ;
+%         \node[det, below=of fl, minimum size=0.55cm,yshift=0.4cm] (l) {$l$} ; %
+%
+%         \node[det, above=of fa, minimum size=0.55cm, xshift=-0.8cm, yshift=-0.4cm] (e) {$e$} ; %
+%         \node[factor, above=of e, yshift=-0.4cm] (fe) {} ;
+%
+%         \node[det,minimum size=0.55cm, above=of fa, xshift=0.8cm, yshift=-0.4cm] (t) {$t$} ; %
+%         \node[factor, above=of t, yshift=-0.4cm] (ft) {} ;
+%         \node[factor, below=of t, xshift=0.8cm, yshift=0.4cm] (fr) {} ;
+%         \node[det,minimum size=0.55cm, below=of fr, yshift=0.4cm] (r) {$r$} ; %
+%
+%         \node[det, above=of fe, minimum size=0.55cm, xshift=0.8cm, yshift=-0.4cm] (c) {$c$} ; %
+%         \node[factor, above=of c, yshift=-0.4cm] (fc) {} ;
+%
+%
+%         \edge {fc} {c};
+%         \edge[-] {c} {fe,ft};
+%         \edge[-] {fa} {e,t};
+%         \edge {fa} {a};
+%         \edge {fe} {e};
+%         \edge {ft} {t};
+%         \edge[-] {fr} {t};
+%         \edge {fr} {r};
+%         \edge[-] {fl} {a};
+%         \edge {fl} {l};
+%         }
+% }
+% \end{figure}
+% \end{textblock}
+% }
+%
+%
+% \only<9>{
+% \begin{textblock}{110}(35,40) \Large
+% \centering El método de inferencia más eficiente
+% \end{textblock}
+% }
+%
+% \end{frame}
 
 %  \begin{frame}[plain]
 % \begin{textblock}{160}(0,4)
@@ -1401,7 +1352,6 @@ m_{x \rightarrow f}(x) = \prod_{g \in \only<5>{\textcolor{red}}{v(x) \setminus \
 
 
 \end{frame}
-
 
 
 \begin{frame}[plain]
@@ -1683,210 +1633,211 @@ m_{x \rightarrow f}(x) = \prod_{g \in \only<5>{\textcolor{red}}{v(x) \setminus \
 % \end{textblock}
 % \end{frame}
 
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large El truco de la factorización
-\end{textblock}
-\vspace{1.5cm} \centering
-
-\begin{equation*}
-\sum \prod = \prod \sum
-\end{equation*}
-
-$a_1 \, b_1 + a_1 \, b_2 + a_2 \, b_1 + a_2 \, b_2  = (a1 + a_2) \, (b_1 + b_2)$
-
-\pause
-
-\begin{equation*}
-   P(a^1) = \Big(\sum_l P(l|a^1) \Big) \Big(\sum_{e,t} P(e)P(t)P(a^1|t,e)(\sum_r P(r|t)) \Big)
-\end{equation*}
-
-  \includegraphics[width=0.35\textwidth]{../../auxiliar/static/sum_product.png}
-
-\end{frame}
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large
- Modelo sin observables
-\end{textblock}
-
-\begin{textblock}{40}(5,12)
-\centering
-\begin{figure}[H]
-\centering
-  \scalebox{0.8}{
-\tikz{ %
-
-
-        \node[factor] (fa) {} ;
-        %\node[const,left=of fa] (pa) {$P(a|e,t)$} ;
-        \node[det, below=of fa, yshift=0.1cm] (a) {$a$} ; %
-
-        \node[factor, below=of a] (fl) {} ;
-        %\node[const,right=of fl] (pl) {$P(l|a)$} ;
-        \node[det, below=of fl,yshift=0.1cm] (l) {$l$} ; %
-
-        \node[det, above=of fa, xshift=-1.6cm,yshift=-0.1cm] (e) {$e$} ; %
-        \node[factor, above=of e,yshift=-0.1cm] (fe) {} ;
-        %\node[const,right=of fe] (pe) {$P(e)$} ;
-
-        \node[det, above=of fa, xshift=1.6cm,yshift=-0.1cm] (t) {$t$} ; %
-        \node[factor, above=of t,yshift=-0.1cm] (ft) {} ;
-        %\node[const,right=of ft] (pt) {$P(t)$} ;
-        \node[factor, below=of t, xshift=1.6cm,yshift=0.1cm] (fr) {} ;
-        \node[det,below=of fr,yshift=0.1cm] (r) {$r$} ; %
-        %\node[const,left=of fr] (pr) {$P(r|t)$} ;
-
-
-        \edge[-] {fa} {a,e,t};
-        \edge[-] {fe} {e};
-        \edge[-] {ft} {t};
-        \edge[-] {fr} {r,t};
-        \edge[-] {fl} {l,a};
-
-        \onslide<1->{\path[draw, ->, fill=black!50] (fe) edge[bend left,draw=black!50] node[right,color=black!75] {\only<2->{$P(e)$}} (e);}
-        \onslide<3>{\path[draw, ->, fill=black!50] (e) edge[bend left,draw=black!50] node[above,color=black!75] {$P(e)$} (fa);}
-        \onslide<4->{\path[draw, ->, fill=black!50] (ft) edge[bend left,draw=black!50] node[right,color=black!75] {$P(t)$} (t);}
-        \onslide<5>{\path[draw, ->, fill=black!50] (r) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (fr);}
-        \onslide<6->{\path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[left,color=black!75] {\only<7->{$1$}} (t);}
-        \onslide<8->{\path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (a);}
-        \onslide<9->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {\only<12->{$1$}} (t);}
-        \onslide<13->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (e);}
-        \onslide<15->{\path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[right,color=black!75] {\only<16->{$P(r)$}} (r);}
-        \onslide<17->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[right,color=black!75] {\only<18->{$P(a)$}} (a);}
-        \onslide<19->{\path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[right,color=black!75] {$P(l)$} (l);}
-        }
-}
-\end{figure}
-\end{textblock}
-
-\begin{textblock}{100}(62,16)
- $m_{f_e\rightarrow e}(e) = \onslide<2->{P(e)} \onslide<3>{= m_{e\rightarrow f_a}(e)}$  \\
- \onslide<4->{$m_{f_t\rightarrow t}(t) = P(t)$ } \\
- \only<5>{$m_{r \rightarrow f_r}(r) = 1$ \\}
- $\onslide<6->{m_{f_r\rightarrow t}(t) = \sum_r \, P(r|t)} \onslide<7->{= 1}$  \\
- $\onslide<8->{m_{f_l\rightarrow a}(a) = \sum_l \, P(l|a) = 1} $  \\
- \onslide<9->{$m_{f_a\rightarrow t}(t) = \sum_{ea} \, P(e) P(a|e,t) \only<10>{= \sum_{e} \, P(e) \sum_{a} P(a|e,t) } \only<11>{= \sum_{e} \, P(e)} \only<12->{= 1 }$  }\\
- \onslide<13->{$m_{f_a\rightarrow e}(e) = \sum_{ta} \, P(t) P(a|e,t) = 1$ } \\
- \onslide<15->{$m_{f_r\rightarrow r}(r) = \sum_{t} \, P(t) P(r|t) \onslide<16->{= P(r)}$ } \\
- \onslide<17->{$m_{f_a\rightarrow a}(a) = \sum_{et} \, P(e)P(t)P(a|e,t)  \onslide<18->{= P(a)}$ } \\
- \onslide<19->{$m_{f_l\rightarrow l}(l) = \sum_{a} \, P(a) P(l|a) = P(l)$ }
- \end{textblock}
-
- \only<14>{
-\begin{textblock}{80}(60,60)
- \centering
- Todos los mensajes \\ que suben son $1$
-\end{textblock}
-}
-
- \only<20>{
-\begin{textblock}{80}(60,70)
- \centering
- Todos los mensajes que \\ bajan son marginales
-\end{textblock}
-}
-
-\end{frame}
-
-
-\begin{frame}[plain]
-\begin{textblock}{160}(0,4)
- \centering \Large
-Modelo con observables
-\end{textblock}
-
-\begin{textblock}{40}(5,12)
-\centering
-\begin{figure}[H]
-\centering
-  \scalebox{0.8}{
-\tikz{ %
-
-
-        \node[factor] (fa) {} ;
-        %\node[const,left=of fa] (pa) {$P(a|e,t)$} ;
-        \node[det, below=of fa, yshift=0.1cm] (a) {$a$} ; %
-
-        \node[factor, below=of a] (fl) {} ;
-        %\node[const,right=of fl] (pl) {$P(l|a)$} ;
-        \node[det, below=of fl,yshift=0.1cm] (l) {$l$} ; %
-
-        \node[det, fill=black!10,above=of fa, xshift=-1.6cm,yshift=-0.1cm] (e) {$e^*$} ; %
-        \node[factor, above=of e,yshift=-0.1cm] (fe) {} ;
-        %\node[const,right=of fe] (pe) {$P(e)$} ;
-
-        \node[det, above=of fa, xshift=1.6cm,yshift=-0.1cm] (t) {$t$} ; %
-        \node[factor, above=of t,yshift=-0.1cm] (ft) {} ;
-        %\node[const,right=of ft] (pt) {$P(t)$} ;
-        \node[factor, below=of t, xshift=1.6cm,yshift=0.1cm] (fr) {} ;
-        \node[det,below=of fr,yshift=0.1cm] (r) {$r$} ; %
-        %\node[const,left=of fr] (pr) {$P(r|t)$} ;
-
-
-        \edge[-] {fa} {a,e,t};
-        \edge[-] {fe} {e};
-        \edge[-] {ft} {t};
-        \edge[-] {fr} {r,t};
-        \edge[-] {fl} {l,a};
-
-        \path[draw, ->, fill=black!50] (fe) edge[bend left,draw=black!50] node[right,color=black!75] {$P(e^*)$} (e);
-        \path[draw, ->, fill=black!50] (ft) edge[bend left,draw=black!50] node[right,color=black!75] {$P(t)$} (t);
-        \path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[left,color=black!75] {\only<1->{$1$}} (t);
-        \path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (a);
-        \onslide<2->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {\only<3->{$P(e^*)$}} (t);}
-        \path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (e);
-        \onslide<7->{\path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[right,color=black!75] {\only<8->{$P(r,e^*)$}} (r);}
-        \onslide<9->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[right,color=black!75] {\only<10->{$P(a,e^*)$}} (a);}
-        \onslide<11->{\path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[right,color=black!75] {\only<12->{$P(l,e^*)$}} (l);}
-        }
-}
-\end{figure}
-\end{textblock}
-
-\begin{textblock}{100}(62,16)
- $m_{f_e\rightarrow e}\phantom{(e)} = P(e^*) $  \\
- $m_{f_t\rightarrow t}(t) = P(t)$  \\
- $m_{f_r\rightarrow t}(t) = \sum_r \, P(r|t) = 1$  \\
- $m_{f_l\rightarrow a}(a) = \sum_l \, P(l|a) = 1 $  \\
- $m_{f_a\rightarrow t}(t) = \onslide<2->{\sum_{a} \, P(e^*) P(a|e^*,t)} \onslide<3->{= P(e^*)}$  \\
- $m_{f_a\rightarrow e}\phantom{(e)} = \sum_{ta} \, P(t) P(a|e^*,t) = 1$  \\
- $m_{f_r\rightarrow r}(r) = \onslide<7->{\sum_{t} \, P(t) P(r|t)} \onslide<8->{= P(r,e^*)}$ \\
- $m_{f_a\rightarrow a}(a) = \onslide<9->{\sum_{t} \, P(e^*)P(t)P(a|e^*,t)}\onslide<10->{  = P(a,e^*)}$  \\
- $m_{f_l\rightarrow l}(l) = \onslide<11->{\sum_{a} \, P(a,e^*) P(l|a)} \onslide<12->{ = P(l,e^*)}$
- \end{textblock}
-
-
-\only<4-6>{
-\begin{textblock}{80}(70,60)
-\begin{flalign*}
-  P(t,e^*) & = P(e^*) P(t) \\
-  \onslide<5->{P(t|e^*) &= \frac{P(e^*) P(t) }{P(e^*)}} \onslide<6->{= P(t)}&&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<13-14>{
-\begin{textblock}{80}(70,60)
-\begin{flalign*}
-  P(l|e^*) & \, = P(l,e^*)/P(e^*) \only<14>{\neq \, P(l)} &&
-\end{flalign*}
-\end{textblock}
-}
-
-\only<15>{
-\begin{textblock}{80}(69.15,60)
-\begin{flalign*}
-  \underbrace{P(l|e^*)}_{\hfrac{\text{que llamen}}{\text{cuando entran}}} & = P(l,e^*)/P(e^*) \neq  \underbrace{P(l)}_{\hfrac{\text{que llamen}}{\text{}}} &&
-\end{flalign*}
-\end{textblock}
-}
-
-\end{frame}
-
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \Large El truco de la factorización
+% \end{textblock}
+% \vspace{1.5cm} \centering
+%
+% \begin{equation*}
+% \sum \prod = \prod \sum
+% \end{equation*}
+%
+% $a_1 \, b_1 + a_1 \, b_2 + a_2 \, b_1 + a_2 \, b_2  = (a1 + a_2) \, (b_1 + b_2)$
+%
+% \pause
+%
+% \begin{equation*}
+%    P(a^1) = \Big(\sum_l P(l|a^1) \Big) \Big(\sum_{e,t} P(e)P(t)P(a^1|t,e)(\sum_r P(r|t)) \Big)
+% \end{equation*}
+%
+%   \includegraphics[width=0.35\textwidth]{../../auxiliar/static/sum_product.png}
+%
+% \end{frame}
+%
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \Large
+%  Modelo sin observables
+% \end{textblock}
+%
+% \begin{textblock}{40}(5,12)
+% \centering
+% \begin{figure}[H]
+% \centering
+%   \scalebox{0.8}{
+% \tikz{ %
+%
+%
+%         \node[factor] (fa) {} ;
+%         %\node[const,left=of fa] (pa) {$P(a|e,t)$} ;
+%         \node[det, below=of fa, yshift=0.1cm] (a) {$a$} ; %
+%
+%         \node[factor, below=of a] (fl) {} ;
+%         %\node[const,right=of fl] (pl) {$P(l|a)$} ;
+%         \node[det, below=of fl,yshift=0.1cm] (l) {$l$} ; %
+%
+%         \node[det, above=of fa, xshift=-1.6cm,yshift=-0.1cm] (e) {$e$} ; %
+%         \node[factor, above=of e,yshift=-0.1cm] (fe) {} ;
+%         %\node[const,right=of fe] (pe) {$P(e)$} ;
+%
+%         \node[det, above=of fa, xshift=1.6cm,yshift=-0.1cm] (t) {$t$} ; %
+%         \node[factor, above=of t,yshift=-0.1cm] (ft) {} ;
+%         %\node[const,right=of ft] (pt) {$P(t)$} ;
+%         \node[factor, below=of t, xshift=1.6cm,yshift=0.1cm] (fr) {} ;
+%         \node[det,below=of fr,yshift=0.1cm] (r) {$r$} ; %
+%         %\node[const,left=of fr] (pr) {$P(r|t)$} ;
+%
+%
+%         \edge[-] {fa} {a,e,t};
+%         \edge[-] {fe} {e};
+%         \edge[-] {ft} {t};
+%         \edge[-] {fr} {r,t};
+%         \edge[-] {fl} {l,a};
+%
+%         \onslide<1->{\path[draw, ->, fill=black!50] (fe) edge[bend left,draw=black!50] node[right,color=black!75] {\only<2->{$P(e)$}} (e);}
+%         \onslide<3>{\path[draw, ->, fill=black!50] (e) edge[bend left,draw=black!50] node[above,color=black!75] {$P(e)$} (fa);}
+%         \onslide<4->{\path[draw, ->, fill=black!50] (ft) edge[bend left,draw=black!50] node[right,color=black!75] {$P(t)$} (t);}
+%         \onslide<5>{\path[draw, ->, fill=black!50] (r) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (fr);}
+%         \onslide<6->{\path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[left,color=black!75] {\only<7->{$1$}} (t);}
+%         \onslide<8->{\path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (a);}
+%         \onslide<9->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {\only<12->{$1$}} (t);}
+%         \onslide<13->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (e);}
+%         \onslide<15->{\path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[right,color=black!75] {\only<16->{$P(r)$}} (r);}
+%         \onslide<17->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[right,color=black!75] {\only<18->{$P(a)$}} (a);}
+%         \onslide<19->{\path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[right,color=black!75] {$P(l)$} (l);}
+%         }
+% }
+% \end{figure}
+% \end{textblock}
+%
+% \begin{textblock}{100}(62,16)
+%  $m_{f_e\rightarrow e}(e) = \onslide<2->{P(e)} \onslide<3>{= m_{e\rightarrow f_a}(e)}$  \\
+%  \onslide<4->{$m_{f_t\rightarrow t}(t) = P(t)$ } \\
+%  \only<5>{$m_{r \rightarrow f_r}(r) = 1$ \\}
+%  $\onslide<6->{m_{f_r\rightarrow t}(t) = \sum_r \, P(r|t)} \onslide<7->{= 1}$  \\
+%  $\onslide<8->{m_{f_l\rightarrow a}(a) = \sum_l \, P(l|a) = 1} $  \\
+%  \onslide<9->{$m_{f_a\rightarrow t}(t) = \sum_{ea} \, P(e) P(a|e,t) \only<10>{= \sum_{e} \, P(e) \sum_{a} P(a|e,t) } \only<11>{= \sum_{e} \, P(e)} \only<12->{= 1 }$  }\\
+%  \onslide<13->{$m_{f_a\rightarrow e}(e) = \sum_{ta} \, P(t) P(a|e,t) = 1$ } \\
+%  \onslide<15->{$m_{f_r\rightarrow r}(r) = \sum_{t} \, P(t) P(r|t) \onslide<16->{= P(r)}$ } \\
+%  \onslide<17->{$m_{f_a\rightarrow a}(a) = \sum_{et} \, P(e)P(t)P(a|e,t)  \onslide<18->{= P(a)}$ } \\
+%  \onslide<19->{$m_{f_l\rightarrow l}(l) = \sum_{a} \, P(a) P(l|a) = P(l)$ }
+%  \end{textblock}
+%
+%  \only<14>{
+% \begin{textblock}{80}(60,60)
+%  \centering
+%  Todos los mensajes \\ que suben son $1$
+% \end{textblock}
+% }
+%
+%  \only<20>{
+% \begin{textblock}{80}(60,70)
+%  \centering
+%  Todos los mensajes que \\ bajan son marginales
+% \end{textblock}
+% }
+%
+% \end{frame}
+%
+%
+% \begin{frame}[plain]
+% \begin{textblock}{160}(0,4)
+%  \centering \Large
+% Modelo con observables
+% \end{textblock}
+%
+% \begin{textblock}{40}(5,12)
+% \centering
+% \begin{figure}[H]
+% \centering
+%   \scalebox{0.8}{
+% \tikz{ %
+%
+%
+%         \node[factor] (fa) {} ;
+%         %\node[const,left=of fa] (pa) {$P(a|e,t)$} ;
+%         \node[det, below=of fa, yshift=0.1cm] (a) {$a$} ; %
+%
+%         \node[factor, below=of a] (fl) {} ;
+%         %\node[const,right=of fl] (pl) {$P(l|a)$} ;
+%         \node[det, below=of fl,yshift=0.1cm] (l) {$l$} ; %
+%
+%         \node[det, fill=black!10,above=of fa, xshift=-1.6cm,yshift=-0.1cm] (e) {$e^*$} ; %
+%         \node[factor, above=of e,yshift=-0.1cm] (fe) {} ;
+%         %\node[const,right=of fe] (pe) {$P(e)$} ;
+%
+%         \node[det, above=of fa, xshift=1.6cm,yshift=-0.1cm] (t) {$t$} ; %
+%         \node[factor, above=of t,yshift=-0.1cm] (ft) {} ;
+%         %\node[const,right=of ft] (pt) {$P(t)$} ;
+%         \node[factor, below=of t, xshift=1.6cm,yshift=0.1cm] (fr) {} ;
+%         \node[det,below=of fr,yshift=0.1cm] (r) {$r$} ; %
+%         %\node[const,left=of fr] (pr) {$P(r|t)$} ;
+%
+%
+%         \edge[-] {fa} {a,e,t};
+%         \edge[-] {fe} {e};
+%         \edge[-] {ft} {t};
+%         \edge[-] {fr} {r,t};
+%         \edge[-] {fl} {l,a};
+%
+%         \path[draw, ->, fill=black!50] (fe) edge[bend left,draw=black!50] node[right,color=black!75] {$P(e^*)$} (e);
+%         \path[draw, ->, fill=black!50] (ft) edge[bend left,draw=black!50] node[right,color=black!75] {$P(t)$} (t);
+%         \path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[left,color=black!75] {\only<1->{$1$}} (t);
+%         \path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (a);
+%         \onslide<2->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {\only<3->{$P(e^*)$}} (t);}
+%         \path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[left,color=black!75] {$1$} (e);
+%         \onslide<7->{\path[draw, ->, fill=black!50] (fr) edge[bend left,draw=black!50] node[right,color=black!75] {\only<8->{$P(r,e^*)$}} (r);}
+%         \onslide<9->{\path[draw, ->, fill=black!50] (fa) edge[bend left,draw=black!50] node[right,color=black!75] {\only<10->{$P(a,e^*)$}} (a);}
+%         \onslide<11->{\path[draw, ->, fill=black!50] (fl) edge[bend left,draw=black!50] node[right,color=black!75] {\only<12->{$P(l,e^*)$}} (l);}
+%         }
+% }
+% \end{figure}
+% \end{textblock}
+%
+% \begin{textblock}{100}(62,16)
+%  $m_{f_e\rightarrow e}\phantom{(e)} = P(e^*) $  \\
+%  $m_{f_t\rightarrow t}(t) = P(t)$  \\
+%  $m_{f_r\rightarrow t}(t) = \sum_r \, P(r|t) = 1$  \\
+%  $m_{f_l\rightarrow a}(a) = \sum_l \, P(l|a) = 1 $  \\
+%  $m_{f_a\rightarrow t}(t) = \onslide<2->{\sum_{a} \, P(e^*) P(a|e^*,t)} \onslide<3->{= P(e^*)}$  \\
+%  $m_{f_a\rightarrow e}\phantom{(e)} = \sum_{ta} \, P(t) P(a|e^*,t) = 1$  \\
+%  $m_{f_r\rightarrow r}(r) = \onslide<7->{\sum_{t} \, P(t) P(r|t)} \onslide<8->{= P(r,e^*)}$ \\
+%  $m_{f_a\rightarrow a}(a) = \onslide<9->{\sum_{t} \, P(e^*)P(t)P(a|e^*,t)}\onslide<10->{  = P(a,e^*)}$  \\
+%  $m_{f_l\rightarrow l}(l) = \onslide<11->{\sum_{a} \, P(a,e^*) P(l|a)} \onslide<12->{ = P(l,e^*)}$
+%  \end{textblock}
+%
+%
+% \only<4-6>{
+% \begin{textblock}{80}(70,60)
+% \begin{flalign*}
+%   P(t,e^*) & = P(e^*) P(t) \\
+%   \onslide<5->{P(t|e^*) &= \frac{P(e^*) P(t) }{P(e^*)}} \onslide<6->{= P(t)}&&
+% \end{flalign*}
+% \end{textblock}
+% }
+%
+% \only<13-14>{
+% \begin{textblock}{80}(70,60)
+% \begin{flalign*}
+%   P(l|e^*) & \, = P(l,e^*)/P(e^*) \only<14>{\neq \, P(l)} &&
+% \end{flalign*}
+% \end{textblock}
+% }
+%
+% \only<15>{
+% \begin{textblock}{80}(69.15,60)
+% \begin{flalign*}
+%   \underbrace{P(l|e^*)}_{\hfrac{\text{que llamen}}{\text{cuando entran}}} & = P(l,e^*)/P(e^*) \neq  \underbrace{P(l)}_{\hfrac{\text{que llamen}}{\text{}}} &&
+% \end{flalign*}
+% \end{textblock}
+% }
+%
+% \end{frame}
+%
+%
 
 
 
@@ -1898,7 +1849,56 @@ Modelo con observables
  \centering
  \vspace{0.75cm}
 
- \only<1-3>{
+ \begin{textblock}{68}(0,25)
+ \tikz{
+    \node[det] (l) {$l$} ; %
+    \node[det, above=of l] (a) {$a$} ; %
+    \node[det, above=of a,xshift=1.5cm] (t) {$t$} ; %
+    \node[det, above=of a,xshift=-1.5cm] (e) {$e$} ; %
+    \node[det, below=of t,xshift=1.5cm] (r) {$r$} ; %
+
+    \edge {a} {l};
+    \edge {t,e} {a};
+    \edge {t} {r};
+
+    \node[const, above= of e, yshift=0.1cm] (cpd_e) {Entradera:};
+    \node[const, above= of t, yshift=0.1cm] (cpd_t) {Terremoto:};
+    \node[const, left= of a, xshift=-0.1cm] (cpd_a) {Alarma:};
+    \node[const, left= of r, xshift=-0.1cm] (cpd_r) {Redes:};
+    \node[const, left= of l, xshift=-0.1cm] (cpd_l) {Llamada:};
+
+    }
+\end{textblock}
+
+
+\only<1->{
+\begin{textblock}{90}(68,24)
+\centering
+ \begin{tabular}{c c c}
+ & \onslide<2->{$\hfrac{\text{Intermedio}}{\text{no observable}}$} &   \onslide<3->{$\hfrac{\text{Intermedio}}{\text{observable}}}$ \\
+ & & \\
+ $ e \rightarrow a \rightarrow l $    & \onslide<2->{$P(l) \overset{?}{=} P(l|e)$} & \onslide<3->{$P(l|a) \overset{?}{=} P(l|e,a)$} \\
+ %$ l \leftarrow a \leftarrow t $      &  \onslide<4->{$P(t) \overset{?}{=} P(t|l)$}  & \onslide<5->{$P(t|a) \overset{?}{=} P(t|a,l)$} \\
+ $ a \leftarrow t \rightarrow r $     & \onslide<4->{$P(r) \overset{?}{=} P(r|a)$} & \onslide<5->{$P(r|t) \overset{?}{=} P(r|t,a)$} \\
+ $ e \rightarrow a \leftarrow t $     & \onslide<6->{$P(t) \overset{?}{=} P(t|e)$} & \onslide<7->{$P(t|a) \overset{?}{=} P(t|e,a)$} \\
+            $\overset{\downarrow}{l}$  &  & \onslide<8->{$P(t|l) \overset{?}{=} P(t|e,l)$}
+ \end{tabular}
+ \end{textblock}
+ }
+
+
+ \end{frame}
+
+
+ \begin{frame}[plain]
+\begin{textblock}{160}(0,4)
+ \centering \LARGE Flujo de inferencia \\
+ \large Independencia condicional
+ \end{textblock}
+ \centering
+ \vspace{0.75cm}
+
+ \only<1-14>{
  \begin{textblock}{68}(0,25)
  \tikz{
     \node[det] (l) {$l$} ; %
@@ -1921,30 +1921,82 @@ Modelo con observables
 \end{textblock}
 }
 
-\only<1-3>{
+\only<1-14>{
 \begin{textblock}{90}(68,24)
 \centering
  \begin{tabular}{c c c}
  & \onslide<1->{$\hfrac{\text{Intermedio}}{\text{no observable}}$} &   \onslide<1->{$\hfrac{\text{Intermedio}}{\text{observable}}}$ \\
  & & \\
- $ e \rightarrow a \rightarrow l $    & \only<1>{$P(l) \overset{?}{=} P(l|e)$}\only<2->{$P(l) \neq P(l|e)$} & \only<1-2>{$P(l|a) \overset{?}{=} P(l|e,a)$}\only<3->{$P(l|a) \overset{\phantom{?}}{=} P(l|e,a)$} \\
- $ a \leftarrow t \rightarrow r $     & \only<1-2>{$P(r) \overset{?}{=} P(r|a)$}\only<3->{$P(r) \neq P(r|a)$} & \only<1-2>{$P(r|t) \overset{?}{=} P(r|t,a)$}\only<3->{$P(r|t) \overset{\phantom{?}}{=} P(r|t,a)$} \\
- $ e \rightarrow a \leftarrow t $     & \only<1>{$P(t) \overset{?}{=} P(t|e)$}\only<2->{$P(t) \overset{\phantom{?}}{=} P(t|e)$} & \only<1-2>{$P(t|a) \overset{?}{=} P(t|e,a)$}\only<3->{$P(t|a) \neq P(t|e,a)$} \\
-            $\overset{\downarrow}{l}$  &  & \only<1-2>{$P(t|l) \overset{?}{=} P(t|e,l)$}\only<3->{$P(t|l) \neq P(t|e,l)$}
+ $ e \rightarrow a \rightarrow l $    & \only<1>{$P(l) \overset{?}{=} P(l|e)$}\only<2->{$P(l) \neq P(l|e)$} & \only<1-3>{$P(l|a) \overset{?}{=} P(l|e,a)$}\only<4->{$P(l|a) \overset{\phantom{?}}{=} P(l|e,a)$} \\
+ $ a \leftarrow t \rightarrow r $     & \only<1-5>{$P(r) \overset{?}{=} P(r|a)$}\only<6->{$P(r) \neq P(r|a)$} & \only<1-7>{$P(r|t) \overset{?}{=} P(r|t,a)$}\only<8->{$P(r|t) \overset{\phantom{?}}{=} P(r|t,a)$} \\
+ $ e \rightarrow a \leftarrow t $     & \only<1-9>{$P(t) \overset{?}{=} P(t|e)$}\only<10->{$P(t) \overset{\phantom{?}}{=} P(t|e)$} & \only<1-11>{$P(t|a) \overset{?}{=} P(t|e,a)$}\only<12->{$P(t|a) \neq P(t|e,a)$} \\
+            $\overset{\downarrow}{l}$  &  & \only<1-13>{$P(t|l) \overset{?}{=} P(t|e,l)$}\only<14->{$P(t|l) \neq P(t|e,l)$}
  \end{tabular}
 \end{textblock}
  }
 
 
-\only<4>{
+\only<15>{
 \begin{textblock}{140}(10,32) \Large
  Hay flujo de inferencia entre los extremos de una cadena si:\\[0.3cm] \large
  \begin{itemize}
   \item[$\bullet$] Todas las consecuencias comunes (o sus descendientes) son observables
-  \item[$\bullet$] Ning\'una otra variable es observable
+  \item[$\bullet$] Ninguna otra variable es observable
  \end{itemize}
 \end{textblock}
 }
+
+\only<1-2>{
+\begin{textblock}{80}(65,72) \Large
+$\phantom{\overset{?}{=}} P(l) \only<1>{\overset{?}{=}}\only<2>{\neq} P(l|e)\phantom{\overset{?}{=}}$
+\end{textblock}
+}
+
+\only<3-4>{
+\begin{textblock}{80}(65,72) \Large
+$\phantom{\overset{?}{=}} P(l|a) \only<3>{\overset{?}{=}}\only<4>{=} P(l|a,e)\phantom{\overset{?}{=}}$
+\end{textblock}
+}
+
+
+\only<5-6>{
+\begin{textblock}{80}(65,72) \Large
+$\phantom{\overset{?}{=}} P(r) \only<5>{\overset{?}{=}}\only<6>{\neq} P(r|a)\phantom{\overset{?}{=}}$
+\end{textblock}
+}
+
+
+\only<7-8>{
+\begin{textblock}{80}(65,72) \Large
+$\phantom{\overset{?}{=}} P(r|t) \only<7>{\overset{?}{=}}\only<8>{=} P(r|t,a)\phantom{\overset{?}{=}}$
+\end{textblock}
+}
+
+
+\only<9-10>{
+\begin{textblock}{80}(65,72) \Large
+$\phantom{\overset{?}{=}} P(t) \only<9>{\overset{?}{=}}\only<10>{=} P(t|e)\phantom{\overset{?}{=}}$
+\end{textblock}
+}
+
+
+\only<11-12>{
+\begin{textblock}{80}(65,72) \Large
+$\phantom{\overset{?}{=}} P(t|a) \only<11>{\overset{?}{=}}\only<12>{\neq} P(t|a,e)\phantom{\overset{?}{=}}$
+\end{textblock}
+}
+
+
+\only<13-14>{
+\begin{textblock}{80}(65,72) \Large
+$\phantom{\overset{?}{=}} P(t|l) \only<13>{\overset{?}{=}}\only<14>{\neq} P(t|l,e)\phantom{\overset{?}{=}}$
+\end{textblock}
+}
+
+
+
+
+
 
  \end{frame}
 
