@@ -19,7 +19,7 @@ El objetivo del curso "Verdades empíricas" es revisar los métodos actuales que
 
 <!--Bajo incertidumbre, la lógica es paraconsistente en tanto se hace necesario creer al mismo tiempo en A y no A hasta que la sorpresa, única fuente de información, decida. -->
 
-## Programa ([descargar](https://github.com/BayesDeLasProvinciasUnidasDelSur/curso/releases/download/2023.1/0-programa.pdf))
+## Programa
 
 (Ver RELEASE [pdf](https://github.com/BayesPlurinacional/tallerBP-2023/releases/tag/pdf))
 
